@@ -53,13 +53,17 @@ const StyledSplash = styled.section`
     }
   }
 
+  ${up("md")} {
+    background-image: url(${ConnectedWorld});
+    background-repeat: no-repeat;
+    background-position: bottom 50% right 2rem;
+    background-size: auto 50%;
+  }
+
   ${up("xl")} {
     padding: 4rem 0;
     min-height: 600px;
-    background-image: url(${ConnectedWorld});
-    background-repeat: no-repeat;
-    background-position: bottom right;
-    background-size: 50%;
+    background-size: auto 75%;
   }
 `
 
