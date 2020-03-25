@@ -9,6 +9,7 @@ const theme = {
     primary: "#DD4B50",
     secondary: "#7BBB78",
     tertiary: "#66B6E1",
+    discord: "#7289DA",
     text: "#161617",
     darkGrey: "#8D8D8F",
     mediumGrey: rgba(16, 16, 17, 0.5),
@@ -24,6 +25,7 @@ const theme = {
     headerHeight: "56px",
   },
   breakpoints: {
+    xs: "321px", // iPhone 5SE
     sm: "576px",
     md: "768px",
     lg: "992px",

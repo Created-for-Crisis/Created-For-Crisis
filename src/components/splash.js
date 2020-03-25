@@ -6,17 +6,25 @@ import { up } from "styled-breakpoints"
 import Button from "./button"
 import { ContentContainer } from "../styles/components"
 import ConnectedWorld from "../assets/connected_world.png"
+import DiscordLogo from "../assets/logos/Discord-Logo-White.svg"
 
 const StyledSplash = styled.section`
   .content {
     padding: 2rem 1rem;
+    h1,
+    h3,
+    p {
+      margin-bottom: 1rem;
+    }
     span,
     p {
       font-size: 1rem;
     }
     h1 {
-      margin: 0;
       font-size: 2rem;
+    }
+    h3 {
+      font-size: 1.5rem;
     }
 
     span {
@@ -26,13 +34,25 @@ const StyledSplash = styled.section`
     }
     p {
       line-height: 1.75;
+      max-width: 420px;
     }
   }
 
   .actions {
+    margin-top: 2rem;
     display: flex;
+    flex-direction: column;
     .action + .action {
-      margin-left: 1rem;
+      margin: 1rem 0 0 0;
+    }
+  }
+
+  ${up("xs")} {
+    .actions {
+      flex-direction: row;
+      .action + .action {
+        margin: 0 0 0 1rem;
+      }
     }
   }
 
@@ -47,9 +67,6 @@ const StyledSplash = styled.section`
       h1 {
         font-size: 4rem;
       }
-      p {
-        max-width: 500px;
-      }
     }
   }
 
@@ -61,8 +78,7 @@ const StyledSplash = styled.section`
   }
 
   ${up("xl")} {
-    padding: 4rem 0;
-    min-height: 600px;
+    min-height: 500px;
     background-size: auto 75%;
   }
 `
@@ -75,12 +91,10 @@ const Splash = () => {
           <span>We are</span>
           <h1>Created For Crisis,</h1>
           <p>
-            a nationwide group of individuals who have come together in a time
-            of crisis to solve important problems; we are a group of sewists,
-            engineers, medical professionals, and makers who believe that
-            open-sourced designs and dispersed manufacturing can help fill
-            critical needs.
+            We’re here to solve problems faced by healthcare providers during
+            the COVID-19 pandemic and beyond.
           </p>
+          <h3>Let us do what we do best so you can, too.</h3>
           <div className="actions">
             <Button
               variant="primary"
@@ -89,7 +103,16 @@ const Splash = () => {
               target="_blank"
               className="action"
             >
-              <Mail /> Contact Us
+              Contact Us <Mail />
+            </Button>
+            <Button
+              variant="discord"
+              as="a"
+              href="https://discord.gg/T2Xw2j7"
+              target="_blank"
+              className="action"
+            >
+              Get Involved <DiscordLogo />
             </Button>
           </div>
         </div>

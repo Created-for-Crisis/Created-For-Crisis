@@ -1,7 +1,6 @@
 import PropTypes from "prop-types"
 import styled from "styled-components"
 import { darken } from "polished"
-import { up } from "styled-breakpoints"
 import { PropStyles } from "../styles/helpers"
 
 /*
@@ -42,19 +41,28 @@ const ButtonVariants = PropStyles("variant", ({ colors }) => {
         color: colors.text,
       },
     },
+    discord: {
+      color: colors.white,
+      backgroundColor: colors.discord,
+      borderColor: colors.lightGrey,
+      "&:hover, &:focus, &:active": {
+        backgroundColor: darken(0.05, colors.discord),
+      },
+    },
   }
 })
 
 const Button = styled.button`
   font-family: ${props => props.theme.fonts.header};
   font-weight: 400;
+  line-height: 1;
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
   border: 1px solid;
   height: 36px;
   border-radius: 0.25rem;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
   font-size: 0.85rem;
   transition: all 0.2s ease;
   text-decoration: none;
@@ -68,17 +76,10 @@ const Button = styled.button`
   }
 
   svg {
-    display: none;
     height: 0.95rem;
     width: auto;
-  }
-
-  ${up("sm")} {
-    svg {
-      display: inline;
-      stroke-width: 1px;
-      margin-right: 0.5rem;
-    }
+    stroke-width: 1px;
+    margin-left: 0.5rem;
   }
 `
 

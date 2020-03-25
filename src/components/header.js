@@ -6,7 +6,7 @@ import { rgba } from "polished"
 import { Mail } from "react-feather"
 import { up } from "styled-breakpoints"
 import Button from "./button"
-import Logo from "../assets/Logo.svg"
+import Logo from "../assets/logos/CreatedForCrisis-Logo.svg"
 
 const StyledHeader = styled.header`
   position: fixed;
@@ -23,24 +23,32 @@ const StyledHeader = styled.header`
   background: ${props => rgba(props.theme.colors.white, 0.95)};
   box-shadow: 12px 30px 0px rgba(16, 16, 17, 0.0003),
     3.4px 8px 0px rgba(16, 16, 17, 0.0007), 1px 2px 0px rgba(16, 16, 17, 0.02);
+
   nav {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    a:not(.button) {
-      font-size: 0.85rem;
-      font-family: ${props => props.theme.fonts.header};
-      color: ${props => props.theme.colors.mediumGrey};
-      font-weight: 400;
-      text-decoration: none;
-      transition: all 0.25s ease-in-out;
-      &:hover {
-        color: ${props => props.theme.colors.tertiary};
-      }
-    }
+    display: none;
   }
+
   &.scrolling {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+  }
+
+  ${up("sm")} {
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      a:not(.button) {
+        font-size: 0.85rem;
+        font-family: ${props => props.theme.fonts.header};
+        color: ${props => props.theme.colors.mediumGrey};
+        font-weight: 400;
+        text-decoration: none;
+        transition: all 0.25s ease-in-out;
+        &:hover {
+          color: ${props => props.theme.colors.tertiary};
+        }
+      }
+    }
   }
 
   ${up("md")} {
@@ -101,7 +109,8 @@ const Header = ({ inverted }) => {
           target="_blank"
           className="button"
         >
-          <Mail /> Contact
+          Contact
+          <Mail />
         </Button>
       </nav>
     </StyledHeader>
