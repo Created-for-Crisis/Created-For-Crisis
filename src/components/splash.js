@@ -11,7 +11,6 @@ import DiscordLogo from "../assets/logos/Discord-Logo-White.svg"
 const StyledSplash = styled.section`
   .content {
     padding: 2rem 1rem;
-    h1,
     h3,
     p {
       margin-bottom: 1rem;
@@ -22,6 +21,7 @@ const StyledSplash = styled.section`
     }
     h1 {
       font-size: 2rem;
+      margin-bottom: 0.5rem;
     }
     h3 {
       font-size: 1.5rem;
