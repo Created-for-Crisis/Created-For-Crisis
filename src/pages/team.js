@@ -6,8 +6,9 @@ import TeamIllustration from "../assets/team_illustration.png"
 import DiscordLogo from "../assets/logos/Discord-Logo-White.svg"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { ContentContainer, ActionGroup } from "../styles/components"
+import { ContentContainer, ActionGroup, Grid } from "../styles/components"
 import Button from "../components/button"
+import TeamMember from "../components/teamMember"
 
 const Team = () => {
   const {
@@ -17,8 +18,19 @@ const Team = () => {
       allContentfulTeamMember {
         edges {
           node {
+            id
             name
+            leadership
+            role
+            biography {
+              internal {
+                content
+              }
+            }
+            linkedInUrl
+            gitHubUrl
             image {
+              description
               fluid(
                 quality: 100
                 maxHeight: 120
@@ -35,7 +47,6 @@ const Team = () => {
     }
   `)
 
-  console.log({ teamMembers })
   return (
     <Layout>
       <SEO title="Team" />
@@ -59,7 +70,23 @@ const Team = () => {
         </ActionGroup>
       </Splash>
       <ContentContainer>
-        <h1>Team</h1>
+        <h2 style={{ margin: "0 0 4rem", textAlign: "center" }}>Leadership</h2>
+        <Grid sm={1} md={1} lg={2}>
+          {teamMembers
+            .filter(({ node: { leadership } }) => leadership)
+            .map(({ node }) => (
+              <TeamMember key={node.id} {...node} />
+            ))}
+        </Grid>
+
+        <h2 style={{ margin: "4rem 0", textAlign: "center" }}>Contributors</h2>
+        <Grid>
+          {teamMembers
+            .filter(({ node: { leadership } }) => !leadership)
+            .map(({ node }) => (
+              <TeamMember key={node.id} {...node} />
+            ))}
+        </Grid>
       </ContentContainer>
     </Layout>
   )

@@ -153,10 +153,10 @@ Header.defaultProps = {
       text: "News",
       route: "/news/",
     },
-    {
-      text: "Masks",
-      route: "/masks/",
-    },
+    // {
+    //   text: "Masks",
+    //   route: "/masks/",
+    // },
     {
       text: "Our Team",
       route: "/team/",

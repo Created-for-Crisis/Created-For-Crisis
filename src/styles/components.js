@@ -36,4 +36,21 @@ const ActionGroup = styled.div`
   }
 `
 
-export { StyledHeader, StyledText, ContentContainer, ActionGroup }
+const Grid = styled.div.attrs(props => ({
+  sm: props.sm || 2,
+  md: props.md || 3,
+  lg: props.lg || 4,
+}))`
+  display: grid;
+  ${up("sm")} {
+    grid-template-columns: repeat(${props => props.sm}, 1fr);
+  }
+  ${up("md")} {
+    grid-template-columns: repeat(${props => props.md}, 1fr);
+  }
+  ${up("lg")} {
+    grid-template-columns: repeat(${props => props.lg}, 1fr);
+  }
+`
+
+export { StyledHeader, StyledText, ContentContainer, ActionGroup, Grid }
