@@ -89,7 +89,7 @@ const Splash = () => {
       <ContentContainer>
         <div className="content">
           <span>We are</span>
-          <h1>Created For Crisis,</h1>
+          <h1>Created For Crisis</h1>
           <p>
             We’re here to solve problems faced by healthcare providers during
             the COVID-19 pandemic and beyond.
