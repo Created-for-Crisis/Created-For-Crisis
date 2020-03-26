@@ -5,6 +5,7 @@ import styled from "styled-components"
 import { rgba } from "polished"
 import { Mail } from "react-feather"
 import { up } from "styled-breakpoints"
+import { ContentContainer } from "../styles/components"
 import Button from "./button"
 import Logo from "../assets/logos/CreatedForCrisis-Logo.svg"
 
@@ -13,23 +14,24 @@ const StyledHeader = styled.header`
   top: 0;
   left: 0;
   width: 100%;
-  height: ${props => props.theme.layout.headerHeight};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem;
   z-index: 100;
   transition: all 0.25s ease-in-out;
   background: ${props => rgba(props.theme.colors.white, 0.95)};
-  box-shadow: 12px 30px 0px rgba(16, 16, 17, 0.0003),
-    3.4px 8px 0px rgba(16, 16, 17, 0.0007), 1px 2px 0px rgba(16, 16, 17, 0.02);
+
+  ${ContentContainer} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: ${props => props.theme.layout.headerHeight};
+  }
 
   nav {
     display: none;
   }
 
   &.scrolling {
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+    box-shadow: 12px 30px 0px rgba(16, 16, 17, 0.0003),
+      3.4px 8px 0px rgba(16, 16, 17, 0.0007), 1px 2px 0px rgba(16, 16, 17, 0.02);
   }
 
   ${up("sm")} {
@@ -49,10 +51,6 @@ const StyledHeader = styled.header`
         }
       }
     }
-  }
-
-  ${up("md")} {
-    padding: 1rem 2rem;
   }
 `
 
@@ -90,29 +88,29 @@ function useScrollingListener() {
   return scrollState
 }
 
-const Header = ({ inverted }) => {
+const Header = () => {
   // Initial State
   let { passedBreakpoint } = useScrollingListener()
 
   return (
-    <StyledHeader
-      className={`${inverted && passedBreakpoint ? "scrolling" : ""}`}
-    >
-      <Link to="/" style={{ lineHeight: 0 }}>
-        <Logo className="logo" />
-      </Link>
-      <nav>
-        <Button
-          variant="grey"
-          as="a"
-          href="mailto:info@createdforcrisis.org"
-          target="_blank"
-          className="button"
-        >
-          Contact
-          <Mail />
-        </Button>
-      </nav>
+    <StyledHeader className={`${passedBreakpoint ? "scrolling" : ""}`}>
+      <ContentContainer>
+        <Link to="/" style={{ lineHeight: 0 }}>
+          <Logo className="logo" />
+        </Link>
+        <nav>
+          <Button
+            variant="grey"
+            as="a"
+            href="mailto:info@createdforcrisis.org"
+            target="_blank"
+            className="button"
+          >
+            Contact
+            <Mail />
+          </Button>
+        </nav>
+      </ContentContainer>
     </StyledHeader>
   )
 }

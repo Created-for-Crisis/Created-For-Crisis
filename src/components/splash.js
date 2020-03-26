@@ -10,7 +10,7 @@ import DiscordLogo from "../assets/logos/Discord-Logo-White.svg"
 
 const StyledSplash = styled.section`
   .content {
-    padding: 2rem 1rem;
+    padding: 2rem 0;
     h3,
     p {
       margin-bottom: 1rem;
@@ -58,7 +58,7 @@ const StyledSplash = styled.section`
 
   ${up("md")} {
     .content {
-      padding: 4rem 2rem;
+      padding: 4rem 0;
       max-width: 720px;
       span,
       p {
@@ -70,11 +70,13 @@ const StyledSplash = styled.section`
     }
   }
 
-  ${up("md")} {
-    background-image: url(${ConnectedWorld});
-    background-repeat: no-repeat;
-    background-position: bottom 50% right 2rem;
-    background-size: auto 50%;
+  ${ContentContainer} {
+    ${up("md")} {
+      background-image: url(${ConnectedWorld});
+      background-repeat: no-repeat;
+      background-position: bottom 50% right 5%;
+      background-size: auto 75%;
+    }
   }
 
   ${up("xl")} {
