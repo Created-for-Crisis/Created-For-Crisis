@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components"
-import Typography from "typography"
 import { rgba } from "polished"
+import typography from "./typography"
 
 const theme = {
   colors: {
@@ -33,41 +33,6 @@ const theme = {
     sl: "1400px", // Super Large, Additional Breakpoint
   },
 }
-
-const typography = new Typography({
-  baseFontSize: "16px",
-  baseLineHeight: 1.5,
-  headerFontFamily: ["Poppins", "Helvetica", "Arial", "sans-serif"],
-  bodyFontFamily: ["Open Sans", "serif"],
-  googleFonts: [
-    {
-      name: "Poppins",
-      styles: ["700"],
-    },
-    {
-      name: "Georgia",
-      styles: ["400", "400i", "700", "700i"],
-    },
-    {
-      name: "Open Sans",
-      styles: ["400", "400i", "700", "700i"],
-    },
-  ],
-  overrideStyles: ({ adjustFontSizeTo, rhythm }, options, styles) => ({
-    h3: {
-      fontFamily: ["Georgia", "serif"].join(","),
-      fontWeight: "400",
-    },
-    h4: {
-      fontFamily: ["Georgia", "serif"].join(","),
-      fontWeight: "400",
-    },
-    h5: {
-      fontFamily: ["Georgia", "serif"].join(","),
-      fontWeight: "400",
-    },
-  }),
-})
 
 const GlobalStyle = createGlobalStyle`
   body {
