@@ -40,14 +40,32 @@ const StyledHeader = styled.header`
       align-items: center;
       justify-content: flex-end;
       a:not(.button) {
+        position: relative;
+        margin-right: 2.5rem;
+        padding: 0 .5rem;
         font-size: 0.85rem;
         font-family: ${props => props.theme.fonts.header};
         color: ${props => props.theme.colors.mediumGrey};
         font-weight: 400;
         text-decoration: none;
-        transition: all 0.25s ease-in-out;
-        &:hover {
-          color: ${props => props.theme.colors.tertiary};
+        transition: all 0.15s ease-in-out;
+        /* border-bottom: 2px solid ${props => props.theme.colors.text}; */
+        &:after {
+          content: "";
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 0%;
+          height: 2px;
+          background-color: ${props => props.theme.colors.text};
+          transition: all 0.15s ease-in-out;
+        }
+        &:hover, &:focus, &:active, &.active {
+          color: ${props => props.theme.colors.text};
+          &:after{
+            width: 100%;
+          }
         }
       }
     }
@@ -88,7 +106,7 @@ function useScrollingListener() {
   return scrollState
 }
 
-const Header = () => {
+const Header = ({ links }) => {
   // Initial State
   let { passedBreakpoint } = useScrollingListener()
 
@@ -99,6 +117,11 @@ const Header = () => {
           <Logo className="logo" />
         </Link>
         <nav>
+          {links.map(({ text, route }, i) => (
+            <Link key={i} to={route} activeClassName="active">
+              {text}
+            </Link>
+          ))}
           <Button
             variant="grey"
             as="a"
@@ -116,11 +139,29 @@ const Header = () => {
 }
 
 Header.propTypes = {
-  inverted: PropTypes.bool,
+  links: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      route: PropTypes.string.isRequired,
+    })
+  ),
 }
 
 Header.defaultProps = {
-  inverted: false,
+  links: [
+    {
+      text: "News",
+      route: "/news/",
+    },
+    {
+      text: "Masks",
+      route: "/masks/",
+    },
+    {
+      text: "Our Team",
+      route: "/team/",
+    },
+  ],
 }
 
 export default Header
