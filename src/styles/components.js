@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { up } from "styled-breakpoints"
 
 const StyledHeader = styled.header.attrs(props => ({
   color: props.inverted ? props.theme.colors.white : props.theme.colors.text,
@@ -19,4 +20,20 @@ const ContentContainer = styled.div`
   margin: auto;
 `
 
-export { StyledHeader, StyledText, ContentContainer }
+const ActionGroup = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  .action + .action {
+    margin: 1rem 0 0 0;
+  }
+
+  ${up("xs")} {
+    flex-direction: row;
+    .action + .action {
+      margin: 0 0 0 1rem;
+    }
+  }
+`
+
+export { StyledHeader, StyledText, ContentContainer, ActionGroup }

@@ -1,12 +1,8 @@
 import React from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
-import { Mail } from "react-feather"
 import { up } from "styled-breakpoints"
-import Button from "./button"
 import { ContentContainer } from "../styles/components"
-import ConnectedWorld from "../assets/connected_world.png"
-import DiscordLogo from "../assets/logos/Discord-Logo-White.svg"
 
 const StyledSplash = styled.section`
   .content {
@@ -38,24 +34,6 @@ const StyledSplash = styled.section`
     }
   }
 
-  .actions {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    .action + .action {
-      margin: 1rem 0 0 0;
-    }
-  }
-
-  ${up("xs")} {
-    .actions {
-      flex-direction: row;
-      .action + .action {
-        margin: 0 0 0 1rem;
-      }
-    }
-  }
-
   ${up("md")} {
     .content {
       padding: 4rem 0;
@@ -72,7 +50,7 @@ const StyledSplash = styled.section`
 
   ${ContentContainer} {
     ${up("md")} {
-      background-image: url(${ConnectedWorld});
+      background-image: url(${props => props.image});
       background-repeat: no-repeat;
       background-position: bottom 50% right 5%;
       background-size: auto 75%;
@@ -85,50 +63,27 @@ const StyledSplash = styled.section`
   }
 `
 
-const Splash = () => {
+const Splash = ({ children, image }) => {
   return (
-    <StyledSplash>
+    <StyledSplash image={image}>
       <ContentContainer>
-        <div className="content">
-          <span>We are</span>
-          <h1>Created For Crisis</h1>
-          <p>
-            We’re here to solve problems faced by healthcare providers during
-            the COVID-19 pandemic and beyond.
-          </p>
-          <h3>Let us do what we do best so you can, too.</h3>
-          <div className="actions">
-            <Button
-              variant="primary"
-              as="a"
-              href="mailto:info@createdforcrisis.org"
-              target="_blank"
-              className="action"
-            >
-              Contact Us <Mail />
-            </Button>
-            <Button
-              variant="discord"
-              as="a"
-              href="https://discord.gg/T2Xw2j7"
-              target="_blank"
-              className="action"
-            >
-              Get Involved <DiscordLogo />
-            </Button>
-          </div>
-        </div>
+        <div className="content">{children}</div>
       </ContentContainer>
     </StyledSplash>
   )
 }
 
 Splash.propTypes = {
-  inverted: PropTypes.bool,
+  children: PropTypes.arrayOf(PropTypes.element.isRequired),
+  image: PropTypes.string,
 }
 
 Splash.defaultProps = {
-  inverted: false,
+  children: (
+    <>
+      <h1>Splash</h1>
+    </>
+  ),
 }
 
 export default Splash
