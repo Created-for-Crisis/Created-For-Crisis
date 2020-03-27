@@ -16,7 +16,7 @@ jobs:
       - run:
           name: Install Dependencies
           command: |
-            npm install
+            yarn install
             echo 'export CONTENTFUL_SPACE_ID=$CONTENTFUL_SPACE_ID' >> $BASH_ENV
             echo 'export CONTENTFUL_ACCESS_TOKEN=$CONTENTFUL_ACCESS_TOKEN' >> $BASH_ENV
       - save_cache:
@@ -25,7 +25,7 @@ jobs:
             - ./node_modules
       - run:
           name: Gatsby Build
-          command: npm run build
+          command: yarn build
       - run:
           name: Firebase Deploy
           command: ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN"
