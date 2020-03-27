@@ -9,7 +9,6 @@
     "@contentful/rich-text-types": "^14.1.0",
     "babel-plugin-styled-components": "^1.10.7",
     "dotenv": "^8.2.0",
-    "firebase": "^7.13.0",
     "gatsby": "^2.19.45",
     "gatsby-core-utils": "^1.1.1",
     "gatsby-image": "^2.2.44",
@@ -36,6 +35,7 @@
     "typography": "^0.16.19"
   },
   "devDependencies": {
+    "firebase-tools": "^7.16.1",
     "prettier": "^1.19.1"
   },
   "keywords": [
