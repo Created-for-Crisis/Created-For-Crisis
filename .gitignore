@@ -60,7 +60,6 @@ public
 
 # Firebase Files
 .firebase
-.firebaserc
 
 # Mac files
 .DS_Store
