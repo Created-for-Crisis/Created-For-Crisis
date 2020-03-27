@@ -123,13 +123,13 @@ const Header = ({ links }) => {
             </Link>
           ))}
           <Button
-            variant="grey"
+            variant="tertiary"
             as="a"
             href="mailto:info@createdforcrisis.org"
             target="_blank"
             className="button"
           >
-            Contact
+            Contact Us
             <Mail />
           </Button>
         </nav>
@@ -149,10 +149,10 @@ Header.propTypes = {
 
 Header.defaultProps = {
   links: [
-    {
-      text: "News",
-      route: "/news/",
-    },
+    // {
+    //   text: "News",
+    //   route: "/news/",
+    // },
     // {
     //   text: "Masks",
     //   route: "/masks/",
@@ -160,6 +160,10 @@ Header.defaultProps = {
     {
       text: "Our Team",
       route: "/team/",
+    },
+    {
+      text: "Labeling & Safety",
+      route: "/labelingandsafety/",
     },
   ],
 }

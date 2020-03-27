@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { Link } from "gatsby"
 import styled from "styled-components"
 import { up } from "styled-breakpoints"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
@@ -81,7 +82,7 @@ const Banner = ({
           {documentToReactComponents(json)}
           {actions && (
             <ActionGroup>
-              {actions.map(({ text, link, variant, icon, discord_icon }) => {
+              {actions.map(({ text, link, variant, icon, internal_link }) => {
                 const Icon = icon
                   ? FeatherIcons[icon]
                   : variant === "discord"
@@ -92,7 +93,8 @@ const Banner = ({
                   <Button
                     key={link}
                     variant={variant}
-                    as="a"
+                    as={internal_link ? Link : "a"}
+                    to={link}
                     href={link}
                     target="_blank"
                     className="action"
