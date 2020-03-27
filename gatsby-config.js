@@ -49,15 +49,15 @@ module.exports = {
         background_color: `#fff`,
         theme_color: `#fff`,
         display: `standalone`,
-        icon: `src/assets/favicon.png`, // This path is relative to the root of the site.
+        icon: `src/assets/favicons/CfC-Favicon-64.png`, // This path is relative to the root of the site.
         icons: [
           {
-            src: `/favicons/192-icon.png`,
+            src: `/favicons/CfC-Favicon-192.png`,
             sizes: `192x192`,
             type: `image/png`,
           },
           {
-            src: `/favicons/512-icon.png`,
+            src: `/favicons/CfC-Favicon-512.png`,
             sizes: `512x512`,
             type: `image/png`,
           },
