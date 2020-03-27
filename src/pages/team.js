@@ -112,11 +112,9 @@ const Team = () => {
             >
               Organization Leaders
             </h2>
-            {/* <Grid sm={1} md={1} lg={2}> */}
             {orgLeaders.map(({ node }) => (
               <TeamMember key={node.id} {...node} fullSize />
             ))}
-            {/* </Grid> */}
           </section>
         )}
         {projectLeads.length > 0 && (
