@@ -35,7 +35,6 @@ const Team = () => {
           node {
             id
             name
-            leadership
             position
             role
             biography {
