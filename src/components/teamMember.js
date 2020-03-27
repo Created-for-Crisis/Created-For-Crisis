@@ -83,9 +83,9 @@ const StyledTeamMember = styled.div`
     padding: 1rem;
 
     .socials {
-      justify-content: space-around;
+      justify-content: center;
       a {
-        margin: 0.5rem;
+        margin: 0.5rem 1rem;
       }
     }
   }

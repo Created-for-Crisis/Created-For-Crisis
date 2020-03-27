@@ -73,8 +73,8 @@ const Team = () => {
     ({ node: { position } }) => position === "Organization Leader"
   )
 
-  let projectLeads = teamMembers.filter(
-    ({ node: { position } }) => position === "Project Lead"
+  let members = teamMembers.filter(
+    ({ node: { position } }) => position === "Team Member"
   )
 
   let contributors = teamMembers.filter(
@@ -116,7 +116,7 @@ const Team = () => {
             ))}
           </section>
         )}
-        {projectLeads.length > 0 && (
+        {members.length > 0 && (
           <section>
             <h2
               style={{
@@ -125,11 +125,13 @@ const Team = () => {
                 lineHeight: "1.5",
               }}
             >
-              Project Leads
+              Team Members
             </h2>
-            {projectLeads.map(({ node }) => (
-              <TeamMember key={node.id} {...node} fullSize />
-            ))}
+            <Grid lg={2}>
+              {members.map(({ node }) => (
+                <TeamMember key={node.id} {...node} />
+              ))}
+            </Grid>
           </section>
         )}
         {contributors.length > 0 && (
