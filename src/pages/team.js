@@ -1,20 +1,35 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
-import Splash from "../components/splash"
-import TeamIllustration from "../assets/team_illustration.png"
-import DiscordLogo from "../assets/logos/Discord-Logo-White.svg"
+import Banner from "../components/blocks/banner"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { ContentContainer, ActionGroup, Grid } from "../styles/components"
-import Button from "../components/button"
+import { ContentContainer, Grid } from "../styles/components"
 import TeamMember from "../components/teamMember"
 
 const Team = () => {
   const {
     allContentfulTeamMember: { edges: teamMembers },
+    contentfulBanner,
   } = useStaticQuery(graphql`
-    query getTeamMembers {
+    query getTeamData {
+      contentfulBanner(id: { eq: "d62d5f94-075e-5609-aa0b-c3ddcd86b5f9" }) {
+        title
+        illustration {
+          file {
+            url
+          }
+        }
+        actions {
+          text
+          variant
+          link
+          icon
+        }
+        content {
+          json
+        }
+      }
       allContentfulTeamMember {
         edges {
           node {
@@ -50,25 +65,7 @@ const Team = () => {
   return (
     <Layout>
       <SEO title="Team" />
-      <Splash image={TeamIllustration}>
-        <span>Average Joes</span>
-        <h1>Our Team</h1>
-        <p>
-          As an online community we coordinate efforts and work together, or
-          something like that.
-        </p>
-        <ActionGroup>
-          <Button
-            variant="discord"
-            as="a"
-            href="https://discord.gg/T2Xw2j7"
-            target="_blank"
-            className="action"
-          >
-            Get Involved <DiscordLogo />
-          </Button>
-        </ActionGroup>
-      </Splash>
+      <Banner {...contentfulBanner} />
       <ContentContainer>
         <h2 style={{ margin: "0 0 4rem", textAlign: "center" }}>Leadership</h2>
         <Grid sm={1} md={1} lg={2}>

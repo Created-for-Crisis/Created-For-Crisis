@@ -26,11 +26,5 @@ export const postQuery = graphql`
     contentfulArticle(id: { eq: $id }) {
       title
     }
-    site {
-      siteMetadata {
-        title
-        description
-      }
-    }
   }
 `

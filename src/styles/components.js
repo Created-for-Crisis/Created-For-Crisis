@@ -20,6 +20,13 @@ const ContentContainer = styled.div`
   margin: auto;
 `
 
+const ArticleContainer = styled.div`
+  max-width: ${props => props.theme.breakpoints.md};
+  padding: 0 1rem;
+  width: 100%;
+  margin: auto;
+`
+
 const ActionGroup = styled.div`
   margin-top: 2rem;
   display: flex;
@@ -53,4 +60,11 @@ const Grid = styled.div.attrs(props => ({
   }
 `
 
-export { StyledHeader, StyledText, ContentContainer, ActionGroup, Grid }
+export {
+  StyledHeader,
+  StyledText,
+  ContentContainer,
+  ArticleContainer,
+  ActionGroup,
+  Grid,
+}
