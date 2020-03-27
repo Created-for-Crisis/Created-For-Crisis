@@ -22,7 +22,7 @@ const StyledTeamMember = styled.div`
     margin: 0.5rem 0 0;
   }
 
-  .leadership {
+  .full-size {
     display: grid;
 
     img {
@@ -85,15 +85,15 @@ const StyledTeamMember = styled.div`
 const TeamMember = ({
   name,
   role,
-  leadership,
+  fullSize,
   image,
   gitHubUrl,
   linkedInUrl,
   biography,
 }) => (
   <StyledTeamMember>
-    {leadership ? (
-      <div className="leadership">
+    {fullSize ? (
+      <div className="full-size">
         <aside>
           {image && <img src={image.fluid.src} alt={image.description} />}
           <div className="socials">
@@ -125,7 +125,7 @@ const TeamMember = ({
 )
 
 TeamMember.propTypes = {
-  leadership: PropTypes.bool.isRequired,
+  fullSize: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
   role: PropTypes.string.isRequired,
   image: PropTypes.shape({

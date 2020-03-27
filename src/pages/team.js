@@ -36,6 +36,7 @@ const Team = () => {
             id
             name
             leadership
+            position
             role
             biography {
               internal {
@@ -62,28 +63,97 @@ const Team = () => {
     }
   `)
 
+  /*
+   ** Breakdown team members by role
+   */
+
+  let founder = teamMembers.filter(
+    ({ node: { position } }) => position === "Founder"
+  )[0]
+
+  let orgLeaders = teamMembers.filter(
+    ({ node: { position } }) => position === "Organization Leader"
+  )
+
+  let projectLeads = teamMembers.filter(
+    ({ node: { position } }) => position === "Project Lead"
+  )
+
+  let contributors = teamMembers.filter(
+    ({ node: { position } }) => position === "Contributor"
+  )
+
   return (
     <Layout>
       <SEO title="Team" />
       <Banner {...contentfulBanner} />
       <ContentContainer>
-        <h2 style={{ margin: "0 0 4rem", textAlign: "center" }}>Leadership</h2>
-        <Grid sm={1} md={1} lg={2}>
-          {teamMembers
-            .filter(({ node: { leadership } }) => leadership)
-            .map(({ node }) => (
-              <TeamMember key={node.id} {...node} />
+        {founder && (
+          <section>
+            <h2
+              style={{
+                margin: "4rem 0 2rem",
+                textAlign: "center",
+                lineHeight: "1.5",
+              }}
+            >
+              Founder
+            </h2>
+            <TeamMember {...founder.node} fullSize />
+          </section>
+        )}
+        {orgLeaders.length > 0 && (
+          <section>
+            <h2
+              style={{
+                margin: "4rem 0 2rem",
+                textAlign: "center",
+                lineHeight: "1.5",
+              }}
+            >
+              Organization Leaders
+            </h2>
+            {/* <Grid sm={1} md={1} lg={2}> */}
+            {orgLeaders.map(({ node }) => (
+              <TeamMember key={node.id} {...node} fullSize />
             ))}
-        </Grid>
-
-        <h2 style={{ margin: "4rem 0", textAlign: "center" }}>Contributors</h2>
-        <Grid>
-          {teamMembers
-            .filter(({ node: { leadership } }) => !leadership)
-            .map(({ node }) => (
-              <TeamMember key={node.id} {...node} />
+            {/* </Grid> */}
+          </section>
+        )}
+        {projectLeads.length > 0 && (
+          <section>
+            <h2
+              style={{
+                margin: "4rem 0 2rem",
+                textAlign: "center",
+                lineHeight: "1.5",
+              }}
+            >
+              Project Leads
+            </h2>
+            {projectLeads.map(({ node }) => (
+              <TeamMember key={node.id} {...node} fullSize />
             ))}
-        </Grid>
+          </section>
+        )}
+        {contributors.length > 0 && (
+          <section>
+            <h2
+              style={{
+                margin: "4rem 0 2rem",
+                textAlign: "center",
+                lineHeight: "1.5",
+              }}
+            >
+              Contributors
+            </h2>
+            <Grid>
+              {contributors.map(({ node }) => (
+                <TeamMember key={node.id} {...node} />
+              ))}
+            </Grid>
+          </section>
+        )}
       </ContentContainer>
     </Layout>
   )
