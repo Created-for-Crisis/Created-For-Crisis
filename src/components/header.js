@@ -123,7 +123,7 @@ const Header = ({ links }) => {
             </Link>
           ))}
           <Button
-            variant="tertiary"
+            variant="primary"
             as="a"
             href="mailto:info@createdforcrisis.org"
             target="_blank"
