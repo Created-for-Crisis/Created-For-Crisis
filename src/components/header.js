@@ -184,10 +184,10 @@ Header.defaultProps = {
       text: "Our Team",
       route: "/team/",
     },
-    // {
-    //   text: "Labeling & Safety",
-    //   route: "/labelingandsafety/",
-    // },
+    {
+      text: "Labeling & Safety",
+      route: "/labelingandsafety/",
+    },
   ],
 }
 
