@@ -28,6 +28,7 @@ const StyledMobileMenu = styled.div`
     z-index: 99;
     width: 100vw;
     background-color: ${props => props.theme.colors.mediumGrey};
+    border: none;
   }
 
   .panel {
@@ -106,13 +107,13 @@ const MobileMenu = ({ open, closeMenu, links }) => {
   console.log({ links })
   return (
     <StyledMobileMenu className={`${open ? "visible" : ""}`}>
-      <div className="overlay" onClick={closeMenu} />
+      <button className="overlay" onClick={closeMenu} onKeyDown={closeMenu} />
       <div className="panel">
         <header>
           Menu
-          <div className="close" onClick={closeMenu}>
+          <button className="close" onClick={closeMenu} onKeyDown={closeMenu}>
             <X />
-          </div>
+          </button>
         </header>
         <nav>
           <Link to={"/"} activeClassName="active">
