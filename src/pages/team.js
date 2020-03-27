@@ -37,13 +37,12 @@ const Team = () => {
             name
             position
             role
-            biography {
-              internal {
-                content
-              }
+            bio {
+              json
             }
             linkedInUrl
             gitHubUrl
+            website
             image {
               description
               fluid(
@@ -81,6 +80,8 @@ const Team = () => {
   let contributors = teamMembers.filter(
     ({ node: { position } }) => position === "Contributor"
   )
+
+  console.log({ founder })
 
   return (
     <Layout>

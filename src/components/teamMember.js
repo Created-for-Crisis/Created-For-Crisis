@@ -1,8 +1,9 @@
 import React from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
-import { GitHub, Linkedin } from "react-feather"
+import { GitHub, Linkedin, ExternalLink } from "react-feather"
 import { up } from "styled-breakpoints"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
 const StyledTeamMember = styled.div`
   margin-bottom: 2rem;
@@ -18,9 +19,9 @@ const StyledTeamMember = styled.div`
     margin: 0.5rem 0 0;
   }
 
-  p.bio {
+  /* .bio {
     margin: 0.5rem 0 0;
-  }
+  } */
 
   .full-size {
     display: grid;
@@ -37,6 +38,11 @@ const StyledTeamMember = styled.div`
     .socials {
       display: flex;
       align-items: center;
+
+      svg {
+        height: 1rem;
+        width: auto;
+      }
 
       a {
         color: ${props => props.theme.colors.text};
@@ -89,7 +95,8 @@ const TeamMember = ({
   image,
   gitHubUrl,
   linkedInUrl,
-  biography,
+  website,
+  bio,
 }) => (
   <StyledTeamMember>
     {fullSize ? (
@@ -107,12 +114,19 @@ const TeamMember = ({
                 <Linkedin />
               </a>
             )}
+            {website && (
+              <a href={website} target="_blank" rel="noopener noreferrer">
+                <ExternalLink />
+              </a>
+            )}
           </div>
         </aside>
         <div className="content">
           <h3>{name}</h3>
           <p className="role">{role}</p>
-          {biography && <p className="bio">{biography.internal.content}</p>}
+          <div className="bio">
+            {bio && documentToReactComponents(bio.json)}
+          </div>
         </div>
       </div>
     ) : (

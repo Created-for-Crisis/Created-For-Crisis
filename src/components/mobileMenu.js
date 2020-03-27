@@ -103,51 +103,48 @@ const StyledMobileMenu = styled.div`
   }
 `
 
-const MobileMenu = ({ open, closeMenu, links }) => {
-  console.log({ links })
-  return (
-    <StyledMobileMenu className={`${open ? "visible" : ""}`}>
-      <button className="overlay" onClick={closeMenu} onKeyDown={closeMenu} />
-      <div className="panel">
-        <header>
-          Menu
-          <button className="close" onClick={closeMenu} onKeyDown={closeMenu}>
-            <X />
-          </button>
-        </header>
-        <nav>
-          <Link to={"/"} activeClassName="active">
-            Home
+const MobileMenu = ({ open, closeMenu, links }) => (
+  <StyledMobileMenu className={`${open ? "visible" : ""}`}>
+    <button className="overlay" onClick={closeMenu} onKeyDown={closeMenu} />
+    <div className="panel">
+      <header>
+        Menu
+        <button className="close" onClick={closeMenu} onKeyDown={closeMenu}>
+          <X />
+        </button>
+      </header>
+      <nav>
+        <Link to={"/"} activeClassName="active">
+          Home
+        </Link>
+        {links.map(({ text, route }, i) => (
+          <Link key={i} to={route} activeClassName="active">
+            {text}
           </Link>
-          {links.map(({ text, route }, i) => (
-            <Link key={i} to={route} activeClassName="active">
-              {text}
-            </Link>
-          ))}
-          <Button
-            variant="primary"
-            as="a"
-            href="mailto:info@createdforcrisis.org"
-            target="_blank"
-            className="button"
-          >
-            Contact Us
-            <Mail />
-          </Button>
-          <Button
-            variant="discord"
-            as="a"
-            href="https://discord.gg/T2Xw2j7"
-            target="_blank"
-            className="button"
-          >
-            Get Involved
-            <DiscordLogo />
-          </Button>
-        </nav>
-      </div>
-    </StyledMobileMenu>
-  )
-}
+        ))}
+        <Button
+          variant="primary"
+          as="a"
+          href="mailto:info@createdforcrisis.org"
+          target="_blank"
+          className="button"
+        >
+          Contact Us
+          <Mail />
+        </Button>
+        <Button
+          variant="discord"
+          as="a"
+          href="https://discord.gg/T2Xw2j7"
+          target="_blank"
+          className="button"
+        >
+          Get Involved
+          <DiscordLogo />
+        </Button>
+      </nav>
+    </div>
+  </StyledMobileMenu>
+)
 
 export default MobileMenu
