@@ -23,6 +23,7 @@ const StyledImageBlock = styled.section`
   }
 
   .content {
+    font-size: 1.25rem;
     ${up("md")} {
       flex: 1 0 auto;
       max-width: 540px;

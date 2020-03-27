@@ -5,9 +5,9 @@ import { ContentContainer } from "../styles/components"
 
 const StyledFooter = styled.section`
   padding: 2rem 1rem;
-  text-align: center;
-  p {
+  p.copyright {
     margin: 0;
+    text-align: center;
   }
 `
 
@@ -15,7 +15,9 @@ const Footer = () => {
   return (
     <StyledFooter>
       <ContentContainer>
-        <p>© {new Date().getFullYear()} Created for Crisis</p>
+        <p className="copyright">
+          © {new Date().getFullYear()} Created for Crisis
+        </p>
       </ContentContainer>
     </StyledFooter>
   )
