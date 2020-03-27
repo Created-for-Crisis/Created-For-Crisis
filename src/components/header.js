@@ -143,9 +143,13 @@ const Header = ({ links }) => {
               <Mail />
             </Button>
           </nav>
-          <div className="menu-trigger" onClick={() => setMobileMenuOpen(true)}>
+          <button
+            className="menu-trigger"
+            onClick={() => setMobileMenuOpen(true)}
+            onKeyDown={() => setMobileMenuOpen(true)}
+          >
             <Menu />
-          </div>
+          </button>
         </ContentContainer>
       </StyledHeader>
       <MobileMenu
