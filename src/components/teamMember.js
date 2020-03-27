@@ -10,7 +10,7 @@ const StyledTeamMember = styled.div`
   h3 {
     font-family: ${props => props.theme.fonts.header};
     font-weight: 700;
-    margin-bottom: 0;
+    margin: 0;
   }
   p.role {
     font-size: 0.9rem;

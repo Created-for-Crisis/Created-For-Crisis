@@ -7,10 +7,6 @@ import { ContentContainer } from "../styles/components"
 const StyledSplash = styled.section`
   .content {
     padding: 2rem 0;
-    h3,
-    p {
-      margin-bottom: 1rem;
-    }
     span,
     p {
       font-size: 1rem;

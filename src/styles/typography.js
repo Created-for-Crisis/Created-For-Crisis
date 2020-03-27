@@ -2,9 +2,9 @@ import Typography from "typography"
 
 const typography = new Typography({
   baseFontSize: "16px",
-  baseLineHeight: 1.5,
+  baseLineHeight: 1.666,
   headerFontFamily: ["Poppins", "Helvetica", "Arial", "sans-serif"],
-  bodyFontFamily: ["Open Sans", "serif"],
+  bodyFontFamily: ["Open Sans", "sans-serif"],
   googleFonts: [
     {
       name: "Poppins",
@@ -19,8 +19,10 @@ const typography = new Typography({
       styles: ["400", "400i", "700", "700i"],
     },
   ],
+  scaleRatio: 3,
   overrideStyles: ({ adjustFontSizeTo, rhythm }, options, styles) => ({
     h3: {
+      marginTop: rhythm(2),
       fontFamily: ["Georgia", "serif"].join(","),
       fontWeight: "400",
     },

@@ -2,6 +2,9 @@ import { createGlobalStyle } from "styled-components"
 import { rgba } from "polished"
 import typography from "./typography"
 
+require("typeface-open-sans")
+require("typeface-poppins")
+
 const theme = {
   colors: {
     black: "#161617",
@@ -17,9 +20,9 @@ const theme = {
     whiteGrey: rgba(16, 16, 17, 0.02),
   },
   fonts: {
-    header: "Poppins",
-    body: "Open Sans",
-    accent: "Georgia",
+    header: '"Poppins", sans-serif',
+    body: '"Open Sans", sans-serif',
+    accent: '"Georgia", serif',
   },
   layout: {
     headerHeight: "56px",

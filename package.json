@@ -33,6 +33,8 @@
     "styled-breakpoints": "^8.1.0",
     "styled-components": "^5.0.1",
     "styled-system": "^5.1.5",
+    "typeface-open-sans": "^0.0.75",
+    "typeface-poppins": "^0.0.72",
     "typography": "^0.16.19"
   },
   "devDependencies": {
