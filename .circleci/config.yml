@@ -2,15 +2,17 @@ version: 2.1
 orbs:
   node: circleci/node@1.1.6
 jobs:
-  build:
+  build-and-deploy:
     executor:
       name: node/default
     steps:
       - checkout
       - node/with-cache:
           steps:
+            - run: npm install -g gatsby-cli
             - run: yarn install
+            - run: gatsby build
 workflows:
   build:
     jobs:
-      - build
+      - build-and-deploy
