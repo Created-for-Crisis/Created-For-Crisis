@@ -35,6 +35,13 @@ const StyledHeader = styled.header`
       3.4px 8px 0px rgba(16, 16, 17, 0.0007), 1px 2px 0px rgba(16, 16, 17, 0.02);
   }
 
+  .menu-trigger {
+    cursor: pointer;
+    background: ${props => props.theme.colors.white};
+    border: none;
+    box-shadow: none;
+  }
+
   ${up("sm")} {
     nav {
       display: flex;
@@ -75,10 +82,6 @@ const StyledHeader = styled.header`
 
     .menu-trigger {
       display: none;
-      cursor: pointer;
-      background: ${props => props.theme.colors.white};
-      border: none;
-      box-shadow: none;
     }
   }
 `
