@@ -76,6 +76,9 @@ const StyledHeader = styled.header`
     .menu-trigger {
       display: none;
       cursor: pointer;
+      background: ${props => props.theme.colors.white};
+      border: none;
+      box-shadow: none;
     }
   }
 `

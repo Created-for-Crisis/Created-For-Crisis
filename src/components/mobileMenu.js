@@ -40,6 +40,9 @@ const StyledMobileMenu = styled.div`
 
   .close {
     cursor: pointer;
+    background: ${props => props.theme.colors.white};
+    border: none;
+    box-shadow: none;
   }
 
   &.visible {
