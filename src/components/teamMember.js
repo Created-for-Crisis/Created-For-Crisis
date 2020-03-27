@@ -19,9 +19,24 @@ const StyledTeamMember = styled.div`
     margin: 0.5rem 0 0;
   }
 
-  /* .bio {
-    margin: 0.5rem 0 0;
-  } */
+  .socials {
+    display: flex;
+    align-items: center;
+
+    svg {
+      height: 1rem;
+      width: auto;
+    }
+
+    a {
+      color: ${props => props.theme.colors.text};
+      transition: all 0.15s ease;
+      margin-right: 0.5rem;
+      &:hover {
+        color: ${props => props.theme.colors.mediumGrey};
+      }
+    }
+  }
 
   .full-size {
     display: grid;
@@ -33,25 +48,6 @@ const StyledTeamMember = styled.div`
     aside {
       order: 1;
       margin-top: 1rem;
-    }
-
-    .socials {
-      display: flex;
-      align-items: center;
-
-      svg {
-        height: 1rem;
-        width: auto;
-      }
-
-      a {
-        color: ${props => props.theme.colors.text};
-        transition: all 0.15s ease;
-        margin-right: 0.5rem;
-        &:hover {
-          color: ${props => props.theme.colors.mediumGrey};
-        }
-      }
     }
 
     ${up("sm")} {
@@ -85,6 +81,13 @@ const StyledTeamMember = styled.div`
   .contributor {
     text-align: center;
     padding: 1rem;
+
+    .socials {
+      justify-content: space-around;
+      a {
+        margin: 0.5rem;
+      }
+    }
   }
 `
 
@@ -133,13 +136,30 @@ const TeamMember = ({
       <div className="contributor">
         <h3>{name}</h3>
         <p className="role">{role}</p>
+        <div className="socials">
+          {gitHubUrl && (
+            <a href={gitHubUrl} target="_blank" rel="noopener noreferrer">
+              <GitHub />
+            </a>
+          )}
+          {linkedInUrl && (
+            <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">
+              <Linkedin />
+            </a>
+          )}
+          {website && (
+            <a href={website} target="_blank" rel="noopener noreferrer">
+              <ExternalLink />
+            </a>
+          )}
+        </div>
       </div>
     )}
   </StyledTeamMember>
 )
 
 TeamMember.propTypes = {
-  fullSize: PropTypes.bool.isRequired,
+  fullSize: PropTypes.bool,
   name: PropTypes.string.isRequired,
   role: PropTypes.string.isRequired,
   image: PropTypes.shape({

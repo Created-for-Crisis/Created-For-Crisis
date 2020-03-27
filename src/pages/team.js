@@ -143,7 +143,7 @@ const Team = () => {
             >
               Contributors
             </h2>
-            <Grid>
+            <Grid lg={3}>
               {contributors.map(({ node }) => (
                 <TeamMember key={node.id} {...node} />
               ))}
