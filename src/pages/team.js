@@ -120,13 +120,23 @@ const Team = () => {
           <section>
             <h2
               style={{
-                margin: "4rem 0 2rem",
+                margin: "4rem 0 1rem",
                 textAlign: "center",
                 lineHeight: "1.5",
               }}
             >
               Team Members
             </h2>
+            <p
+              style={{
+                textAlign: "center",
+                fontStyle: "italic",
+                marginBottom: "2rem",
+              }}
+            >
+              Special thanks to the little bird tweeting advice, the turtle who
+              kept us steady, and the pony who carried us through to the end.
+            </p>
             <Grid lg={2}>
               {members.map(({ node }) => (
                 <TeamMember key={node.id} {...node} />
@@ -138,7 +148,7 @@ const Team = () => {
           <section>
             <h2
               style={{
-                margin: "4rem 0 2rem",
+                margin: "4rem 0 1rem",
                 textAlign: "center",
                 lineHeight: "1.5",
               }}
