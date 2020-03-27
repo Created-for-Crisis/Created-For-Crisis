@@ -3,10 +3,11 @@ import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 import { rgba } from "polished"
-import { Mail } from "react-feather"
+import { Mail, Menu } from "react-feather"
 import { up } from "styled-breakpoints"
 import { ContentContainer } from "../styles/components"
 import Button from "./button"
+import MobileMenu from "./mobileMenu"
 import Logo from "../assets/logos/CreatedForCrisis-Logo.svg"
 
 const StyledHeader = styled.header`
@@ -14,7 +15,7 @@ const StyledHeader = styled.header`
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 100;
+  z-index: 50;
   transition: all 0.25s ease-in-out;
   background: ${props => rgba(props.theme.colors.white, 0.95)};
 
@@ -42,14 +43,13 @@ const StyledHeader = styled.header`
       a:not(.button) {
         position: relative;
         margin-right: 2.5rem;
-        padding: 0 .5rem;
+        padding: 0 0.5rem;
         font-size: 0.85rem;
         font-family: ${props => props.theme.fonts.header};
         color: ${props => props.theme.colors.mediumGrey};
         font-weight: 400;
         text-decoration: none;
         transition: all 0.15s ease-in-out;
-        /* border-bottom: 2px solid ${props => props.theme.colors.text}; */
         &:after {
           content: "";
           position: absolute;
@@ -61,13 +61,21 @@ const StyledHeader = styled.header`
           background-color: ${props => props.theme.colors.text};
           transition: all 0.15s ease-in-out;
         }
-        &:hover, &:focus, &:active, &.active {
+        &:hover,
+        &:focus,
+        &:active,
+        &.active {
           color: ${props => props.theme.colors.text};
-          &:after{
+          &:after {
             width: 100%;
           }
         }
       }
+    }
+
+    .menu-trigger {
+      display: none;
+      cursor: pointer;
     }
   }
 `
@@ -108,33 +116,44 @@ function useScrollingListener() {
 
 const Header = ({ links }) => {
   // Initial State
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   let { passedBreakpoint } = useScrollingListener()
 
   return (
-    <StyledHeader className={`${passedBreakpoint ? "scrolling" : ""}`}>
-      <ContentContainer>
-        <Link to="/" style={{ lineHeight: 0 }}>
-          <Logo className="logo" />
-        </Link>
-        <nav>
-          {links.map(({ text, route }, i) => (
-            <Link key={i} to={route} activeClassName="active">
-              {text}
-            </Link>
-          ))}
-          <Button
-            variant="primary"
-            as="a"
-            href="mailto:info@createdforcrisis.org"
-            target="_blank"
-            className="button"
-          >
-            Contact Us
-            <Mail />
-          </Button>
-        </nav>
-      </ContentContainer>
-    </StyledHeader>
+    <>
+      <StyledHeader className={`${passedBreakpoint ? "scrolling" : ""}`}>
+        <ContentContainer>
+          <Link to="/" style={{ lineHeight: 0 }}>
+            <Logo className="logo" />
+          </Link>
+          <nav>
+            {links.map(({ text, route }, i) => (
+              <Link key={i} to={route} activeClassName="active">
+                {text}
+              </Link>
+            ))}
+            <Button
+              variant="primary"
+              as="a"
+              href="mailto:info@createdforcrisis.org"
+              target="_blank"
+              className="button"
+            >
+              Contact Us
+              <Mail />
+            </Button>
+          </nav>
+          <div className="menu-trigger" onClick={() => setMobileMenuOpen(true)}>
+            <Menu />
+          </div>
+        </ContentContainer>
+      </StyledHeader>
+      <MobileMenu
+        links={links}
+        open={mobileMenuOpen}
+        closeMenu={() => setMobileMenuOpen(false)}
+      />
+    </>
   )
 }
 
@@ -161,10 +180,10 @@ Header.defaultProps = {
       text: "Our Team",
       route: "/team/",
     },
-    {
-      text: "Labeling & Safety",
-      route: "/labelingandsafety/",
-    },
+    // {
+    //   text: "Labeling & Safety",
+    //   route: "/labelingandsafety/",
+    // },
   ],
 }
 
