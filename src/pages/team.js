@@ -81,8 +81,6 @@ const Team = () => {
     ({ node: { position } }) => position === "Contributor"
   )
 
-  console.log({ founder })
-
   return (
     <Layout>
       <SEO title="Team" />
