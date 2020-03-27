@@ -43,6 +43,15 @@ const StyledMobileMenu = styled.div`
     background: ${props => props.theme.colors.white};
     border: none;
     box-shadow: none;
+    position: relative;
+    height: 32px;
+    width: 32px;
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 
   &.visible {
