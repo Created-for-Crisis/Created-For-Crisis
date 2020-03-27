@@ -135,7 +135,7 @@ const Team = () => {
               }}
             >
               Special thanks to the little bird tweeting advice, the turtle who
-              kept us steady, and the pony who carried us through to the end.
+              kept us steady, and the pony who carries us through to the end.
             </p>
             <Grid lg={2}>
               {members.map(({ node }) => (
