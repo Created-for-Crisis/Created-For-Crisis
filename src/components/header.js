@@ -187,10 +187,6 @@ Header.propTypes = {
 
 Header.defaultProps = {
   links: [
-    // {
-    //   text: "News",
-    //   route: "/news/",
-    // },
     {
       text: "Our Team",
       route: "/team/",
@@ -200,8 +196,8 @@ Header.defaultProps = {
       route: "/patterns/",
     },
     {
-      text: "Labeling & Safety",
-      route: "/labelingandsafety/",
+      text: "FAQ",
+      route: "/faq/",
     },
   ],
 }
