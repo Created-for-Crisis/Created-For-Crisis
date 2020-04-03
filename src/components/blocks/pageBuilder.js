@@ -23,7 +23,7 @@ function compileBlock(block) {
 
 const PageBuilder = (blocks, content) => (
   <>
-    {blocks.map(block => compileBlock(block))}
+    {blocks && blocks.map(block => compileBlock(block))}
     {content && (
       <ArticleContainer>
         {documentToReactComponents(content.json)}
