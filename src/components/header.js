@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
+import { Link, useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
 import { rgba } from "polished"
 import { Mail, Menu } from "react-feather"
@@ -129,10 +128,23 @@ function useScrollingListener() {
   return scrollState
 }
 
-const Header = ({ links }) => {
+const Header = () => {
   // Initial State
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   let { passedBreakpoint } = useScrollingListener()
+
+  const {
+    contentfulMenu: { routes },
+  } = useStaticQuery(graphql`
+    query getMainNavigation {
+      contentfulMenu(slug: { eq: "main-navigation" }) {
+        routes {
+          slug
+          title
+        }
+      }
+    }
+  `)
 
   return (
     <>
@@ -142,11 +154,12 @@ const Header = ({ links }) => {
             <Logo className="logo" />
           </Link>
           <nav>
-            {links.map(({ text, route }, i) => (
-              <Link key={i} to={route} activeClassName="active">
-                {text}
-              </Link>
-            ))}
+            {routes &&
+              routes.map(({ title, slug }, i) => (
+                <Link key={i} to={`/${slug}/`} activeClassName="active">
+                  {title}
+                </Link>
+              ))}
             <Button
               variant="primary"
               as="a"
@@ -168,38 +181,12 @@ const Header = ({ links }) => {
         </ContentContainer>
       </StyledHeader>
       <MobileMenu
-        links={links}
+        routes={routes}
         open={mobileMenuOpen}
         closeMenu={() => setMobileMenuOpen(false)}
       />
     </>
   )
-}
-
-Header.propTypes = {
-  links: PropTypes.arrayOf(
-    PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      route: PropTypes.string.isRequired,
-    })
-  ),
-}
-
-Header.defaultProps = {
-  links: [
-    {
-      text: "Our Team",
-      route: "/team/",
-    },
-    {
-      text: "Patterns",
-      route: "/patterns/",
-    },
-    {
-      text: "FAQ",
-      route: "/faq/",
-    },
-  ],
 }
 
 export default Header

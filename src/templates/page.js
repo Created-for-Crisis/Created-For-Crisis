@@ -62,6 +62,29 @@ export const postQuery = graphql`
             }
           }
         }
+        ... on ContentfulTeamMemberGrid {
+          id
+          title
+          snippet
+          format
+          members {
+            id
+            name
+            role
+            bio {
+              json
+            }
+            gitHubUrl
+            linkedInUrl
+            website
+            image {
+              description
+              fluid {
+                src
+              }
+            }
+          }
+        }
       }
     }
   }

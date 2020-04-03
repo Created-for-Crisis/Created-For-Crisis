@@ -115,7 +115,7 @@ const StyledMobileMenu = styled.div`
   }
 `
 
-const MobileMenu = ({ open, closeMenu, links }) => (
+const MobileMenu = ({ open, closeMenu, routes }) => (
   <StyledMobileMenu className={`${open ? "visible" : ""}`}>
     <button className="overlay" onClick={closeMenu} onKeyDown={closeMenu} />
     <div className="panel">
@@ -129,11 +129,12 @@ const MobileMenu = ({ open, closeMenu, links }) => (
         <Link to={"/"} activeClassName="active">
           Home
         </Link>
-        {links.map(({ text, route }, i) => (
-          <Link key={i} to={route} activeClassName="active">
-            {text}
-          </Link>
-        ))}
+        {routes &&
+          routes.map(({ title, slug }, i) => (
+            <Link key={i} to={`/${slug}/`} activeClassName="active">
+              {title}
+            </Link>
+          ))}
         <Button
           variant="primary"
           as="a"

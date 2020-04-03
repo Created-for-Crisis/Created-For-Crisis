@@ -3,6 +3,7 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { ArticleContainer } from "../../styles/components"
 import Banner from "./banner"
 import ImageBlock from "./imageBlock"
+import TeamMemberGrid from "./teamMemberGrid"
 
 function compileBlock(block) {
   switch (block.__typename) {
@@ -10,6 +11,9 @@ function compileBlock(block) {
       return <Banner key={block.id} {...block} />
     case "ContentfulImageBlock":
       return <ImageBlock key={block.id} {...block} />
+    case "ContentfulTeamMemberGrid":
+      console.log({ block })
+      return <TeamMemberGrid key={block.id} {...block} />
     default:
       return (
         <section key={block.id} id={block.id} className="block">
