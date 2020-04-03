@@ -21,6 +21,9 @@ const typography = new Typography({
   ],
   scaleRatio: 3,
   overrideStyles: ({ adjustFontSizeTo, rhythm }, options, styles) => ({
+    h2: {
+      marginTop: rhythm(2),
+    },
     h3: {
       marginTop: rhythm(2),
       fontFamily: ["Georgia", "serif"].join(","),
