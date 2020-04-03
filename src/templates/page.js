@@ -85,6 +85,20 @@ export const postQuery = graphql`
             }
           }
         }
+        ... on ContentfulPattern {
+          id
+          name
+          actions {
+            id
+            icon
+            text
+            variant
+            link
+          }
+          description {
+            json
+          }
+        }
       }
     }
   }

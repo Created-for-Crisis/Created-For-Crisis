@@ -4,6 +4,7 @@ import { ArticleContainer } from "../../styles/components"
 import Banner from "./banner"
 import ImageBlock from "./imageBlock"
 import TeamMemberGrid from "./teamMemberGrid"
+import Pattern from "./pattern"
 
 function compileBlock(block) {
   switch (block.__typename) {
@@ -12,8 +13,9 @@ function compileBlock(block) {
     case "ContentfulImageBlock":
       return <ImageBlock key={block.id} {...block} />
     case "ContentfulTeamMemberGrid":
-      console.log({ block })
       return <TeamMemberGrid key={block.id} {...block} />
+    case "ContentfulPattern":
+      return <Pattern key={block.id} {...block} />
     default:
       return (
         <section key={block.id} id={block.id} className="block">
