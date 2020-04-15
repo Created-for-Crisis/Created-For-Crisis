@@ -60,7 +60,7 @@ const StyledHeader = styled.header`
         margin-right: 2.5rem;
         padding: 0 0.5rem;
         font-size: 0.85rem;
-        font-family: ${props => props.theme.fonts.header};
+        font-family: ${props => props.theme.fonts.accent};
         color: ${props => props.theme.colors.mediumGrey};
         font-weight: 400;
         text-decoration: none;

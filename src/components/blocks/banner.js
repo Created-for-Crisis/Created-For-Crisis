@@ -12,7 +12,19 @@ import DiscordLogo from "../../assets/logos/Discord-Logo-White.svg"
 const StyledSplash = styled.section`
   .content {
     padding: 2rem 0;
-    h3,
+    margin: auto;
+    text-align: center;
+    background-image: url(${props => props.image});
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: top center;
+
+    p {
+      max-width: 620px;
+      font-size: 1.5rem;
+      margin: 0 auto 1rem;
+    }
+    /* h3,
     p {
       margin-bottom: 1rem;
     }
@@ -20,45 +32,39 @@ const StyledSplash = styled.section`
       font-size: 1rem;
     }
     h1 {
-      font-size: 2rem;
+      font-size: 4rem;
       margin-bottom: 0.5rem;
     }
     h3 {
       font-size: 1.5rem;
     }
-
-    p:first-child {
-      font-family: ${props => props.theme.fonts.accent};
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 0;
-    }
     p {
-      line-height: 1.75;
       max-width: 420px;
-    }
+    } */
   }
 
   ${up("md")} {
     .content {
       padding: 4rem 0;
-      max-width: 720px;
-      span,
+      max-width: 900px;
+      /* background-repeat: no-repeat; */
+      /* background-position: bottom 50% right 5%; */
+      /* background-size: auto 75%; */
+      /* span,
       p {
         font-size: 1.25rem;
       }
       h1 {
         font-size: 4rem;
+      } */
+      h1 {
+        font-size: 110px;
       }
     }
   }
 
   ${ContentContainer} {
     ${up("md")} {
-      background-image: url(${props => props.image});
-      background-repeat: no-repeat;
-      background-position: bottom 50% right 5%;
-      background-size: auto 75%;
     }
   }
 
@@ -81,7 +87,9 @@ const Banner = ({
         <div className="content">
           {documentToReactComponents(json)}
           {actions && (
-            <ActionGroup>
+            <ActionGroup
+              style={{ alignItems: "center", justifyContent: "center" }}
+            >
               {actions.map(({ text, link, variant, icon, internal_link }) => {
                 const Icon = icon
                   ? FeatherIcons[icon]
@@ -96,6 +104,7 @@ const Banner = ({
                     as={internal_link ? Link : "a"}
                     to={link}
                     href={link}
+                    size="lg"
                     target="_blank"
                     className="action"
                   >

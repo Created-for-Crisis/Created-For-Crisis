@@ -13,7 +13,7 @@ const StyledFooter = styled.section`
   }
   a.credit {
     margin: 0;
-    font-family: ${props => props.theme.fonts.header};
+    font-family: ${props => props.theme.fonts.accent};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,7 +48,7 @@ const StyledFooter = styled.section`
       margin: 0.5rem;
       padding: 0 0.5rem;
       font-size: 0.85rem;
-      font-family: ${props => props.theme.fonts.header};
+      font-family: ${props => props.theme.fonts.accent};
       color: ${props => props.theme.colors.mediumGrey};
       font-weight: 400;
       text-decoration: none;

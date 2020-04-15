@@ -14,7 +14,7 @@ const StyledText = styled.p.attrs(props => ({
 `
 
 const ContentContainer = styled.div`
-  max-width: ${props => props.theme.breakpoints.lg};
+  max-width: ${props => props.theme.breakpoints.xl};
   padding: 0 1rem;
   width: 100%;
   margin: auto;
@@ -32,13 +32,13 @@ const ActionGroup = styled.div`
   display: flex;
   flex-direction: column;
   .action + .action {
-    margin: 1rem 0 0 0;
+    margin: 2rem 0 0 0;
   }
 
   ${up("xs")} {
     flex-direction: row;
     .action + .action {
-      margin: 0 0 0 1rem;
+      margin: 0 0 0 2rem;
     }
   }
 `
