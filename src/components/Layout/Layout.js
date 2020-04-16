@@ -9,12 +9,12 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import { ThemeProvider } from "styled-components"
-import { theme, GlobalStyle } from "../styles/theme"
+import { theme, GlobalStyle } from "../../styles/theme"
 
-import getFirebase, { FirebaseContext } from "./Firebase"
-import withAuthentication from "./Session/withAuthentication"
-import Header from "./header"
-import Footer from "./footer"
+import getFirebase, { FirebaseContext } from "../Firebase"
+import withAuthentication from "../Session/withAuthentication"
+import Header from "../header"
+import Footer from "../footer"
 
 class Layout extends Component {
   state = {

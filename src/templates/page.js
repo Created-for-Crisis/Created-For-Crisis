@@ -2,7 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import PropTypes from "prop-types"
 import SEO from "../components/seo"
-import Layout from "../components/Layout"
+import Layout from "../components/Layout/Layout"
 import PageBuilder from "../components/blocks/pageBuilder"
 
 const Page = ({

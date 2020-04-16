@@ -1,7 +1,7 @@
 import React, { Fragment } from "react"
 import { compose } from "recompose"
 
-import Layout from "../components/Layout"
+import Layout from "../components/Layout/Layout"
 import {
   AuthUserContext,
   withAuthorization,
