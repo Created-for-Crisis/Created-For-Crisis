@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
 import { rgba } from "polished"
-import { Mail, Menu } from "react-feather"
+import { Menu } from "react-feather"
 import { up } from "styled-breakpoints"
 import { ContentContainer } from "../styles/components"
-import Button from "./button"
 import MobileMenu from "./mobileMenu"
 import Logo from "../assets/logos/CreatedForCrisis-Logo.svg"
+import { withFirebase } from "./Firebase"
+import Navigation from "./Navigation"
 
 const StyledHeader = styled.header`
   position: fixed;
@@ -128,7 +129,7 @@ function useScrollingListener() {
   return scrollState
 }
 
-const Header = () => {
+const Header = ({ firebase }) => {
   // Initial State
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   let { passedBreakpoint } = useScrollingListener()
@@ -153,24 +154,7 @@ const Header = () => {
           <Link to="/" style={{ lineHeight: 0 }}>
             <Logo className="logo" />
           </Link>
-          <nav>
-            {routes &&
-              routes.map(({ title, slug }, i) => (
-                <Link key={i} to={`/${slug}/`} activeClassName="active">
-                  {title}
-                </Link>
-              ))}
-            <Button
-              variant="primary"
-              as="a"
-              href="mailto:info@createdforcrisis.org"
-              target="_blank"
-              className="button"
-            >
-              Contact Us
-              <Mail />
-            </Button>
-          </nav>
+          <Navigation routes={routes} />
           <button
             className="menu-trigger"
             onClick={() => setMobileMenuOpen(true)}
@@ -189,4 +173,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default withFirebase(Header)

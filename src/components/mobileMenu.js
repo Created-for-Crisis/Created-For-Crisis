@@ -36,6 +36,8 @@ const StyledMobileMenu = styled.div`
     width: 240px;
     background-color: ${props => props.theme.colors.white};
     transform: translateX(100%);
+    overflow-y: auto;
+    padding-bottom: 1rem;
   }
 
   .close {
@@ -135,6 +137,9 @@ const MobileMenu = ({ open, closeMenu, routes }) => (
               {title}
             </Link>
           ))}
+        <Link to={`/donate/`} activeClassName="active">
+          Support
+        </Link>
         <Button
           variant="primary"
           as="a"

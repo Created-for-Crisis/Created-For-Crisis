@@ -2,7 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import PropTypes from "prop-types"
 import SEO from "../components/seo"
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 import { ContentContainer } from "../styles/components"
 
 const Article = ({ data: { contentfulArticle: article } }) => (
