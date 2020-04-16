@@ -14,6 +14,7 @@ import Button from "../button"
 import StripeForm from "./StripeForm"
 import AmountSelection from "./AmountSelection"
 
+console.log(process.env.STRIPE_PUBLISHABLE_KEY)
 const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY)
 
 const DonateContainer = styled.div`
