@@ -14,8 +14,7 @@ import Button from "../button"
 import StripeForm from "./StripeForm"
 import AmountSelection from "./AmountSelection"
 
-console.log(process.env.STRIPE_PUBLISHABLE_KEY)
-const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY)
+const stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY)
 
 const DonateContainer = styled.div`
   border-radius: 0.5rem;
@@ -168,7 +167,7 @@ const FormContainer = () => {
           dispatch({ type: "processing", payload: true })
 
           const clientSecret = await fetch(
-            `${process.env.EXPRESS_API_PATH}/paymentIntent`,
+            `${process.env.GATSBY_EXPRESS_API_PATH}/paymentIntent`,
             {
               method: "POST",
               headers: {
