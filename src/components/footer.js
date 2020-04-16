@@ -100,6 +100,9 @@ const Footer = () => {
                 {title}
               </Link>
             ))}
+          <Link to={`/donate/`} activeClassName="active">
+            Support
+          </Link>
         </nav>
         <p className="copyright">
           © {new Date().getFullYear()} Created for Crisis

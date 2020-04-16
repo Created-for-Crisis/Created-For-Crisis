@@ -14,7 +14,7 @@ const StyledText = styled.p.attrs(props => ({
 `
 
 const ContentContainer = styled.div`
-  max-width: ${props => props.theme.breakpoints.lg};
+  max-width: ${props => props.theme.breakpoints.xl};
   padding: 0 1rem;
   width: 100%;
   margin: auto;
