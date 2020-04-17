@@ -188,6 +188,18 @@ const FormContainer = () => {
             .then(function(responseJson) {
               return responseJson.client_secret
             })
+            .catch(error => {
+              console.error(error)
+              return null
+            })
+
+          if (!clientSecret) {
+            return dispatch({
+              type: "handleError",
+              payload:
+                "We encountered an error from our API when generating the payment.",
+            })
+          }
 
           const { error, paymentIntent } = await stripe.confirmCardPayment(
             clientSecret,
