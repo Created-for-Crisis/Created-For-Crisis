@@ -17,7 +17,7 @@ app.use(cors({ origin: true }))
 app.use(bodyParser.json())
 
 // Get Payment Intent Secret for Stripe
-app.post("/paymentIntent", async ({ body: { amount } }, res) => {
+app.post("/paymentIntent", async ({ body: { amount, metadata = {} } }, res) => {
   if (!amount) {
     res.status(500).end("Invalid Amount Specified")
   } else {
@@ -25,7 +25,12 @@ app.post("/paymentIntent", async ({ body: { amount } }, res) => {
       amount,
       currency: "usd",
       // Verify your integration in this guide by including this parameter
-      metadata: { integration_check: "accept_a_payment" },
+      metadata: Object.assign(
+        {
+          integration_check: "accept_a_payment",
+        },
+        metadata
+      ),
     })
     res.json({ client_secret: intent.client_secret })
   }

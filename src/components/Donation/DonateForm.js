@@ -176,6 +176,9 @@ const FormContainer = () => {
               },
               body: JSON.stringify({
                 amount: amount.value,
+                metadata: {
+                  organization: "Created for Crisis",
+                },
               }),
             }
           )
