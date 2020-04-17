@@ -138,7 +138,7 @@ const MobileMenu = ({ open, closeMenu, routes }) => (
             </Link>
           ))}
         <Link to={`/donate/`} activeClassName="active">
-          Support
+          Donate
         </Link>
         <Button
           variant="primary"

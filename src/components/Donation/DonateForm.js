@@ -136,8 +136,8 @@ const FormContainer = () => {
   ] = useReducer(reducer, {
     processing: false,
     amount: {
-      text: "$3.00",
-      value: 300,
+      text: "$10.00",
+      value: 1000,
       custom: false,
     },
     showCustomAmount: false,

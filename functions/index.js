@@ -20,6 +20,7 @@ app.use(
       const whitelist = [
         // Development Domains
         "http://localhost:8000",
+        "https://localhost:8000",
         // Created for Crisis Domains
         "https://develop.createdforcrisis.org",
         "https://www.createdforcrisis.org",
