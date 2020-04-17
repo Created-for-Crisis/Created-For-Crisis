@@ -12,29 +12,60 @@ const bodyParser = require("body-parser")
 
 // [START Express App for HTTP Requests]
 const app = express()
-// Automatically allow cross-origin requests
-app.use(cors({ origin: true }))
+// Configure origin whitelist
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Whitelisted Origins
+      const whitelist = [
+        // Development Domains
+        "http://localhost:8000",
+        // Created for Crisis Domains
+        "https://develop.createdforcrisis.org",
+        "https://www.createdforcrisis.org",
+        // MasksNow Domains
+        "https://masksnow.org",
+      ]
+
+      // allow requests with no origin
+      if (!origin) return callback(null, true)
+      if (whitelist.indexOf(origin) === -1) {
+        return callback(
+          new Error(
+            "The CORS policy doesn't have this origin within it's whitelist."
+          ),
+          false
+        )
+      }
+      return callback(null, true)
+    },
+  })
+)
+// Parse request bodies to JSON
 app.use(bodyParser.json())
 
 // Get Payment Intent Secret for Stripe
-app.post("/paymentIntent", async ({ body: { amount, metadata = {} } }, res) => {
-  if (!amount) {
-    res.status(500).end("Invalid Amount Specified")
-  } else {
-    const intent = await stripe.paymentIntents.create({
-      amount,
-      currency: "usd",
-      // Verify your integration in this guide by including this parameter
-      metadata: Object.assign(
-        {
-          integration_check: "accept_a_payment",
-        },
-        metadata
-      ),
-    })
-    res.json({ client_secret: intent.client_secret })
+app.post(
+  "/paymentIntent",
+  async ({ body: { amount, metadata = {} } }, res, next) => {
+    if (!amount) {
+      res.status(500).end("Invalid Amount Specified")
+    } else {
+      const intent = await stripe.paymentIntents.create({
+        amount,
+        currency: "usd",
+        // Verify your integration in this guide by including this parameter
+        metadata: Object.assign(
+          {
+            integration_check: "accept_a_payment",
+          },
+          metadata
+        ),
+      })
+      res.json({ client_secret: intent.client_secret })
+    }
   }
-})
+)
 
 // Expose Express API as a single Cloud Function:
 exports.app = functions.https.onRequest(app)
