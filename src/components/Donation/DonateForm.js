@@ -203,6 +203,7 @@ const FormContainer = () => {
                   // },
                 },
               },
+              receipt_email: values.email,
             }
           )
 
