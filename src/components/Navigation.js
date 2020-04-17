@@ -38,7 +38,7 @@ const NavigationMenu = ({ routes, authUser }) => (
         </Link>
       ))}
     <Button variant="tertiary" className="button" as={Link} to={"/donate/"}>
-      Support
+      Donate
     </Button>
     {/* {authUser ? <SignOut /> : <SignIn />} */}
   </nav>

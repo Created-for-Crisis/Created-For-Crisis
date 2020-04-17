@@ -1,0 +1,5 @@
+# Branch Deployment Settings
+# e.g. staging.createdforcrisis.org, development.createdforcrisis.org
+# All branch deployments will use the DEV Environment variables
+[context.branch-deploy.environment]
+  NODE_ENV = "development"

@@ -14,7 +14,11 @@ import Button from "../button"
 import StripeForm from "./StripeForm"
 import AmountSelection from "./AmountSelection"
 
-const stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY)
+const stripePromise = loadStripe(
+  process.env.NODE_ENV === "development"
+    ? process.env.GATSBY_STRIPE_PUBLISHABLE_KEY_DEV
+    : process.env.GATSBY_STRIPE_PUBLISHABLE_KEY_PROD
+)
 
 const DonateContainer = styled.div`
   border-radius: 0.5rem;
@@ -132,8 +136,8 @@ const FormContainer = () => {
   ] = useReducer(reducer, {
     processing: false,
     amount: {
-      text: "$3.00",
-      value: 300,
+      text: "$10.00",
+      value: 1000,
       custom: false,
     },
     showCustomAmount: false,
@@ -167,7 +171,11 @@ const FormContainer = () => {
           dispatch({ type: "processing", payload: true })
 
           const clientSecret = await fetch(
-            `${process.env.GATSBY_EXPRESS_API_PATH}/paymentIntent`,
+            `${
+              process.env.NODE_ENV === "development"
+                ? process.env.GATSBY_EXPRESS_API_PATH_DEV
+                : process.env.GATSBY_EXPRESS_API_PATH_PROD
+            }/paymentIntent`,
             {
               method: "POST",
               headers: {
@@ -301,6 +309,13 @@ const FormContainer = () => {
           </Form>
         )}
       </Formik>
+      {/* Show Development Mode */}
+      {process.env.NODE_ENV === "development" && (
+        <Message error style={{ marginTop: "2rem" }}>
+          <header>Development Mode is Enabled</header>
+          <p>All donation submissions will hit the test Stripe account.</p>
+        </Message>
+      )}
     </DonateContainer>
   )
 }

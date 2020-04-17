@@ -20,12 +20,18 @@ module.exports = {
     },
     {
       resolve: `gatsby-source-contentful`,
-      options: {
-        spaceId: process.env.CONTENTFUL_SPACE_ID,
-        // Learn about environment variables: https://gatsby.dev/env-vars
-        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-        environment: process.env.CONTENTFUL_ENVIRONMENT,
-      },
+      options:
+        process.env.NODE_ENV === "development"
+          ? {
+              spaceId: process.env.CONTENTFUL_SPACE_ID_DEV,
+              accessToken: process.env.CONTENTFUL_ACCESS_TOKEN_DEV,
+              environment: process.env.CONTENTFUL_ENVIRONMENT_DEV,
+            }
+          : {
+              spaceId: process.env.CONTENTFUL_SPACE_ID_PROD,
+              accessToken: process.env.CONTENTFUL_ACCESS_TOKEN_PROD,
+              environment: process.env.CONTENTFUL_ENVIRONMENT_PROD,
+            },
     },
     {
       resolve: `gatsby-plugin-styled-components`,

@@ -77,20 +77,20 @@ const DonationButton = styled(Button)`
 
 const donationAmounts = [
   {
-    text: "$3.00",
-    value: 300,
-  },
-  {
-    text: "$5.00",
-    value: 500,
-  },
-  {
     text: "$10.00",
     value: 1000,
   },
   {
-    text: "$15.00",
-    value: 1500,
+    text: "$25.00",
+    value: 2500,
+  },
+  {
+    text: "$50.00",
+    value: 5000,
+  },
+  {
+    text: "$100.00",
+    value: 10000,
   },
 ]
 
@@ -144,19 +144,41 @@ const AmountSelection = ({ amount, showCustomAmount, dispatch }) => (
             numeralPositiveOnly: true,
             numeralThousandsGroupStyle: "thousand",
           }}
-          onChange={e =>
+          onChange={({ target: { rawValue } }) => {
+            let value
+            // If decimal specified
+            if (rawValue.includes(".")) {
+              let valueArr = rawValue.split(".")
+              // If cents specified
+              if (valueArr[1].length === 2) {
+                value = parseInt(valueArr.join(""))
+              }
+              // If first cent is specified
+              else if (valueArr[1].length === 1) {
+                value = parseInt(valueArr.join("") + "0")
+              }
+              // No cents specified
+              else {
+                value = parseInt(valueArr.join("") + "00")
+              }
+            }
+            // Return + cents
+            else if (rawValue) {
+              value = parseInt(rawValue + "00")
+            }
+
             dispatch({
               type: "changeAmount",
               payload: {
                 amount: {
                   text: "Custom",
-                  value: parseInt(e.target.rawValue.replace(".", "")) || null,
+                  value,
                   custom: true,
                 },
                 showCustomAmount: true,
               },
             })
-          }
+          }}
         />
       </CustomAmount>
     )}
