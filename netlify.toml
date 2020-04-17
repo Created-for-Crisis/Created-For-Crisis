@@ -1,19 +1,5 @@
-# Production Context Environment Variables
-# createdforcrisis.org
-# [context.production.environment]
-  # ACCESS_TOKEN = "not so secret"
-
-# Staging Context Environment Variables to be the same as production
-# staging.createdforcrisis.org
-# [context.staging.environment]
-#   ACCESS_TOKEN = "not so secret"
-
-# Production Deploy preview Environement Variablees
-# [context.deploy-preview.environment]
-#   ACCESS_TOKEN = "not so secret"
-
 # Branch Deployment Settings
-# e.g. development.createdforcrisis.org
+# e.g. staging.createdforcrisis.org, development.createdforcrisis.org
+# All branch deployments will use the DEV Environment variables
 [context.branch-deploy.environment]
   NODE_ENV = "development"
-  GATSBY_TEST = "${GATSBY_TEST}"

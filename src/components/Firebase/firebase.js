@@ -1,12 +1,29 @@
-const config = {
-  apiKey: process.env.GATSBY_FIREBASE_API_KEY,
-  authDomain: process.env.GATSBY_FIREBASE_AUTH_DOMAIN,
-  databaseURL: process.env.GATSBY_FIREBASE_DATABASE_URL,
-  projectId: process.env.GATSBY_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.GATSBY_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.GATSBY_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.GATSBY_FIREBASE_APP_ID,
-  measurementId: process.env.GATSBY_FIREBASE_MEASUREMENT_ID,
+// Firebase Configuration
+let config = {}
+
+// Set Config based off environment
+if (process.env.NODE_ENV === "development") {
+  config = {
+    apiKey: process.env.GATSBY_FIREBASE_API_KEY_DEV,
+    authDomain: process.env.GATSBY_FIREBASE_AUTH_DOMAIN_DEV,
+    databaseURL: process.env.GATSBY_FIREBASE_DATABASE_URL_DEV,
+    projectId: process.env.GATSBY_FIREBASE_PROJECT_ID_DEV,
+    storageBucket: process.env.GATSBY_FIREBASE_STORAGE_BUCKET_DEV,
+    messagingSenderId: process.env.GATSBY_FIREBASE_MESSAGING_SENDER_ID_DEV,
+    appId: process.env.GATSBY_FIREBASE_APP_ID_DEV,
+    measurementId: process.env.GATSBY_FIREBASE_MEASUREMENT_ID_DEV,
+  }
+} else {
+  config = {
+    apiKey: process.env.GATSBY_FIREBASE_API_KEY_PROD,
+    authDomain: process.env.GATSBY_FIREBASE_AUTH_DOMAIN_PROD,
+    databaseURL: process.env.GATSBY_FIREBASE_DATABASE_URL_PROD,
+    projectId: process.env.GATSBY_FIREBASE_PROJECT_ID_PROD,
+    storageBucket: process.env.GATSBY_FIREBASE_STORAGE_BUCKET_PROD,
+    messagingSenderId: process.env.GATSBY_FIREBASE_MESSAGING_SENDER_ID_PROD,
+    appId: process.env.GATSBY_FIREBASE_APP_ID_PROD,
+    measurementId: process.env.GATSBY_FIREBASE_MEASUREMENT_ID_PROD,
+  }
 }
 
 class Firebase {
