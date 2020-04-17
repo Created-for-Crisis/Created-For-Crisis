@@ -251,7 +251,7 @@ const FormContainer = () => {
                     label="Email Address"
                     name="email"
                     type="email"
-                    placeholder="jane@formik.com"
+                    placeholder="jane@createdforcrisis.org"
                   />
                 </Cell>
               </Grid>
