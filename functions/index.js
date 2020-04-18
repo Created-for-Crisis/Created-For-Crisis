@@ -49,12 +49,13 @@ app.use(bodyParser.json())
 // Get Payment Intent Secret for Stripe
 app.post(
   "/paymentIntent",
-  async ({ body: { amount, metadata = {} } }, res, next) => {
+  async ({ body: { amount, description, metadata = {} } }, res, next) => {
     if (!amount) {
       res.status(500).end("Invalid Amount Specified")
     } else {
       const intent = await stripe.paymentIntents.create({
         amount,
+        description,
         currency: "usd",
         // Verify your integration in this guide by including this parameter
         metadata: Object.assign(

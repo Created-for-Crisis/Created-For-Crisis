@@ -155,6 +155,7 @@ const FormContainer = () => {
         initialValues={{
           name: "",
           email: "",
+          memo: "",
         }}
         validationSchema={Yup.object({
           name: Yup.string()
@@ -164,7 +165,7 @@ const FormContainer = () => {
             .email("Invalid email address")
             .required("Required"),
         })}
-        onSubmit={async (values, { setSubmitting }) => {
+        onSubmit={async ({ name, email, memo }, { setSubmitting }) => {
           if (!stripe || !elements) {
             // Stripe.js has not yet loaded.
             // Make sure to disable form submission until Stripe.js has loaded.
@@ -187,8 +188,10 @@ const FormContainer = () => {
               },
               body: JSON.stringify({
                 amount: amount.value,
+                description: memo,
                 metadata: {
                   organization: "Created for Crisis",
+                  memo,
                 },
               }),
             }
@@ -218,18 +221,11 @@ const FormContainer = () => {
               payment_method: {
                 card: elements.getElement(CardElement),
                 billing_details: {
-                  ...values,
-                  // address: {
-                  //   city: null,
-                  //   country: null,
-                  //   line1: null,
-                  //   line2: null,
-                  //   postal_code: "94103",
-                  //   state: null,
-                  // },
+                  name,
+                  email,
                 },
               },
-              receipt_email: values.email,
+              receipt_email: email,
             }
           )
 
@@ -278,6 +274,14 @@ const FormContainer = () => {
                   />
                 </Cell>
               </Grid>
+            </Row>
+            <Row>
+              <TextInput
+                label="Memo (Optional)"
+                name="memo"
+                type="text"
+                placeholder="e.g. Credit to my organization"
+              />
             </Row>
             {/* Donation Amounts */}
             <Row>
