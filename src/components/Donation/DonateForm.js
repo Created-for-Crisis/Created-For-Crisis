@@ -175,7 +175,7 @@ const FormContainer = () => {
 
           const clientSecret = await fetch(
             `${
-              process.env.NODE_ENV === "development"
+              activeEnv === "development"
                 ? process.env.GATSBY_EXPRESS_API_PATH_DEV
                 : process.env.GATSBY_EXPRESS_API_PATH_PROD
             }/paymentIntent`,
