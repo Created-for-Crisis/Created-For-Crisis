@@ -14,11 +14,12 @@ import Button from "../button"
 import StripeForm from "./StripeForm"
 import AmountSelection from "./AmountSelection"
 
-const stripePromise = loadStripe(
+// Load & Initialize Stripe
+const stripePublishableKey =
   process.env.NODE_ENV === "development"
     ? process.env.GATSBY_STRIPE_PUBLISHABLE_KEY_DEV
     : process.env.GATSBY_STRIPE_PUBLISHABLE_KEY_PROD
-)
+const stripePromise = loadStripe(stripePublishableKey)
 
 const DonateContainer = styled.div`
   border-radius: 0.5rem;
@@ -310,7 +311,7 @@ const FormContainer = () => {
         )}
       </Formik>
       {/* Show Development Mode */}
-      {process.env.NODE_ENV === "development" && (
+      {stripePublishableKey.includes("test") && (
         <Message error style={{ marginTop: "2rem" }}>
           <header>Development Mode is Enabled</header>
           <p>All donation submissions will hit the test Stripe account.</p>
