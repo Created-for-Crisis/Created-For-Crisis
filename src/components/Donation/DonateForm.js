@@ -15,11 +15,13 @@ import StripeForm from "./StripeForm"
 import AmountSelection from "./AmountSelection"
 
 // Load & Initialize Stripe
-const stripePublishableKey =
-  process.env.NODE_ENV === "development"
+const activeEnv =
+  process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development"
+const stripePromise = loadStripe(
+  activeEnv === "development"
     ? process.env.GATSBY_STRIPE_PUBLISHABLE_KEY_DEV
     : process.env.GATSBY_STRIPE_PUBLISHABLE_KEY_PROD
-const stripePromise = loadStripe(stripePublishableKey)
+)
 
 const DonateContainer = styled.div`
   border-radius: 0.5rem;
@@ -173,7 +175,7 @@ const FormContainer = () => {
 
           const clientSecret = await fetch(
             `${
-              process.env.NODE_ENV === "development"
+              activeEnv === "development"
                 ? process.env.GATSBY_EXPRESS_API_PATH_DEV
                 : process.env.GATSBY_EXPRESS_API_PATH_PROD
             }/paymentIntent`,
@@ -311,7 +313,7 @@ const FormContainer = () => {
         )}
       </Formik>
       {/* Show Development Mode */}
-      {stripePublishableKey.includes("test") && (
+      {activeEnv === "development" && (
         <Message error style={{ marginTop: "2rem" }}>
           <header>Development Mode is Enabled</header>
           <p>All donation submissions will hit the test Stripe account.</p>

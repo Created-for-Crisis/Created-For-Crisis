@@ -1,5 +1,8 @@
+const activeEnv =
+  process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development"
+
 require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
+  path: `.env.${activeEnv}`,
 })
 
 module.exports = {
@@ -21,7 +24,7 @@ module.exports = {
     {
       resolve: `gatsby-source-contentful`,
       options:
-        process.env.NODE_ENV === "development"
+        activeEnv === "development"
           ? {
               spaceId: process.env.CONTENTFUL_SPACE_ID_DEV,
               accessToken: process.env.CONTENTFUL_ACCESS_TOKEN_DEV,

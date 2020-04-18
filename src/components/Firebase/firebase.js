@@ -2,7 +2,9 @@
 let config = {}
 
 // Set Config based off environment
-if (process.env.NODE_ENV === "development") {
+const activeEnv =
+  process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development"
+if (activeEnv === "development") {
   config = {
     apiKey: process.env.GATSBY_FIREBASE_API_KEY_DEV,
     authDomain: process.env.GATSBY_FIREBASE_AUTH_DOMAIN_DEV,
