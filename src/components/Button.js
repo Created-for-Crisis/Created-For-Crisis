@@ -24,12 +24,26 @@ const load = keyframes`
 /*
  ** Color Variants
  */
-const ButtonVariants = PropStyles("variant", ({ colors }) => ({
-  primary: {
+const ButtonVariants = PropStyles("color", ({ colors }) => ({
+  blue: {
     color: colors.shades.white,
     backgroundColor: colors.blue,
     "&:hover, &:focus, &:active": {
       backgroundColor: lighten(0.05, colors.blue),
+    },
+  },
+  green: {
+    color: colors.shades.white,
+    backgroundColor: colors.green,
+    "&:hover, &:focus, &:active": {
+      backgroundColor: lighten(0.05, colors.green),
+    },
+  },
+  gold: {
+    color: colors.shades.textDark,
+    backgroundColor: colors.gold,
+    "&:hover, &:focus, &:active": {
+      backgroundColor: lighten(0.05, colors.gold),
     },
   },
 }))
@@ -111,7 +125,7 @@ const StyledButton = styled.button`
     border-bottom: 0.1em solid rgba(255, 255, 255, 0.2);
     border-left: 0.1em solid
       ${props =>
-        props.variant === "primary"
+        props.color === "primary"
           ? props.theme.colors.white
           : props.theme.colors.primary};
     animation: ${load} 1.1s infinite linear;
@@ -119,10 +133,10 @@ const StyledButton = styled.button`
 `
 
 export const Button = props => {
-  const { children, loading, disabled, iconPosition, variant, size } = props
+  const { children, loading, disabled, iconPosition, color, size } = props
 
   const classes = cx(
-    variant,
+    color,
     size,
     useValueAndKey(iconPosition, "icon"),
     useKeyOnly(loading)
@@ -133,7 +147,7 @@ export const Button = props => {
   return (
     <StyledButton
       as={ElementType}
-      variant={variant}
+      color={color}
       iconPosition={iconPosition}
       {...rest}
       className={classes}
@@ -156,7 +170,15 @@ export const ButtonGroup = styled.div`
 Button.propTypes = {
   as: PropTypes.elementType,
   children: PropTypes.node.isRequired,
-  variant: PropTypes.oneOf(["primary", "secondary", "dark", "plain"]),
+  color: PropTypes.oneOf([
+    "blue",
+    "green",
+    "gold",
+    "red",
+    "purple",
+    "white",
+    "discord",
+  ]),
   iconPosition: PropTypes.oneOf(["left", "right"]),
   disabled: PropTypes.bool,
   loading: PropTypes.bool,
@@ -165,5 +187,5 @@ Button.propTypes = {
 Button.defaultProps = {
   as: "button",
   children: "Button",
-  variant: "primary",
+  color: "blue",
 }

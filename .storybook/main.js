@@ -18,6 +18,6 @@ module.exports = {
     },
     "@storybook/addon-docs",
     "@storybook/addon-a11y/register",
-    "@storybook/addon-viewport/register",
+    // "@storybook/addon-viewport/register",
   ],
 }
