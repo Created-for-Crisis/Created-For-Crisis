@@ -3,8 +3,13 @@
 [context.production.environment]
   GATSBY_ACTIVE_ENV = "production"
 
+# Staging Deployment Settings
+# All staging/production deployments will use the PROD Environment variables
+[context.staging.environment]
+  GATSBY_ACTIVE_ENV = "production"
+
 # Branch Deployment Settings
-# e.g. staging.createdforcrisis.org, development.createdforcrisis.org
+# e.g. development.createdforcrisis.org
 # All branch deployments will use the DEV Environment variables
 [context.branch-deploy.environment]
   GATSBY_ACTIVE_ENV = "development"
