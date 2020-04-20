@@ -46,6 +46,48 @@ const ButtonVariants = PropStyles("color", ({ colors }) => ({
       backgroundColor: lighten(0.05, colors.gold),
     },
   },
+  purple: {
+    color: colors.shades.white,
+    backgroundColor: colors.purple,
+    "&:hover, &:focus, &:active": {
+      backgroundColor: lighten(0.05, colors.purple),
+    },
+  },
+  red: {
+    color: colors.shades.white,
+    backgroundColor: colors.red,
+    "&:hover, &:focus, &:active": {
+      backgroundColor: lighten(0.05, colors.red),
+    },
+  },
+  plain: {
+    color: colors.shades.textDark,
+    backgroundColor: colors.shades.white,
+    "&:hover, &:focus, &:active": {
+      backgroundColor: colors.shades.muteGrey,
+    },
+  },
+  mute: {
+    color: colors.shades.textMedium,
+    backgroundColor: colors.shades.muteGrey,
+    "&:hover, &:focus, &:active": {
+      color: colors.shades.textDark,
+    },
+  },
+  discord: {
+    color: colors.shades.white,
+    backgroundColor: colors.brands.discord,
+    "&:hover, &:focus, &:active": {
+      backgroundColor: lighten(0.05, colors.brands.discord),
+    },
+  },
+  "discord-inverse": {
+    color: colors.brands.discord,
+    backgroundColor: colors.shades.white,
+    "&:hover, &:focus, &:active": {
+      backgroundColor: colors.shades.muteGrey,
+    },
+  },
 }))
 
 /*
@@ -76,9 +118,9 @@ const StyledButton = styled.button`
   height: 40px;
   text-transform: uppercase;
   border: none;
-  transition: all 0.15s ease;
   text-decoration: none;
   cursor: pointer;
+  transition: all 0.15s ease;
   will-change: background-color transform box-shadow;
 
   svg {
@@ -90,13 +132,15 @@ const StyledButton = styled.button`
   ${ButtonVariants};
   ${ButtonIconPositions};
 
-  box-shadow: ${props => props.theme.shadows.button};
+  &.shadow {
+    box-shadow: ${props => props.theme.shadows.button};
 
-  &:hover,
-  &:focus,
-  &:active {
-    box-shadow: ${props => props.theme.shadows.buttonActive};
-    transform: translateY(-1px);
+    &:hover,
+    &:focus,
+    &:active {
+      box-shadow: ${props => props.theme.shadows.buttonActive};
+      transform: translateY(-1px);
+    }
   }
 
   &:disabled {
@@ -133,13 +177,13 @@ const StyledButton = styled.button`
 `
 
 export const Button = props => {
-  const { children, loading, disabled, iconPosition, color, size } = props
+  const { children, loading, disabled, iconPosition, color, shadow } = props
 
   const classes = cx(
     color,
-    size,
+    useKeyOnly(shadow, "shadow"),
     useValueAndKey(iconPosition, "icon"),
-    useKeyOnly(loading)
+    useKeyOnly(loading, "loading")
   )
   const rest = getUnhandledProps(Button, props)
   const ElementType = getElementType(Button, props)
@@ -148,6 +192,7 @@ export const Button = props => {
     <StyledButton
       as={ElementType}
       color={color}
+      shadow={shadow}
       iconPosition={iconPosition}
       {...rest}
       className={classes}
@@ -176,9 +221,12 @@ Button.propTypes = {
     "gold",
     "red",
     "purple",
-    "white",
+    "plain",
+    "mute",
     "discord",
+    "discord-inverse",
   ]),
+  shadow: PropTypes.bool,
   iconPosition: PropTypes.oneOf(["left", "right"]),
   disabled: PropTypes.bool,
   loading: PropTypes.bool,
@@ -188,4 +236,5 @@ Button.defaultProps = {
   as: "button",
   children: "Button",
   color: "blue",
+  shadow: true,
 }

@@ -42,17 +42,12 @@ const theme = {
       0,
       0.25
     )}`,
-    card: `box-shadow: 0px -6px 16px ${rgba(
+    card: `0px -6px 16px ${rgba(0, 0, 0, 0.025)}, 0px 8px 16px ${rgba(
       0,
       0,
       0,
-      0.025
-    )}, 0px 8px 16px ${rgba(0, 0, 0, 0.03)}, 0px 13px 27px ${rgba(
-      50,
-      50,
-      93,
-      0.25
-    )}`,
+      0.03
+    )}, 0px 13px 27px ${rgba(50, 50, 93, 0.25)}`,
     cardActive: `0px -12px 36px ${rgba(0, 0, 0, 0.025)}, 0px 18px 36px ${rgba(
       0,
       0,
