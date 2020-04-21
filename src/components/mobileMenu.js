@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 import { Mail, X } from "react-feather"
-import Button from "./button"
+import { Button } from "./Button"
 import DiscordLogo from "../assets/logos/Discord-Logo-White.svg"
 
 const StyledMobileMenu = styled.div`

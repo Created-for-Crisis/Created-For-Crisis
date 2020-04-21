@@ -93,7 +93,7 @@ const ButtonVariants = PropStyles("color", ({ colors }) => ({
 /*
  ** Icon Position Variations
  */
-const ButtonIconPositions = PropStyles("iconPosition", ({ colors }) => ({
+const ButtonIconPositions = PropStyles("iconposition", ({ colors }) => ({
   left: {
     svg: {
       marginRight: ".5rem",
@@ -110,6 +110,7 @@ const StyledButton = styled.button`
   position: relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   font-family: ${props => props.theme.fonts.body};
   font-weight: 600;
   border-radius: 0.25rem;
@@ -180,6 +181,7 @@ export const Button = props => {
   const { children, loading, disabled, iconPosition, color, shadow } = props
 
   const classes = cx(
+    "button",
     color,
     useKeyOnly(shadow, "shadow"),
     useValueAndKey(iconPosition, "icon"),
@@ -192,8 +194,7 @@ export const Button = props => {
     <StyledButton
       as={ElementType}
       color={color}
-      shadow={shadow}
-      iconPosition={iconPosition}
+      iconposition={iconPosition}
       {...rest}
       className={classes}
       disabled={(disabled && ElementType === "button") || undefined}

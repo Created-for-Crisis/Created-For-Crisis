@@ -62,6 +62,7 @@
     "@storybook/react": "^5.3.18",
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-react-handled-props": "^2.1.0",
+    "babel-preset-gatsby": "^0.3.3",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "firebase-tools": "^7.16.1",
     "prettier": "^1.19.1"

@@ -10,7 +10,7 @@ import {
   CardElement,
   useElements,
 } from "@stripe/react-stripe-js"
-import Button from "../button"
+import { Button } from "../Button"
 import StripeForm from "./StripeForm"
 import AmountSelection from "./AmountSelection"
 

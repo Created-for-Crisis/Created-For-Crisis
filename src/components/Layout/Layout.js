@@ -7,14 +7,15 @@
 
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
 import { ThemeProvider } from "styled-components"
+import { TypographyStyle } from "react-typography"
 import { theme, GlobalStyle } from "../../styles/theme"
+import typography from "../../styles/typography"
 
 import getFirebase, { FirebaseContext } from "../Firebase"
+import { AuthUserContext } from "../Session"
 import withAuthentication from "../Session/withAuthentication"
-import Header from "../header"
-import Footer from "../footer"
+import { Masthead } from "./Masthead"
 
 class Layout extends Component {
   state = {
@@ -37,6 +38,7 @@ class Layout extends Component {
     return (
       <ThemeProvider theme={theme}>
         <GlobalStyle />
+        <TypographyStyle typography={typography} />
         <FirebaseContext.Provider value={this.state.firebase}>
           <AppWithAuthentication {...this.props} />
         </FirebaseContext.Provider>
@@ -46,20 +48,13 @@ class Layout extends Component {
 }
 
 const AppWithAuthentication = withAuthentication(({ children }) => {
-  const { site } = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
   return (
     <>
-      <Header siteTitle={site.siteMetadata.title} />
-      <main style={{ paddingTop: "80px" }}>{children}</main>
-      <Footer />
+      <AuthUserContext.Consumer>
+        {authUser => <Masthead user={authUser} />}
+      </AuthUserContext.Consumer>
+      <main>{children}</main>
+      {/* <Footer /> */}
     </>
   )
 })

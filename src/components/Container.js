@@ -20,6 +20,7 @@ const ContainerSizes = PropStyles("size", ({ breakpoints }) => ({
 
 const StyledContainer = styled.div`
   margin: 0 auto;
+  width: 100%;
   padding: ${props =>
     !props.padded
       ? "0"
@@ -43,5 +44,5 @@ Container.defaultProps = {
   right: "1.25rem",
   bottom: "1.25rem",
   left: "1.25rem",
-  size: "full",
+  size: "content",
 }

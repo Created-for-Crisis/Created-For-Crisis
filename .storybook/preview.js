@@ -22,6 +22,6 @@ addDecorator(storyFn => (
   <ThemeProvider theme={theme}>
     <GlobalStyle />
     <TypographyStyle typography={typography} />
-    <Container>{storyFn()}</Container>
+    <Container size="full">{storyFn()}</Container>
   </ThemeProvider>
 ))

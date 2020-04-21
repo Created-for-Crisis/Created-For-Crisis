@@ -5,7 +5,7 @@ import styled from "styled-components"
 import { up } from "styled-breakpoints"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { ContentContainer, ActionGroup } from "../../styles/components"
-import Button from "../button"
+import { Button } from "../Button"
 import * as FeatherIcons from "react-feather"
 import DiscordLogo from "../../assets/logos/Discord-Logo-White.svg"
 

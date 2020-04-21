@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 
 // import { withFirebase } from "./Firebase"
 import { AuthUserContext } from "./Session"
-import Button from "./button"
+import { Button } from "./Button"
 
 const Navigation = ({ routes }) => (
   <AuthUserContext.Consumer>

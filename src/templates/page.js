@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import PropTypes from "prop-types"
-import SEO from "../components/seo"
+import SEO from "../components/Layout/SEO"
 import Layout from "../components/Layout/Layout"
 import PageBuilder from "../components/blocks/pageBuilder"
 
@@ -29,76 +29,6 @@ export const postQuery = graphql`
       title
       content {
         json
-      }
-      blocks {
-        ... on ContentfulBanner {
-          id
-          actions {
-            icon
-            id
-            link
-            text
-            variant
-          }
-          illustration {
-            file {
-              url
-            }
-          }
-          content {
-            json
-          }
-        }
-        ... on ContentfulImageBlock {
-          id
-          title
-          content {
-            json
-          }
-          alignment
-          image {
-            file {
-              url
-            }
-          }
-        }
-        ... on ContentfulTeamMemberGrid {
-          id
-          title
-          snippet
-          format
-          members {
-            id
-            name
-            role
-            bio {
-              json
-            }
-            gitHubUrl
-            linkedInUrl
-            website
-            image {
-              description
-              fluid {
-                src
-              }
-            }
-          }
-        }
-        ... on ContentfulPattern {
-          id
-          name
-          actions {
-            id
-            icon
-            text
-            variant
-            link
-          }
-          description {
-            json
-          }
-        }
       }
     }
   }

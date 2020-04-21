@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import Cleave from "cleave.js/react"
-import Button from "../button"
+import { Button } from "../Button"
 
 const Donations = styled.div`
   display: flex;
