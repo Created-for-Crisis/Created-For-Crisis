@@ -18,6 +18,7 @@ const CustomAmount = styled.div`
   border-radius: 4px;
   overflow: hidden;
   flex: 1;
+  min-width: 120px;
   margin: 0 1rem 1rem 0;
   span {
     display: flex;
