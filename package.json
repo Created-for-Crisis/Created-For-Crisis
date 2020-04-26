@@ -64,6 +64,8 @@
     "babel-plugin-transform-react-handled-props": "^2.1.0",
     "babel-preset-gatsby": "^0.3.3",
     "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-config-react-app": "^5.2.1",
     "firebase-tools": "^7.16.1",
     "prettier": "^1.19.1"
   },
