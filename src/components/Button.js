@@ -60,6 +60,10 @@ const ButtonVariants = PropStyles("color", ({ colors }) => ({
       backgroundColor: lighten(0.05, colors.red),
     },
   },
+  white: {
+    color: colors.shades.textMedium,
+    backgroundColor: colors.shades.whiteSlightlyGreen,
+  },
   plain: {
     color: colors.shades.textDark,
     backgroundColor: colors.shades.white,
@@ -223,6 +227,7 @@ Button.propTypes = {
     "red",
     "purple",
     "plain",
+    "white",
     "mute",
     "discord",
     "discord-inverse",
