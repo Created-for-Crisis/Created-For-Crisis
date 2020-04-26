@@ -24,7 +24,7 @@ export const Home = () => (
 )
 
 export const Default = () => (
-  <Header color={select("Color", ["light", "dark"], "dark")}>
+  <Header color={select("Color", ["light", "dark"], "dark")} routes={routes}>
     <h1>{text("Header Text", "Masks")}</h1>
   </Header>
 )
