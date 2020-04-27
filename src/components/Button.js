@@ -223,7 +223,6 @@ Button.propTypes = {
     "red",
     "purple",
     "plain",
-    "white",
     "mute",
     "discord",
     "discord-inverse",
