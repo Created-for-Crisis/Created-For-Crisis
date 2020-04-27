@@ -19,7 +19,6 @@ const theme = {
       textDark: "#102336",
       textMedium: "#5B7A82",
       textLight: "#289FBA",
-      whiteSlightlyGreen: "#FDFFFC",
     },
     brands: {
       discord: "#7289DA",
