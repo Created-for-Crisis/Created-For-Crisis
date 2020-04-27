@@ -33,7 +33,7 @@ const HomeHeader = ({ color, routes }) => {
         COVID-19 pandemic and beyond.
       </HeroText>
       <ButtonContainer>
-        <Button color="white" as="a" href="mailto:info@createdforcrisis.org">
+        <Button color="plain" as="a" href="mailto:info@createdforcrisis.org">
           Contact Us
         </Button>
         <Button
