@@ -3,16 +3,22 @@ import { graphql } from "gatsby"
 import PropTypes from "prop-types"
 import SEO from "../components/Layout/SEO"
 import Layout from "../components/Layout/Layout"
-import PageBuilder from "../components/blocks/pageBuilder"
+import { Splash } from "../components/Splash"
+import { Container } from "../components/Container"
 
 const Page = ({
   data: {
-    contentfulPage: { title, content, blocks },
+    contentfulPage: { title, subtitle, splashActions },
   },
 }) => (
   <Layout>
     <SEO title={title} />
-    {PageBuilder(blocks, content)}
+    {/* Page Components */}
+    <Splash actions={splashActions}>
+      <h1>{title}</h1>
+      {subtitle && <p>{subtitle}</p>}
+    </Splash>
+    <Container size="content">Stuff</Container>
   </Layout>
 )
 
@@ -27,6 +33,16 @@ export const postQuery = graphql`
   query($id: String!) {
     contentfulPage(id: { eq: $id }) {
       title
+      subtitle
+      splashActions {
+        text
+        color
+        icon
+        iconPosition
+        id
+        url
+        external
+      }
       content {
         json
       }

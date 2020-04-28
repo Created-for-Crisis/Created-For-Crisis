@@ -215,7 +215,7 @@ export const ButtonGroup = styled.div`
 
 Button.propTypes = {
   as: PropTypes.elementType,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   color: PropTypes.oneOf([
     "blue",
     "green",

@@ -1,8 +1,8 @@
 import React from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
-import WorldVectorLight from "../../assets/images/world-vector-light.svg"
-import WorldVectorDark from "../../assets/images/world-vector-dark.svg"
+import WorldVectorLight from "../../assets/images/world-vector-light.png"
+import WorldVectorDark from "../../assets/images/world-vector-dark.png"
 import { PropStyles } from "../../styles/helpers"
 
 const HeroVariants = PropStyles("color", ({ colors }) => ({
