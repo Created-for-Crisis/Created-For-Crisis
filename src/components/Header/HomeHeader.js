@@ -5,8 +5,12 @@ import { Button } from "../Button"
 import Discord from "../../assets/icons/discord"
 import Header from "./Header"
 
-const HeroText = styled.h6`
+const HeroText = styled.p`
   max-width: 731px;
+  font-size: 1.5rem;
+  font-family: "Open Sans", "sans-serif";
+  font-weight: normal;
+  line-height: 2.25rem;
 `
 
 const ButtonContainer = styled.div`

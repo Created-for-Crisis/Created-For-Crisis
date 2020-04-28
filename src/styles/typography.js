@@ -20,9 +20,6 @@ const typography = new Typography({
   ],
   scaleRatio: 2.5,
   overrideStyles: ({ adjustFontSizeTo, rhythm }, options, styles) => ({
-    h1: {
-      fontSize: "6.875rem",
-    },
     h3: {
       fontSize: "1.25rem",
       fontFamily: ["Open Sans", "sans-serif"].join(","),
@@ -43,12 +40,6 @@ const typography = new Typography({
       fontWeight: "600",
       textTransform: "uppercase",
       color: "#5B7A82",
-    },
-    h6: {
-      fontSize: "1.5rem",
-      fontFamily: ["Open Sans", "sans-serif"].join(","),
-      fontWeight: "normal",
-      lineHeight: "2.25rem",
     },
   }),
 })

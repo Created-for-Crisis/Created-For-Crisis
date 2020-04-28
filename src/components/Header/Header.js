@@ -9,7 +9,7 @@ import Hero from "./Hero"
 const HeaderVariants = PropStyles("color", ({ colors }) => ({
   dark: {
     backgroundColor: colors.blue,
-    "& h1, h6": {
+    "& h1, p": {
       color: colors.shades.white,
     },
   },
@@ -19,6 +19,9 @@ const HeaderVariants = PropStyles("color", ({ colors }) => ({
 }))
 
 const StyledHeader = styled.header`
+  h1 {
+    font-size: 6.875rem;
+  }
   ${HeaderVariants};
 `
 
