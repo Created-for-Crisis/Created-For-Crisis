@@ -12,14 +12,19 @@ const TEXT_COLOR_FOR_MODE = {
   [COLOR_MODES.DARK]: theme.colors.shades.white,
 }
 
-const CreatedForCrisisLogo = ({ color }) => (
+const CreatedForCrisisLogo = ({ color, height }) => (
   <svg
+
+    role="img"
     width="205"
-    height="31"
+    height={height}
     viewBox="0 0 205 31"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    aria-labelledby="title"
   >
+    <title>Created for Crisis Logo</title>
+    <desc>A red x in the bottom left, followed by a blue x at the top middle, and a green x in the bottom right. "Created for Crisis" is text to the right.</desc>
     <path
       fill-rule="evenodd"
       clip-rule="evenodd"
@@ -53,6 +58,7 @@ CreatedForCrisisLogo.propTypes = {
 
 CreatedForCrisisLogo.defaultProps = {
   color: COLOR_MODES.LIGHT,
+  height: "31"
 }
 
 export default CreatedForCrisisLogo
