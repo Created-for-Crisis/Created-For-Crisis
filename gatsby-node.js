@@ -11,8 +11,6 @@ const { slash } = require(`gatsby-core-utils`)
 // called after the Gatsby bootstrap is finished so you have
 // access to any information necessary to programmatically
 // create pages.
-// Will create pages for WordPress pages (route : /{slug})
-// Will create pages for WordPress posts (route : /post/{slug})
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   // The “graphql” function allows us to run arbitrary
@@ -22,10 +20,11 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const result = await graphql(`
     {
-      allContentfulPage(filter: { slug: { ne: "home" } }) {
+      allContentfulPage(filter: { compileSeparately: { ne: true } }) {
         edges {
           node {
             id
+            title
             slug
           }
         }
@@ -59,13 +58,13 @@ exports.createPages = async ({ graphql, actions }) => {
 
 // Implement the Gatsby API “onCreatePage”. This is
 // called after every page is created.
-exports.onCreatePage = async ({ page, actions }) => {
-  const { createPage } = actions
-  // page.matchPath is a special key that's used for matching pages
-  // only on the client.
-  if (page.path.match(/^\/account/)) {
-    page.matchPath = "/account/*"
-    // Update the page.
-    createPage(page)
-  }
-}
+// exports.onCreatePage = async ({ page, actions }) => {
+//   const { createPage } = actions
+//   // page.matchPath is a special key that's used for matching pages
+//   // only on the client.
+//   if (page.path.match(/^\/account/)) {
+//     page.matchPath = "/account/*"
+//     // Update the page.
+//     createPage(page)
+//   }
+// }
