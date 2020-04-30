@@ -16,6 +16,7 @@
     "firebase": "^7.14.0",
     "formik": "^2.1.4",
     "gatsby": "^2.19.45",
+    "gatsby-cli": "^2.12.5",
     "gatsby-core-utils": "^1.1.1",
     "gatsby-image": "^2.2.44",
     "gatsby-plugin-google-analytics": "^2.2.2",
