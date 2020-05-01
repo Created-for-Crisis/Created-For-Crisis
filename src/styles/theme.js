@@ -24,6 +24,7 @@ const theme = {
       discord: "#7289DA",
       linkedin: "#0B66C1",
       youtube: "#FF0000",
+      instagram: "#8a3ab9",
       facebook: "#3B5998",
       twitter: "#55ACEE",
       github: "#24292E",

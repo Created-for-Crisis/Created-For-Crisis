@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 import { Container } from "../Container"
 import { Button } from "../Button"
-import CreatedForCrisisLogo from "../../assets/logos/CreatedForCrisisLogo"
+import CreatedForCrisisLogo from "../../assets/logos/CreatedForCrisisLogo.svg"
 
 const StyledMasthead = styled.div`
   display: flex;
@@ -12,11 +12,6 @@ const StyledMasthead = styled.div`
   background-color: ${props => props.theme.colors.blue};
   color: ${props => props.theme.colors.shades.white};
 `
-// TODO get this from the users current color mode
-const COLOR_MODES = {
-  LIGHT: "light",
-  DARK: "dark",
-}
 
 const Nav = styled.nav`
   display: flex;
@@ -48,9 +43,9 @@ export const Masthead = ({ user, routes }) => (
       }}
     >
       <Link to="/" style={{ lineHeight: 0 }}>
-        <CreatedForCrisisLogo color={COLOR_MODES.DARK} height="40"/>
+        <CreatedForCrisisLogo height="40" />
       </Link>
-      <Nav>
+      <Nav aria-labelledby="primary-navigation">
         {routes &&
           routes.map(({ title, slug }, i) => (
             <Link key={i} to={`/${slug}/`} activeClassName="active">
@@ -63,17 +58,12 @@ export const Masthead = ({ user, routes }) => (
             color="gold"
             as={Link}
             to={"/account/"}
-            style={{ width: "142px", padding: 0 }}
+            style={{ padding: 0 }}
           >
             My Account
           </Button>
         ) : (
-          <Button
-            color="green"
-            as={Link}
-            to={"/donate/"}
-            style={{ width: "142px", padding: 0 }}
-          >
+          <Button color="green" as={Link} to={"/donate/"}>
             Donate
           </Button>
         )}

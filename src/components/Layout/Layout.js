@@ -16,6 +16,7 @@ import getFirebase, { FirebaseContext } from "../Firebase"
 import { AuthUserContext } from "../Session"
 import withAuthentication from "../Session/withAuthentication"
 import { Masthead } from "./Masthead"
+import { Footer } from "./Footer"
 
 class Layout extends Component {
   state = {
@@ -54,7 +55,7 @@ const AppWithAuthentication = withAuthentication(({ children }) => {
         {authUser => <Masthead user={authUser} />}
       </AuthUserContext.Consumer>
       <main>{children}</main>
-      {/* <Footer /> */}
+      <Footer />
     </>
   )
 })
