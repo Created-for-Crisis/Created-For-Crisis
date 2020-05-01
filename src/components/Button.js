@@ -80,12 +80,18 @@ const ButtonVariants = PropStyles("color", ({ colors }) => ({
     "&:hover, &:focus, &:active": {
       backgroundColor: lighten(0.05, colors.brands.discord),
     },
+    "svg path": {
+      fill: colors.shades.white,
+    },
   },
   "discord-inverse": {
     color: colors.brands.discord,
     backgroundColor: colors.shades.white,
     "&:hover, &:focus, &:active": {
       backgroundColor: colors.shades.muteGrey,
+    },
+    "svg path": {
+      fill: colors.brands.discord,
     },
   },
 }))
@@ -117,6 +123,7 @@ const StyledButton = styled.button`
   letter-spacing: 0.5px;
   padding: 0.25rem 1rem;
   height: 40px;
+  min-width: 142px;
   text-transform: uppercase;
   border: none;
   text-decoration: none;
