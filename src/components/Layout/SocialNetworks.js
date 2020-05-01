@@ -39,7 +39,7 @@ SocialNetworks.defaultProps = {
   networks: [
     {
       name: "Facebook",
-      link: "https://www.facebook.com/",
+      link: "https://facebook.com/createdforcrisis",
       Icon: withTheme(({ theme }) => (
         <Facebook
           style={{
@@ -52,7 +52,7 @@ SocialNetworks.defaultProps = {
     },
     {
       name: "Linkedin",
-      link: "https://www.linkedin.com/",
+      link: "https://linkedin.com/company/createdforcrisis",
       Icon: withTheme(({ theme }) => (
         <Linkedin
           style={{
@@ -65,7 +65,7 @@ SocialNetworks.defaultProps = {
     },
     {
       name: "Twitter",
-      link: "https://www.twitter.com/",
+      link: "https://twitter.com/Created4Crisis",
       Icon: withTheme(({ theme }) => (
         <Twitter
           style={{
@@ -78,7 +78,7 @@ SocialNetworks.defaultProps = {
     },
     {
       name: "Instagram",
-      link: "https://www.instagram.com/",
+      link: "https://www.instagram.com/created.for.crisis/",
       Icon: withTheme(({ theme }) => (
         <Instagram
           className="instagram"
@@ -91,7 +91,8 @@ SocialNetworks.defaultProps = {
     },
     {
       name: "Youtube",
-      link: "https://www.youtube.com/",
+      link:
+        "https://www.youtube.com/channel/UCzO2-gs16xVqwH5TR4QK_Tg?view_as=subscriber",
       Icon: withTheme(({ theme }) => (
         <Youtube
           style={{
