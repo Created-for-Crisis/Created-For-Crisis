@@ -43,7 +43,7 @@ const SplashInner = styled.div`
 export const Splash = ({ backgroundPosition, actions, children }) => {
   return (
     <SplashBackground>
-      <Container size="content">
+      <Container size="content" padded top={0} bottom={0}>
         <SplashInner backgroundPosition={backgroundPosition}>
           {children}
           {actions && (
