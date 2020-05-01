@@ -17,6 +17,13 @@ From within the cloned repository run this command. Make sure you have the [Gats
 gatsby develop
 ```
 
+Run the following command to clear your cache
+
+```shell
+gatsby clean
+```
+
+
 ### Plans
 
 - Contentful Integration

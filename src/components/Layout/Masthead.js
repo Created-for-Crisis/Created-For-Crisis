@@ -3,8 +3,7 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 import { Container } from "../Container"
 import { Button } from "../Button"
-// import colorLogo from "../../assets/logos/color-logo.png"
-import Logo from "../../assets/logos/colored-logo.svg"
+import CreatedForCrisisLogo from "../../assets/logos/CreatedForCrisisLogo"
 
 const StyledMasthead = styled.div`
   display: flex;
@@ -13,6 +12,11 @@ const StyledMasthead = styled.div`
   background-color: ${props => props.theme.colors.blue};
   color: ${props => props.theme.colors.shades.white};
 `
+// TODO get this from the users current color mode
+const COLOR_MODES = {
+  LIGHT: "light",
+  DARK: "dark",
+}
 
 const Nav = styled.nav`
   display: flex;
@@ -44,7 +48,7 @@ export const Masthead = ({ user, routes }) => (
       }}
     >
       <Link to="/" style={{ lineHeight: 0 }}>
-        <Logo style={{ height: "40px" }} />
+        <CreatedForCrisisLogo color={COLOR_MODES.DARK} height="40"/>
       </Link>
       <Nav>
         {routes &&
