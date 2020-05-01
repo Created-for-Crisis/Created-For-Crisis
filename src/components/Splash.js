@@ -40,12 +40,13 @@ const SplashInner = styled.div`
   }
 `
 
-export const Splash = ({ backgroundPosition, actions, children }) => {
+export const Splash = ({ title, subtitle, backgroundPosition, actions }) => {
   return (
     <SplashBackground>
       <Container size="content" padded top={0} bottom={0}>
         <SplashInner backgroundPosition={backgroundPosition}>
-          {children}
+          <h1>{title}</h1>
+          {subtitle && <p>{subtitle}</p>}
           {actions && (
             <ButtonGroup>
               {actions.map(
@@ -90,7 +91,8 @@ export const Splash = ({ backgroundPosition, actions, children }) => {
 }
 
 Splash.propTypes = {
-  children: PropTypes.node.isRequired,
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
   backgroundPosition: PropTypes.shape({
     x: PropTypes.string,
     y: PropTypes.string,
@@ -99,6 +101,7 @@ Splash.propTypes = {
 }
 
 Splash.defaultProps = {
+  title: "",
   backgroundPosition: { x: "right", y: "30px" },
   actions: [],
 }

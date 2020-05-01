@@ -26,6 +26,9 @@ exports.createPages = async ({ graphql, actions }) => {
             id
             title
             slug
+            contentfulparent {
+              slug
+            }
           }
         }
       }
@@ -41,19 +44,30 @@ exports.createPages = async ({ graphql, actions }) => {
   const { allContentfulPage } = result.data
 
   const pageTemplate = path.resolve(`./src/templates/page.js`)
-  allContentfulPage.edges.forEach(edge => {
-    createPage({
+  allContentfulPage.edges.forEach(
+    ({ node: { id, slug, contentfulparent } }) => {
       // Each page is required to have a `path` as well
       // as a template component. The `context` is
       // optional but is often necessary so the template
       // can query data specific to each page.
-      path: `/${edge.node.slug}/`,
-      component: slash(pageTemplate),
-      context: {
-        id: edge.node.id,
-      },
-    })
-  })
+
+      let path
+      // If the page has a parent page include that in the path
+      if (contentfulparent) {
+        path = `/${contentfulparent.slug}/${slug}/`
+      } else {
+        path = `/${slug}/`
+      }
+
+      createPage({
+        path,
+        component: slash(pageTemplate),
+        context: {
+          id: id,
+        },
+      })
+    }
+  )
 }
 
 // Implement the Gatsby API “onCreatePage”. This is

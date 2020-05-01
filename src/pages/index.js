@@ -32,10 +32,7 @@ const Home = () => {
     <Layout>
       <SEO title={title} />
       {/* Page Components */}
-      <Splash actions={splashActions}>
-        <h1>{title}</h1>
-        <p>{subtitle}</p>
-      </Splash>
+      <Splash title={title} subtitle={subtitle} actions={splashActions} />
     </Layout>
   )
 }
