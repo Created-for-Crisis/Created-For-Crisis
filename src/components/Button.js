@@ -74,6 +74,13 @@ const ButtonVariants = PropStyles("color", ({ colors }) => ({
       color: colors.shades.textDark,
     },
   },
+  medium: {
+    color: colors.shades.white,
+    backgroundColor: colors.shades.textMedium,
+    "&:hover, &:focus, &:active": {
+      backgroundColor: colors.shades.textDark,
+    },
+  },
   discord: {
     color: colors.shades.white,
     backgroundColor: colors.brands.discord,
@@ -123,7 +130,6 @@ const StyledButton = styled.button`
   letter-spacing: 0.5px;
   padding: 0.25rem 1rem;
   height: 40px;
-  min-width: 142px;
   text-transform: uppercase;
   border: none;
   text-decoration: none;
@@ -149,6 +155,10 @@ const StyledButton = styled.button`
       box-shadow: ${props => props.theme.shadows.buttonActive};
       transform: translateY(-1px);
     }
+  }
+
+  &.minWidth {
+    min-width: 142px;
   }
 
   &:disabled {
@@ -185,12 +195,21 @@ const StyledButton = styled.button`
 `
 
 export const Button = props => {
-  const { children, loading, disabled, iconPosition, color, shadow } = props
+  const {
+    children,
+    loading,
+    disabled,
+    iconPosition,
+    color,
+    shadow,
+    minWidth,
+  } = props
 
   const classes = cx(
     "button",
     color,
     useKeyOnly(shadow, "shadow"),
+    useKeyOnly(minWidth, "minWidth"),
     useValueAndKey(iconPosition, "icon"),
     useKeyOnly(loading, "loading")
   )
@@ -233,8 +252,10 @@ Button.propTypes = {
     "mute",
     "discord",
     "discord-inverse",
+    "medium",
   ]),
   shadow: PropTypes.bool,
+  minWidth: PropTypes.bool,
   iconPosition: PropTypes.oneOf(["left", "right"]),
   disabled: PropTypes.bool,
   loading: PropTypes.bool,
@@ -245,4 +266,5 @@ Button.defaultProps = {
   children: "Button",
   color: "blue",
   shadow: true,
+  minWidth: true,
 }
