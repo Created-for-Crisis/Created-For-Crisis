@@ -5,12 +5,17 @@ import Layout from "../components/Layout/Layout"
 import SEO from "../components/Layout/SEO"
 import { Splash } from "../components/Splash"
 
-const Home = () => {
+/*
+ ** This page is also compiled manually
+ ** so we can add the Donation Form within the content.
+ */
+
+const Support = () => {
   const {
     contentfulPage: { title, subtitle, splashActions },
   } = useStaticQuery(graphql`
-    query getHomePage {
-      contentfulPage(slug: { eq: "home" }) {
+    query getSupportPage {
+      contentfulPage(slug: { eq: "support" }) {
         title
         subtitle
         splashActions {
@@ -37,4 +42,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Support
