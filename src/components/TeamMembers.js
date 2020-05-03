@@ -14,22 +14,31 @@ const StyledArticle = styled.article`
   p {
     margin-bottom: 0;
   }
-`
 
-const Icons = styled.aside`
-  display: grid;
-  grid-template-columns: repeat(3, minmax(24px, auto));
-  grid-gap: 32px;
-  align-items: center;
-  justify-content: center;
-
-  a {
-    display: flex;
+  h3 {
     color: ${props => props.theme.colors.shades.textDark};
   }
 
-  a:hover {
+  :hover h3 {
     color: ${props => props.theme.colors.shades.textLight};
+  }
+`
+
+const Icons = styled.aside`
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  a {
+    margin-left: 32px;
+    display: flex;
+    color: ${props => props.theme.colors.shades.textDark};
+    opacity: 1;
+    transition: opacity 0.15s ease;
+  }
+
+  a:hover {
+    opacity: 0.8;
   }
 `
 
@@ -49,17 +58,10 @@ const SocialIconLink = ({ url, name, social, Icon }) => {
   )
 }
 
-const Name = styled.h3`
-  color: ${props => props.theme.colors.shades.textDark};
-  :hover {
-    color: ${props => props.theme.colors.shades.textLight};
-  }
-`
-
 const TeamMember = ({ name, title, gitHubUrl, linkedInUrl, website }) => (
   <StyledArticle>
     <div>
-      <Name>{name}</Name>
+      <h3>{name}</h3>
       <p>{title}</p>
     </div>
     <Icons>
