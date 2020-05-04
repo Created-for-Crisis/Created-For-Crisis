@@ -43,7 +43,12 @@ export const Masthead = ({ user, routes }) => (
       }}
     >
       <Link to="/" style={{ lineHeight: 0 }}>
-        <CreatedForCrisisLogo height="40" />
+        <img src={CreatedForCrisisLogo} alt="Created for Crisis"
+             aria-labelledby={CreatedForCrisisLogo}
+             aria-details={"A red x in the bottom left, followed by a blue x at the top middle, and a green x in the bottom right. \"Created for Crisis\" is text to the right."}
+             style={{
+               margin: 0
+             }}/>
       </Link>
       <Nav aria-labelledby="primary-navigation">
         {routes &&
