@@ -2,13 +2,12 @@ import React from "react"
 import styled from "styled-components"
 import { GitHub, Linkedin, ExternalLink } from "react-feather"
 
-const StyledArticle = styled.article`
+const StyledTeamMember = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
   margin-bottom: 8px;
+  padding: 1.5rem 0;
 
   h3,
   p {
@@ -59,7 +58,7 @@ const SocialIconLink = ({ url, name, social, Icon }) => {
 }
 
 const TeamMember = ({ name, title, gitHubUrl, linkedInUrl, website }) => (
-  <StyledArticle>
+  <StyledTeamMember>
     <div>
       <h3>{name}</h3>
       <p>{title}</p>
@@ -84,7 +83,7 @@ const TeamMember = ({ name, title, gitHubUrl, linkedInUrl, website }) => (
         social="website"
       />
     </Icons>
-  </StyledArticle>
+  </StyledTeamMember>
 )
 
 const StyledH2 = styled.h2`

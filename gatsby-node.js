@@ -28,6 +28,9 @@ exports.createPages = async ({ graphql, actions }) => {
             slug
             contentfulparent {
               slug
+              contentfulparent {
+                slug
+              }
             }
           }
         }
@@ -53,7 +56,10 @@ exports.createPages = async ({ graphql, actions }) => {
 
       let path
       // If the page has a parent page include that in the path
-      if (contentfulparent) {
+      // Maximum depth of 2
+      if (contentfulparent && contentfulparent.contentfulparent) {
+        path = `/${contentfulparent.contentfulparent.slug}/${contentfulparent.slug}/${slug}/`
+      } else if (contentfulparent) {
         path = `/${contentfulparent.slug}/${slug}/`
       } else {
         path = `/${slug}/`

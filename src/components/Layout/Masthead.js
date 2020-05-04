@@ -63,7 +63,7 @@ export const Masthead = ({ user, routes }) => (
             My Account
           </Button>
         ) : (
-          <Button color="green" as={Link} to={"/donate/"}>
+          <Button color="green" as={Link} to={"/support/"}>
             Donate
           </Button>
         )}

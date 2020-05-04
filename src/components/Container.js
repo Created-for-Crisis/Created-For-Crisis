@@ -33,6 +33,24 @@ export const Container = props => (
   <StyledContainer {...props}>{props.children}</StyledContainer>
 )
 
+export const SplitContainer = styled(Container)`
+  margin: 5rem auto;
+  display: flex;
+  align-items: flex-start;
+
+  aside {
+    position: sticky;
+    top: 8rem;
+    left: 0;
+    flex: 0 0 320px;
+  }
+
+  article {
+    flex: 1;
+    margin-left: 2.5rem;
+  }
+`
+
 Container.propTypes = {
   padded: PropTypes.bool,
   size: PropTypes.oneOf(["full", "content", "article"]),

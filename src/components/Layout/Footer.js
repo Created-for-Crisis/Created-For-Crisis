@@ -119,7 +119,7 @@ export const Footer = ({ routes }) => (
           <p>Get in touch or contribute a donation.</p>
         </div>
         <ButtonGroup>
-          <Button color="green" as={Link} to={"/donate/"}>
+          <Button color="green" as={Link} to={"/support/"}>
             Donate
           </Button>
           <Button
