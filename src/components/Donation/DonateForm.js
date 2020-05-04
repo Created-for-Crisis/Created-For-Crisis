@@ -3,14 +3,14 @@ import { Formik, Form, useField } from "formik"
 import styled from "styled-components"
 import { Grid, Cell } from "styled-css-grid"
 import * as Yup from "yup"
-import { loadStripe } from "@stripe/stripe-js"
+import loadStripe from "@stripe/stripe-js"
 import {
   Elements,
   useStripe,
   CardElement,
   useElements,
 } from "@stripe/react-stripe-js"
-import Button from "../button"
+import { Button } from "../Button"
 import StripeForm from "./StripeForm"
 import AmountSelection from "./AmountSelection"
 

@@ -1,20 +1,42 @@
 import React from "react"
 import { graphql } from "gatsby"
 import PropTypes from "prop-types"
-import SEO from "../components/seo"
+import SEO from "../components/Layout/SEO"
 import Layout from "../components/Layout/Layout"
-import PageBuilder from "../components/blocks/pageBuilder"
+import { Splash } from "../components/Splash"
+import { SplitContainer } from "../components/Container"
+import { ContentBuilder } from "../components/ContentBuilder"
+import { RelatedPages } from "../components/Layout/RelatedPages"
 
 const Page = ({
   data: {
-    contentfulPage: { title, content, blocks },
+    contentfulPage: {
+      title,
+      subtitle,
+      splashActions,
+      content,
+      relatedPagesMenu,
+    },
   },
-}) => (
-  <Layout>
-    <SEO title={title} />
-    {PageBuilder(blocks, content)}
-  </Layout>
-)
+}) => {
+  return (
+    <Layout>
+      <SEO title={title} />
+      {/* Page Components */}
+      <Splash title={title} subtitle={subtitle} actions={splashActions} />
+      <SplitContainer size="content">
+        <aside>
+          <RelatedPages
+            routes={relatedPagesMenu ? relatedPagesMenu.routes : []}
+          />
+        </aside>
+        <article>
+          <ContentBuilder content={content} />
+        </article>
+      </SplitContainer>
+    </Layout>
+  )
+}
 
 Page.propTypes = {
   data: PropTypes.object.isRequired,
@@ -27,76 +49,29 @@ export const postQuery = graphql`
   query($id: String!) {
     contentfulPage(id: { eq: $id }) {
       title
+      subtitle
+      splashActions {
+        text
+        color
+        icon
+        iconPosition
+        id
+        url
+        external
+      }
       content {
         json
       }
-      blocks {
-        ... on ContentfulBanner {
-          id
-          actions {
-            icon
-            id
-            link
-            text
-            variant
-          }
-          illustration {
-            file {
-              url
-            }
-          }
-          content {
-            json
-          }
-        }
-        ... on ContentfulImageBlock {
+      relatedPagesMenu {
+        routes {
           id
           title
-          content {
-            json
-          }
-          alignment
-          image {
-            file {
-              url
+          slug
+          contentfulparent {
+            slug
+            contentfulparent {
+              slug
             }
-          }
-        }
-        ... on ContentfulTeamMemberGrid {
-          id
-          title
-          snippet
-          format
-          members {
-            id
-            name
-            role
-            bio {
-              json
-            }
-            gitHubUrl
-            linkedInUrl
-            website
-            image {
-              description
-              fluid {
-                src
-              }
-            }
-          }
-        }
-        ... on ContentfulPattern {
-          id
-          name
-          actions {
-            id
-            icon
-            text
-            variant
-            link
-          }
-          description {
-            json
           }
         }
       }

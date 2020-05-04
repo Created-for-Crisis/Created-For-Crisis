@@ -11,8 +11,6 @@ const { slash } = require(`gatsby-core-utils`)
 // called after the Gatsby bootstrap is finished so you have
 // access to any information necessary to programmatically
 // create pages.
-// Will create pages for WordPress pages (route : /{slug})
-// Will create pages for WordPress posts (route : /post/{slug})
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   // The “graphql” function allows us to run arbitrary
@@ -22,19 +20,18 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const result = await graphql(`
     {
-      allContentfulArticle {
+      allContentfulPage(filter: { compileSeparately: { ne: true } }) {
         edges {
           node {
             id
+            title
             slug
-          }
-        }
-      }
-      allContentfulPage(filter: { slug: { ne: "home" } }) {
-        edges {
-          node {
-            id
-            slug
+            contentfulparent {
+              slug
+              contentfulparent {
+                slug
+              }
+            }
           }
         }
       }
@@ -47,48 +44,47 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   // Access query results via object destructuring
-  const { allContentfulArticle, allContentfulPage } = result.data
-
-  const articleTemplate = path.resolve(`./src/templates/article.js`)
-  allContentfulArticle.edges.forEach(edge => {
-    createPage({
-      // Each page is required to have a `path` as well
-      // as a template component. The `context` is
-      // optional but is often necessary so the template
-      // can query data specific to each page.
-      path: `news/${edge.node.slug}/`,
-      component: slash(articleTemplate),
-      context: {
-        id: edge.node.id,
-      },
-    })
-  })
+  const { allContentfulPage } = result.data
 
   const pageTemplate = path.resolve(`./src/templates/page.js`)
-  allContentfulPage.edges.forEach(edge => {
-    createPage({
+  allContentfulPage.edges.forEach(
+    ({ node: { id, slug, contentfulparent } }) => {
       // Each page is required to have a `path` as well
       // as a template component. The `context` is
       // optional but is often necessary so the template
       // can query data specific to each page.
-      path: `/${edge.node.slug}/`,
-      component: slash(pageTemplate),
-      context: {
-        id: edge.node.id,
-      },
-    })
-  })
+
+      let path
+      // If the page has a parent page include that in the path
+      // Maximum depth of 2
+      if (contentfulparent && contentfulparent.contentfulparent) {
+        path = `/${contentfulparent.contentfulparent.slug}/${contentfulparent.slug}/${slug}/`
+      } else if (contentfulparent) {
+        path = `/${contentfulparent.slug}/${slug}/`
+      } else {
+        path = `/${slug}/`
+      }
+
+      createPage({
+        path,
+        component: slash(pageTemplate),
+        context: {
+          id: id,
+        },
+      })
+    }
+  )
 }
 
 // Implement the Gatsby API “onCreatePage”. This is
 // called after every page is created.
-exports.onCreatePage = async ({ page, actions }) => {
-  const { createPage } = actions
-  // page.matchPath is a special key that's used for matching pages
-  // only on the client.
-  if (page.path.match(/^\/account/)) {
-    page.matchPath = "/account/*"
-    // Update the page.
-    createPage(page)
-  }
-}
+// exports.onCreatePage = async ({ page, actions }) => {
+//   const { createPage } = actions
+//   // page.matchPath is a special key that's used for matching pages
+//   // only on the client.
+//   if (page.path.match(/^\/account/)) {
+//     page.matchPath = "/account/*"
+//     // Update the page.
+//     createPage(page)
+//   }
+// }

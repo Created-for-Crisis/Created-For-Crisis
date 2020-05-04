@@ -1,40 +1,16 @@
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-
 import Layout from "../components/Layout/Layout"
-import SEO from "../components/seo"
-import Banner from "../components/blocks/banner"
+import SEO from "../components/Layout/SEO"
+import { Splash } from "../components/Splash"
 
-const NotFoundPage = () => {
-  const { contentfulBanner } = useStaticQuery(graphql`
-    query get404Page {
-      contentfulBanner(id: { eq: "6fcf583e-9dc5-51d0-85f5-e128b924ff33" }) {
-        title
-        illustration {
-          file {
-            url
-          }
-        }
-        actions {
-          text
-          variant
-          link
-          icon
-          internal_link
-        }
-        content {
-          json
-        }
-      }
-    }
-  `)
-
+const NotFound = () => {
   return (
     <Layout>
-      <SEO title="404: Not found" />
-      <Banner {...contentfulBanner} />
+      <SEO title={"404 | Created for Crisis"} />
+      {/* Page Components */}
+      <Splash title={"404"} subtitle={null} actions={null} />
     </Layout>
   )
 }
 
-export default NotFoundPage
+export default NotFound
