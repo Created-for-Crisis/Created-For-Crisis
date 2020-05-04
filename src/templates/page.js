@@ -26,7 +26,9 @@ const Page = ({
       <Splash title={title} subtitle={subtitle} actions={splashActions} />
       <SplitContainer size="content">
         <aside>
-          <RelatedPages routes={relatedPagesMenu && relatedPagesMenu.routes} />
+          <RelatedPages
+            routes={relatedPagesMenu ? relatedPagesMenu.routes : []}
+          />
         </aside>
         <article>
           <ContentBuilder content={content} />
@@ -67,6 +69,9 @@ export const postQuery = graphql`
           slug
           contentfulparent {
             slug
+            contentfulparent {
+              slug
+            }
           }
         }
       }

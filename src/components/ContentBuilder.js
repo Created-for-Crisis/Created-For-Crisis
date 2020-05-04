@@ -1,8 +1,12 @@
 import React from "react"
-import { BLOCKS, MARKS } from "@contentful/rich-text-types"
+import { Link } from "gatsby"
+import { OutboundLink } from "gatsby-plugin-google-analytics"
+import { BLOCKS, MARKS, INLINES } from "@contentful/rich-text-types"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import styled from "styled-components"
+import { Download, ExternalLink } from "react-feather"
 import { TeamMember } from "./TeamMembers"
+import { Button } from "./Button"
 
 const StyledContent = styled.div`
   h2,
@@ -13,16 +17,12 @@ const StyledContent = styled.div`
   }
 `
 
-// Leaving these in as samples for now.
-const Bold = ({ children }) => <span className="bold">{children}</span>
-const Text = ({ children }) => <p className="align-center">{children}</p>
-
 const options = {
   renderMark: {
     [MARKS.BOLD]: text => <Bold>{text}</Bold>,
   },
   renderNode: {
-    [BLOCKS.PARAGRAPH]: (node, children) => <Text>{children}</Text>,
+    // Blocks
     [BLOCKS.EMBEDDED_ENTRY]: ({
       data: {
         target: {
@@ -35,7 +35,7 @@ const options = {
         },
       },
     }) => {
-      console.log({ id, fields })
+      // console.log({ id, fields })
       switch (id) {
         case "teamMember":
           return (
@@ -51,11 +51,57 @@ const options = {
           break
       }
     },
+    // Inlines
+    [INLINES.EMBEDDED_ENTRY]: ({
+      data: {
+        target: {
+          sys: {
+            contentType: {
+              sys: { id },
+            },
+          },
+          fields,
+        },
+      },
+    }) => {
+      // console.log({ id, fields })
+      switch (id) {
+        case "button":
+          let Icon
+          switch (fields.icon["en-US"]) {
+            case "ExternalLink":
+              Icon = ExternalLink
+              break
+            case "Download":
+              Icon = Download
+              break
+            default:
+              break
+          }
+          return (
+            <Button
+              style={{ marginRight: "1rem" }}
+              color={fields.color["en-US"]}
+              iconPosition={fields.iconPosition["en-US"]}
+              as={fields.external["en-US"] ? OutboundLink : Link}
+              target={fields.external["en-US"] ? "_blank" : "Link"}
+              to={fields.url["en-US"]}
+              href={fields.url["en-US"]}
+            >
+              {Icon && fields.iconPosition["en-US"] === "left" && <Icon />}
+              {fields.text["en-US"]}
+              {Icon && fields.iconPosition["en-US"] === "right" && <Icon />}
+            </Button>
+          )
+        default:
+          break
+      }
+    },
   },
 }
 
 export const ContentBuilder = ({ content }) => {
-  console.log({ content })
+  // console.log({ content })
   return (
     <StyledContent>
       {content && documentToReactComponents(content.json, options)}
