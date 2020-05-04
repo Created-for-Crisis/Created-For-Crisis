@@ -4,6 +4,9 @@ import { useStaticQuery, graphql } from "gatsby"
 import Layout from "../components/Layout/Layout"
 import SEO from "../components/Layout/SEO"
 import { Splash } from "../components/Splash"
+import { SplitContainer } from "../components/Container"
+import { ContentBuilder } from "../components/ContentBuilder"
+import { RelatedPages } from "../components/Layout/RelatedPages"
 
 /*
  ** This page is also compiled manually
@@ -12,7 +15,13 @@ import { Splash } from "../components/Splash"
 
 const Support = () => {
   const {
-    contentfulPage: { title, subtitle, splashActions },
+    contentfulPage: {
+      title,
+      subtitle,
+      splashActions,
+      content,
+      relatedPagesMenu,
+    },
   } = useStaticQuery(graphql`
     query getSupportPage {
       contentfulPage(slug: { eq: "support" }) {
@@ -30,6 +39,16 @@ const Support = () => {
         content {
           json
         }
+        relatedPagesMenu {
+          routes {
+            id
+            title
+            slug
+            contentfulparent {
+              slug
+            }
+          }
+        }
       }
     }
   `)
@@ -38,6 +57,14 @@ const Support = () => {
       <SEO title={title} />
       {/* Page Components */}
       <Splash title={title} subtitle={subtitle} actions={splashActions} />
+      <SplitContainer size="content">
+        <aside>
+          <RelatedPages routes={relatedPagesMenu && relatedPagesMenu.routes} />
+        </aside>
+        <article>
+          <ContentBuilder content={content} />
+        </article>
+      </SplitContainer>
     </Layout>
   )
 }
