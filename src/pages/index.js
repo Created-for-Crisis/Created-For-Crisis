@@ -16,7 +16,7 @@ const Introduction = styled.div`
     margin-right: 1rem;
   }
   img {
-    margin-left: 1rem;
+    margin: 0 0 0 1rem;
     border-radius: 0.5rem;
   }
 `

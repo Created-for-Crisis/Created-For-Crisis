@@ -58,7 +58,7 @@ const Support = () => {
       <SEO title={title} />
       {/* Page Components */}
       <Splash title={title} subtitle={subtitle} actions={splashActions} />
-      <SplitContainer size="content">
+      <SplitContainer size="content" padded style={{ margin: "4rem auto" }}>
         <aside>
           <RelatedPages routes={relatedPagesMenu && relatedPagesMenu.routes} />
         </aside>
