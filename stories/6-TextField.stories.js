@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { withKnobs, text, boolean } from "@storybook/addon-knobs"
-import TextField from "../src/components/TextField"
+import { TextField } from "../src/components/TextField"
 import styled from "styled-components"
 
 export default {

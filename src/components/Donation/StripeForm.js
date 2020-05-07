@@ -21,6 +21,7 @@ const CARD_ELEMENT_OPTIONS = {
 }
 
 const StyledStripeForm = styled.div`
+  margin-top: 0.5rem;
   .StripeElement {
     height: 40px;
     padding: 0.6rem 0.75rem;

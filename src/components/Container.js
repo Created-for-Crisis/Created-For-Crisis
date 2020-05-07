@@ -40,7 +40,7 @@ export const SplitContainer = styled(Container)`
 
   aside {
     position: sticky;
-    top: 8rem;
+    top: 5rem;
     left: 0;
     flex: 0 0 320px;
   }
