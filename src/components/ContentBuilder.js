@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import { OutboundLink } from "gatsby-plugin-google-analytics"
-import { BLOCKS, MARKS, INLINES } from "@contentful/rich-text-types"
+import { BLOCKS, INLINES } from "@contentful/rich-text-types"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import styled from "styled-components"
 import { Download, ExternalLink } from "react-feather"
@@ -18,9 +18,9 @@ const StyledContent = styled.div`
 `
 
 const options = {
-  renderMark: {
-    [MARKS.BOLD]: text => <Bold>{text}</Bold>,
-  },
+  // renderMark: {
+  //   [MARKS.BOLD]: text => <Bold>{text}</Bold>,
+  // },
   renderNode: {
     // Blocks
     [BLOCKS.EMBEDDED_ENTRY]: ({
