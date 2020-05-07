@@ -20,7 +20,7 @@ const CustomAmount = styled.div`
   overflow: hidden;
   flex: 1;
   min-width: 120px;
-  margin: 0.5 1rem 0 0;
+  margin: 0.5rem 1rem 1rem 0;
   span {
     display: flex;
     align-items: center;
@@ -83,7 +83,7 @@ const AmountSelection = ({ amount, showCustomAmount, dispatch }) => (
         shadow={false}
         minWidth={false}
         color={amount.value === value && !showCustomAmount ? "medium" : "plain"}
-        style={{ margin: ".5rem 1rem 0 0" }}
+        style={{ margin: ".5rem 1rem 1rem 0" }}
         onClick={e =>
           dispatch({
             type: "changeAmount",
@@ -109,7 +109,7 @@ const AmountSelection = ({ amount, showCustomAmount, dispatch }) => (
         shadow={false}
         minWidth={false}
         color={"medium"}
-        style={{ margin: ".5rem 1rem 0 0" }}
+        style={{ margin: ".5rem 1rem 1rem 0" }}
         onClick={e =>
           dispatch({
             type: "showCustomAmount",

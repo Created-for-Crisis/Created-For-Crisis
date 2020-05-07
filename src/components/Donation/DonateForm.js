@@ -238,7 +238,7 @@ const FormContainer = () => {
               />
             </Row>
             {/* Donation Amounts */}
-            <Row>
+            <Row style={{ marginBottom: ".5rem" }}>
               <TextField.Label>Donation Amount</TextField.Label>
               <AmountSelection
                 amount={amount}
