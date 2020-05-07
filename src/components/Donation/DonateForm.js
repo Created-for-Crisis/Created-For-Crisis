@@ -31,12 +31,12 @@ const Row = styled.div`
 const Message = styled.div`
   border-radius: 0.25rem;
   padding: 1rem;
-  border: 1px solid ${props => props.theme.colors.whiteGrey};
+  border: none;
   background-color: ${props => props.theme.colors[props.color]};
+  box-shadow: ${props => props.theme.shadows.button};
   color: ${props => props.theme.colors.shades.white};
-  h5 {
+  h3 {
     color: ${props => props.theme.colors.shades.white};
-    font-weight: 700;
     margin-bottom: 0.5rem;
   }
   p {
@@ -195,7 +195,7 @@ const FormContainer = () => {
       >
         {success ? (
           <Message color="green" style={{ margin: "2rem 0" }}>
-            <h5>Thank you!</h5>
+            <h3>Thank you!</h3>
             <p>We successfully processed your donation.</p>
           </Message>
         ) : (
@@ -203,7 +203,7 @@ const FormContainer = () => {
             {/* Show Development Mode */}
             {activeEnv === "development" && (
               <Message color="blue" style={{ margin: "2rem 0" }}>
-                <h5>Development Mode is Enabled</h5>
+                <h3>Development Mode is Enabled</h3>
                 <p>
                   All donation submissions will hit the test Stripe account.
                 </p>
@@ -263,7 +263,7 @@ const FormContainer = () => {
             </Button>
             {error && (
               <Message color="red" style={{ marginTop: "2rem" }}>
-                <h5>An Error Occurred</h5>
+                <h3>An Error Occurred</h3>
                 <p>{error}</p>
               </Message>
             )}
