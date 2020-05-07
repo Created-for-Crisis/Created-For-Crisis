@@ -7,6 +7,7 @@ import { Splash } from "../components/Splash"
 import { SplitContainer } from "../components/Container"
 import { ContentBuilder } from "../components/ContentBuilder"
 import { RelatedPages } from "../components/Layout/RelatedPages"
+import { DonateForm } from "../components/Donation/DonateForm"
 
 /*
  ** This page is also compiled manually
@@ -62,6 +63,7 @@ const Support = () => {
           <RelatedPages routes={relatedPagesMenu && relatedPagesMenu.routes} />
         </aside>
         <article>
+          <DonateForm />
           <ContentBuilder content={content} />
         </article>
       </SplitContainer>

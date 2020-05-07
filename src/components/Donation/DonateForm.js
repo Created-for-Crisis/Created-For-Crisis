@@ -3,7 +3,7 @@ import { Formik, Form, useField } from "formik"
 import styled from "styled-components"
 import { Grid, Cell } from "styled-css-grid"
 import * as Yup from "yup"
-import loadStripe from "@stripe/stripe-js"
+import { loadStripe } from "@stripe/stripe-js"
 import {
   Elements,
   useStripe,
@@ -11,6 +11,7 @@ import {
   useElements,
 } from "@stripe/react-stripe-js"
 import { Button } from "../Button"
+import { TextField } from "../TextField"
 import StripeForm from "./StripeForm"
 import AmountSelection from "./AmountSelection"
 
@@ -23,22 +24,6 @@ const stripePromise = loadStripe(
     : process.env.GATSBY_STRIPE_PUBLISHABLE_KEY_PROD
 )
 
-const DonateContainer = styled.div`
-  border-radius: 0.5rem;
-  margin-bottom: 2rem;
-  padding: 1rem;
-  background: ${props => props.theme.colors.whiteGrey};
-  border: 1px solid ${props => props.theme.colors.whiteGrey};
-`
-
-const Label = styled.header`
-  display: block;
-  font-family: ${props => props.theme.fonts.body};
-  font-weight: 500;
-  margin: 0 0 0.5rem;
-  font-size: 1.1rem;
-`
-
 const Row = styled.div`
   margin-bottom: 1.5rem;
 `
@@ -47,11 +32,10 @@ const Message = styled.div`
   border-radius: 0.25rem;
   padding: 1rem;
   border: 1px solid ${props => props.theme.colors.whiteGrey};
-  background-color: ${props =>
-    props.error ? props.theme.colors.primary : props.theme.colors.secondary};
-  color: ${props => props.theme.colors.white};
-  header {
-    font-family: ${props => props.theme.fonts.header};
+  background-color: ${props => props.theme.colors[props.color]};
+  color: ${props => props.theme.colors.shades.white};
+  h5 {
+    color: ${props => props.theme.colors.shades.white};
     font-weight: 700;
     margin-bottom: 0.5rem;
   }
@@ -60,50 +44,11 @@ const Message = styled.div`
   }
 `
 
-const Input = styled.input`
-  height: 40px;
-  padding: 0.6rem 0.75rem;
-  width: 100%;
-  color: #32325d;
-  background-color: white;
-  border: 1px solid transparent;
-  border-radius: 4px;
-
-  box-shadow: 0 1px 3px 0 #e6ebf1;
-  -webkit-transition: box-shadow 150ms ease;
-  transition: box-shadow 150ms ease;
-
-  &--focus {
-    box-shadow: 0 1px 3px 0 #cfd7df;
-  }
-  &--invalid,
-  &.error {
-    border-color: ${props => props.theme.colors.primary};
-  }
-  &--webkit-autofill {
-    background-color: #fefde5 !important;
-  }
-`
-
 const TextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
   // which we can spread on <input> and also replace ErrorMessage entirely.
   const [field, meta] = useField(props)
-  return (
-    <>
-      <Label style={{ marginTop: 0 }} htmlFor={props.id || props.name}>
-        {label}
-      </Label>
-      <Input
-        className={`text-input ${meta.touched && meta.error ? "error" : ""}`}
-        {...field}
-        {...props}
-      />
-      {/* {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
-      ) : null} */}
-    </>
-  )
+  return <TextField label={label} {...field} {...props} />
 }
 
 // Form Data Reducer
@@ -149,8 +94,8 @@ const FormContainer = () => {
   })
 
   return (
-    <DonateContainer>
-      <h3 style={{ marginTop: 0 }}>Donate to Created for Crisis</h3>
+    <>
+      <h2 style={{ marginTop: 0 }}>Donate to Created for Crisis</h2>
       <Formik
         initialValues={{
           name: "",
@@ -249,12 +194,21 @@ const FormContainer = () => {
         }}
       >
         {success ? (
-          <Message>
-            <header>Thank you!</header>
+          <Message color="green" style={{ margin: "2rem 0" }}>
+            <h5>Thank you!</h5>
             <p>We successfully processed your donation.</p>
           </Message>
         ) : (
           <Form style={{ margin: 0 }}>
+            {/* Show Development Mode */}
+            {activeEnv === "development" && (
+              <Message color="blue" style={{ margin: "2rem 0" }}>
+                <h5>Development Mode is Enabled</h5>
+                <p>
+                  All donation submissions will hit the test Stripe account.
+                </p>
+              </Message>
+            )}
             <Row>
               <Grid columns={2} gap={"1rem"}>
                 <Cell>
@@ -277,7 +231,7 @@ const FormContainer = () => {
             </Row>
             <Row>
               <TextInput
-                label="Memo (Optional)"
+                label="Memo"
                 name="memo"
                 type="text"
                 placeholder="e.g. Credit to my organization"
@@ -285,7 +239,7 @@ const FormContainer = () => {
             </Row>
             {/* Donation Amounts */}
             <Row>
-              <Label>Donation Amount</Label>
+              <TextField.Label>Donation Amount</TextField.Label>
               <AmountSelection
                 amount={amount}
                 showCustomAmount={showCustomAmount}
@@ -295,42 +249,33 @@ const FormContainer = () => {
 
             {/* Stripe Data */}
             <Row>
-              <Label>Card Details</Label>
+              <TextField.Label>Card Details</TextField.Label>
               <StripeForm />
             </Row>
             {/* Submission Button */}
             <Button
               type="submit"
-              variant="secondary"
+              color="green"
               disabled={!stripe || processing}
-              style={{ fontSize: "1.1rem", height: "40px" }}
+              style={{ marginBottom: "2rem" }}
             >
               {processing ? "Processing..." : "Confirm Donation"}
             </Button>
             {error && (
-              <Message error style={{ marginTop: "2rem" }}>
-                <header>An Error Occurred</header>
+              <Message color="red" style={{ marginTop: "2rem" }}>
+                <h5>An Error Occurred</h5>
                 <p>{error}</p>
               </Message>
             )}
           </Form>
         )}
       </Formik>
-      {/* Show Development Mode */}
-      {activeEnv === "development" && (
-        <Message error style={{ marginTop: "2rem" }}>
-          <header>Development Mode is Enabled</header>
-          <p>All donation submissions will hit the test Stripe account.</p>
-        </Message>
-      )}
-    </DonateContainer>
+    </>
   )
 }
 
-const DonateForm = () => (
+export const DonateForm = () => (
   <Elements stripe={stripePromise}>
     <FormContainer />
   </Elements>
 )
-
-export default DonateForm

@@ -2,24 +2,25 @@ import React from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 
+const Label = styled.label`
+  margin-bottom: 0.5rem;
+  color: ${props => props.theme.colors.shades.textDark};
+  font-size: 1.25rem;
+  font-family: "Open Sans" sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+`
+
 const StyledDiv = styled.div`
   display: flex;
   flex-direction: column-reverse;
-  label {
-    margin-bottom: 8px;
-    color: ${props => props.theme.colors.shades.textDark};
-    font-size: 1.25rem;
-    font-family: "Open Sans" sans-serif;
-    font-weight: 600;
-    text-transform: uppercase;
-  }
 
-  input:focus + label {
+  input:focus + ${Label} {
     color: ${props => props.theme.colors.shades.textLight};
   }
 
   small {
-    margin-top: 8px;
+    margin-top: 0.5rem;
   }
 `
 
@@ -28,10 +29,10 @@ const StyledInput = styled.input`
   border-radius: 4px;
   border: none;
   padding: 6px;
-  font-size: 17px;
+  font-size: 1.05rem;
 `
 
-const TextField = ({
+export const TextField = ({
   id,
   label,
   placeholder,
@@ -53,14 +54,19 @@ const TextField = ({
         value={value}
         name={name}
         onChange={onChange}
+        aria-label={name}
         {...inputProps}
       />
-      <label htmlFor={id} {...inputLabelProps}>
-        {label}
-      </label>
+      {label && (
+        <Label htmlFor={id} {...inputLabelProps}>
+          {label}
+        </Label>
+      )}
     </StyledDiv>
   )
 }
+
+TextField.Label = Label
 
 TextField.props = {
   id: PropTypes.string.isRequired,
@@ -81,5 +87,3 @@ TextField.defaultProps = {
   inputProps: {},
   inputLabelProps: {},
 }
-
-export default TextField

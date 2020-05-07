@@ -1,7 +1,7 @@
 import React from "react"
 import styled, { keyframes } from "styled-components"
 import PropTypes from "prop-types"
-import { lighten } from "polished"
+import { lighten, darken } from "polished"
 import cx from "classnames"
 import {
   PropStyles,
@@ -78,7 +78,7 @@ const ButtonVariants = PropStyles("color", ({ colors }) => ({
     color: colors.shades.white,
     backgroundColor: colors.shades.textMedium,
     "&:hover, &:focus, &:active": {
-      backgroundColor: colors.shades.textDark,
+      backgroundColor: darken(0.05, colors.shades.textMedium),
     },
   },
   discord: {
