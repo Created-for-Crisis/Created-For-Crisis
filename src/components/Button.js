@@ -109,12 +109,12 @@ const ButtonVariants = PropStyles("color", ({ colors }) => ({
 const ButtonIconPositions = PropStyles("iconposition", ({ colors }) => ({
   left: {
     svg: {
-      marginRight: ".5rem",
+      margin: "0 .5rem 0 0",
     },
   },
   right: {
     svg: {
-      marginLeft: ".5rem",
+      margin: "0 0 0 .5rem",
     },
   },
 }))

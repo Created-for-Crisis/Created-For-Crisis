@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import Layout from "../components/Layout/Layout"
 import SEO from "../components/Layout/SEO"
 import { Splash } from "../components/Splash"
-import { SplitContainer } from "../components/Container"
+import { Container } from "../components/Container"
 import { ContentBuilder } from "../components/ContentBuilder"
 import { RelatedPages } from "../components/Layout/RelatedPages"
 import { DonateForm } from "../components/Donation/DonateForm"
@@ -58,7 +58,7 @@ const Support = () => {
       <SEO title={title} />
       {/* Page Components */}
       <Splash title={title} subtitle={subtitle} actions={splashActions} />
-      <SplitContainer size="content" padded style={{ margin: "4rem auto" }}>
+      <Container.Page size="content" padded>
         <aside>
           <RelatedPages routes={relatedPagesMenu && relatedPagesMenu.routes} />
         </aside>
@@ -66,7 +66,7 @@ const Support = () => {
           <DonateForm />
           <ContentBuilder content={content} />
         </article>
-      </SplitContainer>
+      </Container.Page>
     </Layout>
   )
 }

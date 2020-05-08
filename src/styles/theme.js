@@ -65,7 +65,8 @@ const theme = {
     spacer: "10px",
   },
   breakpoints: {
-    xs: "321px", // iPhone 5SE
+    xxs: "321px", // iPhone 5SE
+    xs: "420px",
     sm: "576px",
     article: "640px",
     md: "768px",

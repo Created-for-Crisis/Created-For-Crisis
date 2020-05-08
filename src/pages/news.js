@@ -33,7 +33,7 @@ const News = () => {
       {/* Page Components */}
       <Splash title={"News"} subtitle={null} actions={null} />
       {/* News */}
-      <Container size="content" padded style={{ margin: "4rem auto" }}>
+      <Container.Page size="content" padded>
         <h3>Recent News</h3>
         <CardGrid columns={2}>
           {news.map(
@@ -52,7 +52,7 @@ const News = () => {
             )
           )}
         </CardGrid>
-      </Container>
+      </Container.Page>
     </Layout>
   )
 }

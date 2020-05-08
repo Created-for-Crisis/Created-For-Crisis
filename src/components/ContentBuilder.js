@@ -15,6 +15,11 @@ const StyledContent = styled.div`
   h5 {
     line-height: 1.5;
   }
+
+  /* Remove the Margin from the Last Child */
+  *:last-child {
+    margin-bottom: 0;
+  }
 `
 
 const options = {
@@ -103,7 +108,7 @@ const options = {
 export const ContentBuilder = ({ content }) => {
   // console.log({ content })
   return (
-    <StyledContent>
+    <StyledContent className="content-builder">
       {content && documentToReactComponents(content.json, options)}
     </StyledContent>
   )

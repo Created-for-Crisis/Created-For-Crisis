@@ -15,8 +15,7 @@ const SplashBackground = styled.header`
 
 const SplashInner = styled.div`
   background-repeat: no-repeat;
-  padding-bottom: 62px;
-
+  padding: 0 1rem 4rem;
   background-position-x: ${props => props.backgroundPosition.x};
   background-position-y: ${props => props.backgroundPosition.y};
   background-image: url(${WorldVectorDark});
@@ -43,7 +42,7 @@ const SplashInner = styled.div`
 export const Splash = ({ title, subtitle, backgroundPosition, actions }) => {
   return (
     <SplashBackground>
-      <Container size="content" padded top={0} bottom={0}>
+      <Container size="content">
         <SplashInner backgroundPosition={backgroundPosition}>
           <h1>{title}</h1>
           {subtitle && <p>{subtitle}</p>}

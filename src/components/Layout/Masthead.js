@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
+import { up } from "styled-breakpoints"
 import { Container } from "../Container"
 import { Button } from "../Button"
 import CreatedForCrisisLogo from "../../assets/logos/CreatedForCrisisLogo.svg"
@@ -14,7 +15,7 @@ const StyledMasthead = styled.div`
 `
 
 const Nav = styled.nav`
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: flex-end;
 
@@ -27,6 +28,10 @@ const Nav = styled.nav`
 
   a + a {
     margin-left: 3rem;
+  }
+
+  ${up("lg")} {
+    display: flex;
   }
 `
 

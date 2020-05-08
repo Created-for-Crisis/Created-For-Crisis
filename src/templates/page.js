@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 import SEO from "../components/Layout/SEO"
 import Layout from "../components/Layout/Layout"
 import { Splash } from "../components/Splash"
-import { SplitContainer } from "../components/Container"
+import { Container } from "../components/Container"
 import { ContentBuilder } from "../components/ContentBuilder"
 import { RelatedPages } from "../components/Layout/RelatedPages"
 
@@ -24,7 +24,7 @@ const Page = ({
       <SEO title={title} />
       {/* Page Components */}
       <Splash title={title} subtitle={subtitle} actions={splashActions} />
-      <SplitContainer size="content" padded style={{ margin: "4rem auto" }}>
+      <Container.Page size="content" padded>
         <aside>
           <RelatedPages
             routes={relatedPagesMenu ? relatedPagesMenu.routes : []}
@@ -33,7 +33,7 @@ const Page = ({
         <article>
           <ContentBuilder content={content} />
         </article>
-      </SplitContainer>
+      </Container.Page>
     </Layout>
   )
 }

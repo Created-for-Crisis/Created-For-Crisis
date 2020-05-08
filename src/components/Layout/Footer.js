@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import { OutboundLink } from "gatsby-plugin-google-analytics"
 import styled from "styled-components"
+import { up } from "styled-breakpoints"
 import { Container } from "../Container"
 import { Button, ButtonGroup } from "../Button"
 import Discord from "../../assets/icons/discord"
@@ -10,22 +11,74 @@ import { SocialNetworks } from "./SocialNetworks"
 
 const StyledFooter = styled.footer`
   background-color: ${props => props.theme.colors.shades.muteGrey};
-  padding: 1.5rem 0;
+
+  ${up("md")} {
+    padding: 1.5rem 0;
+  }
 `
 
 const Callout = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  flex-direction: column;
+
+  ${up("md")} {
+    flex-direction: row;
+    align-items: center;
+  }
+
   .text p {
+    text-align: center;
     margin: 0;
-    font-size: 1.85rem;
+    font-size: 1rem;
     color: ${props => props.theme.colors.shades.textDark};
     line-height: 1.5;
     letter-spacing: 0.5px;
     &.thin {
       color: ${props => props.theme.colors.shades.textLight};
       font-weight: 300;
+    }
+
+    ${up("xs")} {
+      font-size: 1.25rem;
+    }
+
+    ${up("md")} {
+      text-align: left;
+      font-size: 1.35rem;
+    }
+    ${up("lg")} {
+      font-size: 1.85rem;
+    }
+  }
+
+  ${ButtonGroup} {
+    flex: 1 0 auto;
+    justify-content: center;
+    flex-wrap: wrap;
+    a.button {
+      flex: 1 0 190px;
+      margin: 1rem 0 0;
+      ${up("xs")} {
+        & + a.button {
+          margin: 1rem 0 0 1rem;
+        }
+      }
+      ${up("sm")} {
+        flex-grow: 0;
+      }
+      ${up("md")} {
+        margin: 0;
+        & + a.button {
+          margin: 0 0 0 1rem;
+        }
+        flex: 0 0 auto;
+      }
+    }
+
+    ${up("md")} {
+      justify-content: flex-end;
+      flex: 1 0 360px;
     }
   }
 `
@@ -34,13 +87,19 @@ const Meta = styled.div`
   margin-top: 4rem;
   display: flex;
   align-items: flex-start;
+  flex-direction: column;
   .half {
     flex: 1 0 auto;
+  }
+
+  ${up("lg")} {
+    flex-direction: row;
   }
 `
 
 const FooterMenu = styled.nav`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   margin-bottom: 1rem;
   a + a {
@@ -128,7 +187,6 @@ export const Footer = ({ routes }) => (
             as={OutboundLink}
             target="_blank"
             href={"https://discord.gg/T2Xw2j7"}
-            style={{ marginLeft: "2rem" }}
           >
             <Discord /> Get Involved
           </Button>

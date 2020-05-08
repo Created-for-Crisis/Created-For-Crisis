@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { up } from "styled-breakpoints"
 import PropTypes from "prop-types"
 import { PropStyles } from "../styles/helpers"
 
@@ -33,23 +34,33 @@ export const Container = props => (
   <StyledContainer {...props}>{props.children}</StyledContainer>
 )
 
-export const SplitContainer = styled(Container)`
-  margin: 5rem auto;
-  display: flex;
-  align-items: flex-start;
-
+export const PageContainer = styled(Container)`
+  margin: 0 auto;
   aside {
-    position: sticky;
-    top: 5rem;
-    left: 0;
-    flex: 0 0 320px;
+    margin-bottom: 3rem;
   }
 
-  article {
-    flex: 1;
-    margin-left: 2.5rem;
+  ${up("lg")} {
+    margin: 4rem auto;
+    display: flex;
+    align-items: flex-start;
+
+    aside {
+      position: sticky;
+      top: 5rem;
+      left: 0;
+      flex: 0 0 320px;
+      margin-bottom: 0;
+    }
+
+    article {
+      flex: 1;
+      margin-left: 2.5rem;
+    }
   }
 `
+
+Container.Page = PageContainer
 
 Container.propTypes = {
   padded: PropTypes.bool,
