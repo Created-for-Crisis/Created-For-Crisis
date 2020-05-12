@@ -1,13 +1,12 @@
 import React from "react"
 import styled from "styled-components"
+import { up } from "styled-breakpoints"
 import PropTypes from "prop-types"
 import { Grid, Cell } from "styled-css-grid"
 import cx from "classnames"
 import {
-  PropStyles,
   getUnhandledProps,
   getElementType,
-  useValueAndKey,
   useKeyOnly,
   isNil,
 } from "../styles/helpers"
@@ -45,6 +44,7 @@ const CardBody = styled(Cell)`
 const CardImage = styled.img`
   border-radius: 0.25rem;
   margin: 0 auto;
+  max-width: 60px;
 `
 
 const CardHeader = styled.h3`
@@ -86,10 +86,10 @@ export const Card = props => {
     <CardBody as={ElementType} {...rest} className={classes}>
       {image && (
         <CardContent image>
-          <CardImage
-            src={image}
-            alt="Some default alternative text for the news card"
-          />
+          <picture>
+            <source type="image/webp" srcset={image.fluid.srcSetWebp} />
+            <CardImage src={image.fluid.src} alt={image.title} />
+          </picture>
         </CardContent>
       )}
       <CardContent>
@@ -114,7 +114,13 @@ Card.propTypes = {
   as: PropTypes.elementType,
   children: PropTypes.node,
   type: PropTypes.oneOf(["default", "thumbnail", "featured"]),
-  image: PropTypes.string,
+  image: PropTypes.shape({
+    title: PropTypes.string,
+    fluid: PropTypes.shape({
+      srcSetWebp: PropTypes.string,
+      src: PropTypes.string,
+    }),
+  }),
   title: PropTypes.string,
   source: PropTypes.string,
   date: PropTypes.string,
@@ -123,7 +129,12 @@ Card.propTypes = {
 
 Card.defaultProps = {
   as: "div",
-  image: "https://source.unsplash.com/60x60/daily",
+  image: {
+    title: "Unsplash Daily",
+    fluid: {
+      src: "https://source.unsplash.com/60x60/daily",
+    },
+  },
   title: "How To Make A Coronavirus Face Mask Out Of A T-Shirt",
   source: "abc11.com",
   date: "April 9th, 2020",
@@ -137,3 +148,14 @@ export const CardGrid = styled(Grid).attrs(props => ({
   gap: props.gap || "1rem",
   rowGap: props.rowGap || "2rem",
 }))``
+
+/*
+ ** News Grid
+ */
+export const NewsGrid = styled(CardGrid)`
+  grid-template-columns: 1fr;
+
+  ${up("lg")} {
+    grid-template-columns: 1fr 1fr;
+  }
+`

@@ -5,7 +5,8 @@ import Layout from "../components/Layout/Layout"
 import SEO from "../components/Layout/SEO"
 import { Splash } from "../components/Splash"
 import { Container } from "../components/Container"
-import { Card, CardGrid } from "../components/Card"
+import { Header } from "../components/Header"
+import { Card, NewsGrid } from "../components/Card"
 
 const News = () => {
   const {
@@ -20,6 +21,19 @@ const News = () => {
             publishedDate(formatString: "MMMM Do, YYYY")
             sourceName
             url
+            image {
+              title
+              fluid(
+                quality: 100
+                maxHeight: 60
+                maxWidth: 60
+                cropFocus: CENTER
+                resizingBehavior: THUMB
+              ) {
+                srcSetWebp
+                src
+              }
+            }
           }
         }
       }
@@ -34,24 +48,26 @@ const News = () => {
       <Splash title={"News"} subtitle={null} actions={null} />
       {/* News */}
       <Container.Page size="content" padded>
-        <h3>Recent News</h3>
-        <CardGrid columns={2}>
-          {news.map(
-            ({ node: { id, title, sourceName, publishedDate, url } }) => (
-              <Card
-                key={id}
-                title={title}
-                image={null}
-                source={sourceName}
-                date={publishedDate}
-                as={OutboundLink}
-                href={url}
-                target="_blank"
-                style={{ textDecoration: "none" }}
-              />
-            )
-          )}
-        </CardGrid>
+        <div>
+          <Header as="h3">Recent News</Header>
+          <NewsGrid>
+            {news.map(
+              ({ node: { id, title, sourceName, publishedDate, url } }) => (
+                <Card
+                  key={id}
+                  title={title}
+                  image={null}
+                  source={sourceName}
+                  date={publishedDate}
+                  as={OutboundLink}
+                  href={url}
+                  target="_blank"
+                  style={{ textDecoration: "none" }}
+                />
+              )
+            )}
+          </NewsGrid>
+        </div>
       </Container.Page>
     </Layout>
   )

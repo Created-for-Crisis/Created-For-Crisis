@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "created-for-crisis",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Created for Crisis GatsbyJS Website.",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Ryan P McKenna <ryanpatmckenna@gmail.com>",
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^13.4.0",
     "@contentful/rich-text-types": "^14.1.0",
@@ -90,9 +90,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/Rekenna/Created-For-Crisis"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/Rekenna/Created-For-Crisis/issues"
   }
 }

@@ -1,15 +1,16 @@
 import React from "react"
 import styled, { withTheme } from "styled-components"
+import { up } from "styled-breakpoints"
 import { Facebook, Twitter, Linkedin, Instagram, Youtube } from "react-feather"
 import { OutboundLink } from "gatsby-plugin-google-analytics"
 
 const Socials = styled.nav`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-around;
 
   a {
-    margin-left: 2rem;
+    margin: 1rem;
     text-decoration: none;
     color: ${props => props.theme.colors.shades.textDark};
   }
@@ -21,6 +22,14 @@ const Socials = styled.nav`
     polygon {
       fill: ${props => props.theme.colors.shades.white};
       stroke: ${props => props.theme.colors.shades.white};
+    }
+  }
+
+  ${up("lg")} {
+    justify-content: flex-end;
+
+    a {
+      margin: 0 0 0 2rem;
     }
   }
 `

@@ -18,7 +18,12 @@ export const Dynamic = () => (
           "Title",
           "How To Make A Coronavirus Face Mask Out Of A T-Shirt"
         )}
-        image={text("Image URL", "https://source.unsplash.com/60x60/daily")}
+        image={{
+          title: "Image",
+          fluid: {
+            src: text("Image URL", "https://source.unsplash.com/60x60/daily"),
+          },
+        }}
         source={text("Source", "abc11.com")}
         date={text("Date", "April 9th, 2020")}
         shadow={boolean("Shadow", true)}

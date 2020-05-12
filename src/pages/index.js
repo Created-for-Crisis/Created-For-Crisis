@@ -2,22 +2,35 @@ import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { OutboundLink } from "gatsby-plugin-google-analytics"
 import styled from "styled-components"
+import { up } from "styled-breakpoints"
 import Layout from "../components/Layout/Layout"
 import SEO from "../components/Layout/SEO"
 import { Splash } from "../components/Splash"
 import { Container } from "../components/Container"
 import { ContentBuilder } from "../components/ContentBuilder"
-import { Card, CardGrid } from "../components/Card"
+import { Card, NewsGrid } from "../components/Card"
+import { Header } from "../components/Header"
 
 const Introduction = styled.div`
   display: flex;
   align-items: flex-start;
-  .content {
-    margin-right: 1rem;
-  }
+  flex-direction: column;
+
   img {
-    margin: 0 0 0 1rem;
-    border-radius: 0.5rem;
+    display: none;
+  }
+
+  ${up("lg")} {
+    flex-direction: row;
+    .content {
+      margin-right: 1rem;
+    }
+
+    img {
+      display: block;
+      margin: 0 0 0 1rem;
+      border-radius: 0.5rem;
+    }
   }
 `
 
@@ -58,6 +71,19 @@ const Home = () => {
             publishedDate(formatString: "MMMM Do, YYYY")
             sourceName
             url
+            image {
+              title
+              fluid(
+                quality: 100
+                maxHeight: 60
+                maxWidth: 60
+                cropFocus: CENTER
+                resizingBehavior: THUMB
+              ) {
+                srcSetWebp
+                src
+              }
+            }
           }
         }
       }
@@ -71,43 +97,48 @@ const Home = () => {
     }
   `)
 
-  // console.log({ news })
   return (
     <Layout>
       <SEO title={title} />
       {/* Page Components */}
       <Splash title={title} subtitle={subtitle} actions={splashActions} />
       {/* News */}
-      <Container size="content" padded style={{ margin: "4rem auto" }}>
-        <h3>Recent News</h3>
-        <CardGrid columns={2}>
-          {news.map(
-            ({ node: { id, title, sourceName, publishedDate, url } }) => (
-              <Card
-                key={id}
-                title={title}
-                image={null}
-                source={sourceName}
-                date={publishedDate}
-                as={OutboundLink}
-                href={url}
-                target="_blank"
-                style={{ textDecoration: "none" }}
-              />
-            )
-          )}
-        </CardGrid>
-      </Container>
+      <Container.Page size="content" padded>
+        <div>
+          <Header as="h3">Recent News</Header>
+          <NewsGrid>
+            {news.map(
+              ({
+                node: { id, title, sourceName, publishedDate, url, image },
+              }) => (
+                <Card
+                  key={id}
+                  title={title}
+                  image={image}
+                  source={sourceName}
+                  date={publishedDate}
+                  as={OutboundLink}
+                  href={url}
+                  target="_blank"
+                  style={{ textDecoration: "none" }}
+                />
+              )
+            )}
+          </NewsGrid>
+        </div>
+      </Container.Page>
       {/* Introduction */}
-      <Container size="content" padded style={{ margin: "4rem auto" }}>
-        <h3>Introduction</h3>
-        <Introduction>
-          <div className="content">
-            <ContentBuilder content={content} />
-          </div>
-          <img src={src} alt={imageTitle} />
-        </Introduction>
-      </Container>
+      <Container.Page size="content" padded>
+        <div>
+          <Header as="h3">Introduction</Header>
+          <Introduction>
+            <div className="content">
+              <ContentBuilder content={content} />
+            </div>
+            <img src={src} alt={imageTitle} />
+          </Introduction>
+        </div>
+      </Container.Page>
     </Layout>
   )
 }

@@ -84,16 +84,21 @@ const Callout = styled.div`
 `
 
 const Meta = styled.div`
-  margin-top: 4rem;
+  margin-top: 1rem;
   display: flex;
   align-items: flex-start;
-  flex-direction: column;
+  flex-direction: column-reverse;
   .half {
+    width: 100%;
     flex: 1 0 auto;
   }
 
   ${up("lg")} {
+    margin-top: 4rem;
     flex-direction: row;
+    .half {
+      width: auto;
+    }
   }
 `
 
@@ -101,11 +106,10 @@ const FooterMenu = styled.nav`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-bottom: 1rem;
-  a + a {
-    margin-left: 3rem;
-  }
+  text-align: center;
   a {
+    margin-bottom: 1rem;
+    flex: 1 0 120px;
     font-weight: 600;
     color: ${props => props.theme.colors.shades.textDark};
     text-decoration: none;
@@ -117,31 +121,62 @@ const FooterMenu = styled.nav`
       color: ${props => props.theme.colors.shades.textLight};
     }
   }
+
+  ${up("sm")} {
+    a {
+      flex: 1 0 auto;
+    }
+  }
+
+  ${up("lg")} {
+    a {
+      flex-grow: 0;
+    }
+
+    a + a {
+      margin-left: 3rem;
+    }
+  }
 `
 
 const Copyright = styled.p`
   margin: 0;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  flex-direction: column;
   font-size: 0.95rem;
-  span + span,
+
   span + a,
   a + a {
-    position: relative;
-    margin-left: 1rem;
-    padding-left: 1rem;
+    margin-top: 1rem;
+  }
 
-    &:before {
-      content: "";
-      height: 4px;
-      width: 4px;
-      background-color: ${props => props.theme.colors.shades.textDark};
-      border-radius: 50%;
-      position: absolute;
-      top: calc(50% - 1px);
-      left: 0;
-      transform: traslateY(-50%);
+  ${up("sm")} {
+    flex-direction: row;
+    justify-content: center;
+    span + a,
+    a + a {
+      position: relative;
+      margin: 0 0 0 1rem;
+      padding-left: 1rem;
+
+      &:before {
+        content: "";
+        height: 4px;
+        width: 4px;
+        background-color: ${props => props.theme.colors.shades.textDark};
+        border-radius: 50%;
+        position: absolute;
+        top: calc(50% - 1px);
+        left: 0;
+        transform: traslateY(-50%);
+      }
     }
+  }
+
+  ${up("lg")} {
+    justify-content: flex-start;
   }
 
   a {
@@ -249,5 +284,9 @@ Footer.defaultProps = {
       title: "Support",
       link: "/support/",
     },
+    // {
+    //   title: "My Account",
+    //   link: "/account/",
+    // },
   ],
 }
