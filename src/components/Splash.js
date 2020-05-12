@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { Link } from "gatsby"
 import { OutboundLink } from "gatsby-plugin-google-analytics"
 import styled from "styled-components"
+import { up } from "styled-breakpoints"
 import WorldVectorDark from "../assets/images/world-vector-dark.png"
 import Discord from "../assets/icons/discord"
 import { Container } from "./Container"
@@ -11,6 +12,10 @@ import { Download, ExternalLink } from "react-feather"
 
 const SplashBackground = styled.header`
   background-color: ${props => props.theme.colors.blue};
+  margin-top: 72px;
+  ${up("lg")} {
+    margin-top: 0;
+  }
 `
 
 const SplashInner = styled.div`
@@ -27,15 +32,43 @@ const SplashInner = styled.div`
 
   h1 {
     margin-bottom: 0;
-    font-size: 6.875rem;
+    font-size: 3rem;
+    ${up("lg")} {
+      font-size: 6.875rem;
+    }
   }
 
   p {
     max-width: 731px;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-family: "Open Sans", "sans-serif";
     font-weight: normal;
     line-height: 2.25rem;
+    ${up("lg")} {
+      font-size: 1.5rem;
+    }
+  }
+
+  ${ButtonGroup} {
+    flex-direction: column;
+    align-items: flex-start;
+
+    a.button + a.button {
+      margin: 1rem 0 0;
+    }
+
+    ${up("sm")} {
+      flex-direction: row;
+      align-items: center;
+
+      a.button {
+        display: inline-flex;
+
+        & + a.button {
+          margin: 0 0 0 1rem;
+        }
+      }
+    }
   }
 `
 
@@ -67,7 +100,6 @@ export const Splash = ({ title, subtitle, backgroundPosition, actions }) => {
                   return (
                     <Button
                       key={id}
-                      style={{ marginRight: "1rem" }}
                       color={color}
                       iconPosition={iconPosition}
                       as={external ? OutboundLink : Link}

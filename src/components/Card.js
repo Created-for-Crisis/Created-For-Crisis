@@ -87,7 +87,7 @@ export const Card = props => {
       {image && (
         <CardContent image>
           <picture>
-            <source type="image/webp" srcset={image.fluid.srcSetWebp} />
+            <source type="image/webp" srcSet={image.fluid.srcSetWebp} />
             <CardImage src={image.fluid.src} alt={image.title} />
           </picture>
         </CardContent>
