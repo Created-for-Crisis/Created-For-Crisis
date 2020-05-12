@@ -238,7 +238,7 @@ export const Footer = ({ routes }) => (
               ))}
           </FooterMenu>
           <Copyright>
-            <span>&copy; 2020 Created for Crisis</span>
+            <span>&copy; 2020 Created for Crisis Inc.</span>
             <OutboundLink
               href="mailto:info@createdforcrisis.org"
               target="_blank"
