@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
+import { pathGenerator } from "../../util/helpers"
 
 const StyledRelatedPages = styled.nav`
   background-color: ${props => props.theme.colors.shades.muteGrey};
@@ -36,24 +37,15 @@ export const RelatedPages = ({ routes }) => {
   return (
     <StyledRelatedPages>
       <h3>Related Pages</h3>
-      {routes.map(({ id, title, slug, contentfulparent }) => {
-        let path
-        // If the page has a parent page include that in the path
-        // Maximum depth of 2
-        if (contentfulparent && contentfulparent.contentfulparent) {
-          path = `/${contentfulparent.contentfulparent.slug}/${contentfulparent.slug}/${slug}/`
-        } else if (contentfulparent) {
-          path = `/${contentfulparent.slug}/${slug}/`
-        } else {
-          path = `/${slug}/`
-        }
-
-        return (
-          <Link key={id} to={path} activeClassName="active">
-            {title}
-          </Link>
-        )
-      })}
+      {routes.map(({ id, title, slug, contentfulparent }) => (
+        <Link
+          key={id}
+          to={pathGenerator(slug, contentfulparent)}
+          activeClassName="active"
+        >
+          {title}
+        </Link>
+      ))}
     </StyledRelatedPages>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Link } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
 import { up } from "styled-breakpoints"
 import cx from "classnames"
@@ -8,6 +8,7 @@ import { Button } from "../Button"
 import CreatedForCrisisLogo from "../../assets/logos/CreatedForCrisisLogo.svg"
 import { Menu, X } from "react-feather"
 import { useKeyOnly } from "../../styles/helpers"
+import { pathGenerator } from "../../util/helpers"
 
 const StyledMasthead = styled.div`
   position: fixed;
@@ -23,6 +24,75 @@ const StyledMasthead = styled.div`
 
   ${up("lg")} {
     position: relative;
+  }
+`
+
+const DropdownMenu = styled.div`
+  position: relative;
+  display: block;
+
+  ${up("lg")} {
+    position: absolute;
+    top: calc(100% + 1.5rem);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    border-radius: 0.5rem;
+    background-color: ${props => props.theme.colors.shades.white};
+    box-shadow: ${props => props.theme.shadows.card};
+    opacity: 0;
+    visibility: hidden;
+
+    /* To maintain the hover statee */
+    &:before {
+      content: "";
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      height: 1.5rem;
+      width: 100%;
+      background: transparent;
+    }
+
+    /* Little Carat on top of the menu */
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 7px 7px 7px;
+      border-color: transparent transparent
+        ${props => props.theme.colors.shades.white} transparent;
+    }
+  }
+  a {
+    text-decoration: none;
+    display: block;
+    padding: 0.75rem;
+    &:hover strong,
+    &.active strong {
+      color: ${props => props.theme.colors.shades.textLight};
+    }
+  }
+
+  strong,
+  span {
+    display: block;
+    letter-spacing: 0.7px;
+    color: ${props => props.theme.colors.shades.textDark};
+  }
+
+  strong {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+  }
+
+  span {
+    font-size: 0.75rem;
   }
 `
 
@@ -47,7 +117,8 @@ const Nav = styled.nav`
     box-shadow: ${props => props.theme.shadows.card};
   }
 
-  a:not(.button) {
+  .nav-link {
+    position: relative;
     text-decoration: none;
     color: ${props => props.theme.colors.shades.textDark};
     font-weight: 500;
@@ -56,6 +127,10 @@ const Nav = styled.nav`
     text-transform: uppercase;
     font-size: 1.25rem;
     letter-spacing: 1px;
+
+    &.active {
+      color: ${props => props.theme.colors.shades.textLight};
+    }
   }
 
   a.button {
@@ -63,7 +138,7 @@ const Nav = styled.nav`
   }
 
   ${up("lg")} {
-    overflow-y: none;
+    overflow-y: visible;
     padding-top: 0;
     position: static;
     flex-direction: row;
@@ -75,14 +150,24 @@ const Nav = styled.nav`
     background-color: transparent;
     transform: translateX(0);
 
-    a:not(.button) {
+    .nav-link,
+    .dropdown-link {
+      position: relative;
       padding: 0;
       text-transform: none;
       font-size: 1rem;
       color: ${props => props.theme.colors.shades.white};
     }
 
-    a + a,
+    .dropdown-link:hover ${DropdownMenu} {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    a.nav-link + a.nav-link,
+    a.nav-link + .dropdown-link,
+    .dropdown-link + a.nav-link,
     a.button {
       margin: 0 0 0 3rem;
     }
@@ -118,8 +203,36 @@ const MenuToggle = styled.div`
   }
 `
 
-export const Masthead = ({ user, routes }) => {
+export const Masthead = ({ user }) => {
   const [navigationOpen, setNavigationOpen] = useState(false)
+
+  const {
+    contentfulMenu: { routes },
+  } = useStaticQuery(
+    graphql`
+      query GetPrimaryNavigation {
+        contentfulMenu(slug: { eq: "primary-navigation" }) {
+          id
+          slug
+          title
+          routes {
+            id
+            title
+            slug
+            dropdownItems {
+              title
+              subtitle
+              slug
+              id
+              contentfulparent {
+                slug
+              }
+            }
+          }
+        }
+      }
+    `
+  )
 
   return (
     <StyledMasthead>
@@ -144,16 +257,45 @@ export const Masthead = ({ user, routes }) => {
           )}
         >
           {routes &&
-            routes.map(({ title, slug }, i) => (
-              <Link
-                key={i}
-                to={`/${slug}/`}
-                activeClassName="active"
-                onClick={e => setNavigationOpen(false)}
-              >
-                {title}
-              </Link>
-            ))}
+            routes.map(({ id, title, slug, dropdownItems }) =>
+              dropdownItems ? (
+                <span className="dropdown-link" key={id}>
+                  <Link
+                    to={pathGenerator(slug)}
+                    activeClassName="active"
+                    className="nav-link"
+                    onClick={e => setNavigationOpen(false)}
+                  >
+                    {title}
+                  </Link>
+                  <DropdownMenu>
+                    {dropdownItems.map(
+                      ({ id, title, subtitle, slug, contentfulparent }) => (
+                        <Link
+                          key={id}
+                          to={pathGenerator(slug, contentfulparent)}
+                          activeClassName="active"
+                          onClick={e => setNavigationOpen(false)}
+                        >
+                          <strong>{title}</strong>
+                          <span>{subtitle}</span>
+                        </Link>
+                      )
+                    )}
+                  </DropdownMenu>
+                </span>
+              ) : (
+                <Link
+                  key={id}
+                  to={pathGenerator(slug)}
+                  activeClassName="active"
+                  className="nav-link"
+                  onClick={e => setNavigationOpen(false)}
+                >
+                  {title}
+                </Link>
+              )
+            )}
           {/* If Logged in User show My Account button */}
           {user ? (
             <Button
@@ -187,25 +329,4 @@ export const Masthead = ({ user, routes }) => {
       </Container>
     </StyledMasthead>
   )
-}
-
-Masthead.defaultProps = {
-  routes: [
-    {
-      title: "About",
-      slug: "about",
-    },
-    {
-      title: "News",
-      slug: "news",
-    },
-    {
-      title: "Projects",
-      slug: "projects",
-    },
-    {
-      title: "Support",
-      slug: "support",
-    },
-  ],
 }
