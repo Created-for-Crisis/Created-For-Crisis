@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 import { OutboundLink } from "gatsby-plugin-google-analytics"
 import styled from "styled-components"
 import { up } from "styled-breakpoints"
@@ -8,6 +8,7 @@ import { Button, ButtonGroup } from "../Button"
 import Discord from "../../assets/icons/discord"
 import { Code, Heart } from "react-feather"
 import { SocialNetworks } from "./SocialNetworks"
+import { pathGenerator } from "../../util/helpers"
 
 const StyledFooter = styled.footer`
   background-color: ${props => props.theme.colors.shades.muteGrey};
@@ -204,64 +205,93 @@ const Copyright = styled.p`
   }
 `
 
-export const Footer = ({ routes }) => (
-  <StyledFooter>
-    <Container size="content" padded>
-      <Callout>
-        <div className="text">
-          <p className="thin">Able to lend a hand?</p>
-          <p>Get in touch or contribute a donation.</p>
-        </div>
-        <ButtonGroup>
-          <Button color="green" as={Link} to={"/support/"}>
-            Donate
-          </Button>
-          <Button
-            color="discord-inverse"
-            iconPosition="left"
-            as={OutboundLink}
-            target="_blank"
-            href={"https://discord.gg/T2Xw2j7"}
-          >
-            <Discord /> Get Involved
-          </Button>
-        </ButtonGroup>
-      </Callout>
-      <Meta>
-        <div className="half left">
-          <FooterMenu aria-labelledby="footer-navigation">
-            {routes &&
-              routes.map(({ title, link }, i) => (
-                <Link key={i} to={link} activeClassName="active">
-                  {title}
-                </Link>
-              ))}
-          </FooterMenu>
-          <Copyright>
-            <span>&copy; 2020 Created for Crisis Inc.</span>
-            <OutboundLink
-              href="mailto:info@createdforcrisis.org"
+export const Footer = () => {
+  const {
+    contentfulMenu: { routes },
+  } = useStaticQuery(
+    graphql`
+      query GetFooterNavigation {
+        contentfulMenu(slug: { eq: "footer-navigation" }) {
+          id
+          slug
+          title
+          routes {
+            id
+            title
+            slug
+            contentfulparent {
+              slug
+            }
+          }
+        }
+      }
+    `
+  )
+  return (
+    <StyledFooter>
+      <Container size="content" padded>
+        <Callout>
+          <div className="text">
+            <p className="thin">Able to lend a hand?</p>
+            <p>Get in touch or contribute a donation.</p>
+          </div>
+          <ButtonGroup>
+            <Button color="green" as={Link} to={"/support/"}>
+              Donate
+            </Button>
+            <Button
+              color="discord-inverse"
+              iconPosition="left"
+              as={OutboundLink}
               target="_blank"
+              href={"https://discord.gg/T2Xw2j7"}
             >
-              info@createdforcrisis.org
-            </OutboundLink>
-            <OutboundLink
-              href="https://github.com/Rekenna/Created-For-Crisis"
-              target="_blank"
-              className="github"
-            >
-              <Code className="code" /> + <Heart className="heart" />
-            </OutboundLink>
-          </Copyright>
-        </div>
-        <div className="half right">
-          <SocialNetworks />
-        </div>
-      </Meta>
-    </Container>
-  </StyledFooter>
-)
-
+              <Discord /> Get Involved
+            </Button>
+          </ButtonGroup>
+        </Callout>
+        <Meta>
+          <div className="half left">
+            <FooterMenu aria-labelledby="footer-navigation">
+              <Link to={"/"} activeClassName="active">
+                Home
+              </Link>
+              {routes &&
+                routes.map(({ id, title, slug, contentfulparent }) => (
+                  <Link
+                    key={id}
+                    to={pathGenerator(slug, contentfulparent)}
+                    activeClassName="active"
+                  >
+                    {title}
+                  </Link>
+                ))}
+            </FooterMenu>
+            <Copyright>
+              <span>&copy; 2020 Created for Crisis Inc.</span>
+              <OutboundLink
+                href="mailto:info@createdforcrisis.org"
+                target="_blank"
+              >
+                info@createdforcrisis.org
+              </OutboundLink>
+              <OutboundLink
+                href="https://github.com/Rekenna/Created-For-Crisis"
+                target="_blank"
+                className="github"
+              >
+                <Code className="code" /> + <Heart className="heart" />
+              </OutboundLink>
+            </Copyright>
+          </div>
+          <div className="half right">
+            <SocialNetworks />
+          </div>
+        </Meta>
+      </Container>
+    </StyledFooter>
+  )
+}
 Footer.defaultProps = {
   routes: [
     {
