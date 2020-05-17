@@ -7,11 +7,14 @@ import { Splash } from "../components/Splash"
 import { Container } from "../components/Container"
 import { ContentBuilder } from "../components/ContentBuilder"
 import { RelatedPages } from "../components/Layout/RelatedPages"
+import config from "../../config"
 
 const Page = ({
+  location: { pathname },
   data: {
     contentfulPage: {
       title,
+      headerTitle,
       subtitle,
       splashActions,
       content,
@@ -19,11 +22,20 @@ const Page = ({
     },
   },
 }) => {
+  console.log({ pathname })
   return (
     <Layout>
-      <SEO title={title} />
+      <SEO
+        title={`${title} | ${config.title}`}
+        pathname={pathname}
+        desc={subtitle || config.description}
+      />
       {/* Page Components */}
-      <Splash title={title} subtitle={subtitle} actions={splashActions} />
+      <Splash
+        title={headerTitle || title}
+        subtitle={subtitle}
+        actions={splashActions}
+      />
       <Container.Page size="content" padded>
         <aside>
           <RelatedPages
@@ -49,6 +61,7 @@ export const postQuery = graphql`
   query($id: String!) {
     contentfulPage(id: { eq: $id }) {
       title
+      headerTitle
       subtitle
       splashActions {
         text

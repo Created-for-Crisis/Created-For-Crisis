@@ -8,16 +8,18 @@ import { Container } from "../components/Container"
 import { ContentBuilder } from "../components/ContentBuilder"
 import { RelatedPages } from "../components/Layout/RelatedPages"
 import { DonateForm } from "../components/Donation/DonateForm"
+import config from "../../config"
 
 /*
  ** This page is also compiled manually
  ** so we can add the Donation Form within the content.
  */
 
-const Support = () => {
+const Support = ({ location: { pathname } }) => {
   const {
     contentfulPage: {
       title,
+      headerTitle,
       subtitle,
       splashActions,
       content,
@@ -25,8 +27,9 @@ const Support = () => {
     },
   } = useStaticQuery(graphql`
     query getSupportPage {
-      contentfulPage(slug: { eq: "support" }) {
+      contentfulPage(slug: { eq: "donate" }) {
         title
+        headerTitle
         subtitle
         splashActions {
           text
@@ -55,9 +58,17 @@ const Support = () => {
   `)
   return (
     <Layout>
-      <SEO title={title} />
+      <SEO
+        title={`Support | ${config.title}`}
+        pathname={pathname}
+        desc={subtitle || config.description}
+      />
       {/* Page Components */}
-      <Splash title={title} subtitle={subtitle} actions={splashActions} />
+      <Splash
+        title={headerTitle || title}
+        subtitle={subtitle}
+        actions={splashActions}
+      />
       <Container.Page size="content" padded>
         <aside>
           <RelatedPages routes={relatedPagesMenu && relatedPagesMenu.routes} />

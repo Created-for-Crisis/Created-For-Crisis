@@ -7,8 +7,9 @@ import { Splash } from "../components/Splash"
 import { Container } from "../components/Container"
 import { Header } from "../components/Header"
 import { Card, NewsGrid } from "../components/Card"
+import config from "../../config"
 
-const News = () => {
+const News = ({ location: { pathname } }) => {
   const {
     allContentfulNews: { edges: news },
   } = useStaticQuery(graphql`
@@ -42,7 +43,11 @@ const News = () => {
   // console.log({ news })
   return (
     <Layout>
-      <SEO title={"News | Created for Crisis"} />
+      <SEO
+        title={`Support | ${config.title}`}
+        pathname={pathname}
+        desc={config.description}
+      />
       {/* Page Components */}
       <Splash title={"News"} subtitle={null} actions={null} />
       {/* News */}

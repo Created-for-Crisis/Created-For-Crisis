@@ -10,6 +10,7 @@ import { Container } from "../components/Container"
 import { ContentBuilder } from "../components/ContentBuilder"
 import { Card, NewsGrid } from "../components/Card"
 import { Header } from "../components/Header"
+import config from "../../config"
 
 const Introduction = styled.div`
   display: flex;
@@ -98,7 +99,11 @@ const Home = () => {
 
   return (
     <Layout>
-      <SEO title={title} />
+      <SEO
+        title={`Home | ${config.title}`}
+        pathname={"/"}
+        desc={config.description}
+      />
       {/* Page Components */}
       <Splash title={title} subtitle={subtitle} actions={splashActions} />
       {/* News */}

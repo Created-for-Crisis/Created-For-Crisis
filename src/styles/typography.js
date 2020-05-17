@@ -8,16 +8,6 @@ const typography = new Typography({
   headerColor: "#102336",
   bodyFontFamily: ["Open Sans", "sans-serif"],
   bodyColor: "#102336",
-  googleFonts: [
-    {
-      name: "Crimson Text",
-      styles: ["400", "700"],
-    },
-    {
-      name: "Open Sans",
-      styles: ["400", "400i", "600", "700", "700i"],
-    },
-  ],
   scaleRatio: 2.5,
   overrideStyles: ({ adjustFontSizeTo, rhythm }, options, styles) => ({
     h3: {
