@@ -5,7 +5,7 @@ import { BLOCKS, INLINES } from "@contentful/rich-text-types"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import styled from "styled-components"
 import { Download, ExternalLink } from "react-feather"
-import { TeamMember } from "./TeamMembers"
+import { TeamMember } from "./TeamMember"
 import { Button } from "./Button"
 
 const StyledContent = styled.div`
@@ -40,16 +40,29 @@ const options = {
         },
       },
     }) => {
-      // console.log({ id, fields })
       switch (id) {
         case "teamMember":
+          const {
+            name,
+            role,
+            linkedInUrl,
+            gitHubUrl,
+            website,
+            biography,
+            image,
+          } = fields
           return (
             <TeamMember
-              name={fields.name["en-US"]}
-              title={fields.role["en-US"]}
-              linkedInUrl={fields.linkedInUrl["en-US"]}
-              gitHubUrl={fields.gitHubUrl["en-US"]}
-              website={fields.website["en-US"]}
+              name={name && name["en-US"]}
+              title={role && role["en-US"]}
+              biography={
+                biography &&
+                documentToReactComponents(biography["en-US"], options)
+              }
+              image={image && image["en-US"]}
+              linkedInUrl={linkedInUrl && linkedInUrl["en-US"]}
+              gitHubUrl={gitHubUrl && gitHubUrl["en-US"]}
+              website={website && website["en-US"]}
             />
           )
         default:
