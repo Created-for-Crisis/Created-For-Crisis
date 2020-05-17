@@ -236,7 +236,7 @@ export const Footer = () => {
             <p>Get in touch or contribute a donation.</p>
           </div>
           <ButtonGroup>
-            <Button color="green" as={Link} to={"/support/"}>
+            <Button color="green" as={Link} to={"/donate/"}>
               Donate
             </Button>
             <Button
@@ -291,32 +291,4 @@ export const Footer = () => {
       </Container>
     </StyledFooter>
   )
-}
-Footer.defaultProps = {
-  routes: [
-    {
-      title: "Home",
-      link: "/",
-    },
-    {
-      title: "About",
-      link: "/about/",
-    },
-    {
-      title: "News",
-      link: "/news/",
-    },
-    {
-      title: "Projects",
-      link: "/projects/",
-    },
-    {
-      title: "Support",
-      link: "/support/",
-    },
-    // {
-    //   title: "My Account",
-    //   link: "/account/",
-    // },
-  ],
 }
