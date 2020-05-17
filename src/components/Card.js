@@ -4,6 +4,7 @@ import { up } from "styled-breakpoints"
 import PropTypes from "prop-types"
 import { Grid, Cell } from "styled-css-grid"
 import cx from "classnames"
+import Img from "gatsby-image"
 import {
   getUnhandledProps,
   getElementType,
@@ -41,10 +42,11 @@ const CardBody = styled(Cell)`
   }
 `
 
-const CardImage = styled.img`
+const CardImage = styled(Img)`
   border-radius: 0.25rem;
   margin: 0 auto;
   max-width: 60px;
+  max-height: 60px;
 `
 
 const CardHeader = styled.h3`
@@ -88,7 +90,7 @@ export const Card = props => {
         <CardContent image>
           <picture>
             <source type="image/webp" srcSet={image.fluid.srcSetWebp} />
-            <CardImage src={image.fluid.src} alt={image.title} />
+            <CardImage fluid={image.fluid} />
           </picture>
         </CardContent>
       )}
@@ -129,12 +131,6 @@ Card.propTypes = {
 
 Card.defaultProps = {
   as: "div",
-  image: {
-    title: "Unsplash Daily",
-    fluid: {
-      src: "https://source.unsplash.com/60x60/daily",
-    },
-  },
   title: "How To Make A Coronavirus Face Mask Out Of A T-Shirt",
   source: "abc11.com",
   date: "April 9th, 2020",

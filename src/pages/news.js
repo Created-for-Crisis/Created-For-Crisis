@@ -30,8 +30,7 @@ const News = () => {
                 cropFocus: CENTER
                 resizingBehavior: THUMB
               ) {
-                srcSetWebp
-                src
+                ...GatsbyContentfulFluid_withWebp
               }
             }
           }
@@ -52,11 +51,13 @@ const News = () => {
           <Header as="h3">Recent News</Header>
           <NewsGrid>
             {news.map(
-              ({ node: { id, title, sourceName, publishedDate, url } }) => (
+              ({
+                node: { id, title, sourceName, publishedDate, url, image },
+              }) => (
                 <Card
                   key={id}
                   title={title}
-                  image={null}
+                  image={image}
                   source={sourceName}
                   date={publishedDate}
                   as={OutboundLink}

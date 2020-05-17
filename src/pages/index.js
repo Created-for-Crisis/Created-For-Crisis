@@ -80,8 +80,7 @@ const Home = () => {
                 cropFocus: CENTER
                 resizingBehavior: THUMB
               ) {
-                srcSetWebp
-                src
+                ...GatsbyContentfulFluid_withWebp
               }
             }
           }

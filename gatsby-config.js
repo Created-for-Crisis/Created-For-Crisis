@@ -30,11 +30,13 @@ module.exports = {
               spaceId: process.env.CONTENTFUL_SPACE_ID_DEV,
               accessToken: process.env.CONTENTFUL_ACCESS_TOKEN_DEV,
               environment: process.env.CONTENTFUL_ENVIRONMENT_DEV,
+              downloadLocal: true,
             }
           : {
               spaceId: process.env.CONTENTFUL_SPACE_ID_PROD,
               accessToken: process.env.CONTENTFUL_ACCESS_TOKEN_PROD,
               environment: process.env.CONTENTFUL_ENVIRONMENT_PROD,
+              downloadLocal: true,
             },
     },
     {
