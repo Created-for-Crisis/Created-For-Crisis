@@ -59,7 +59,7 @@ const Support = ({ location: { pathname } }) => {
   return (
     <Layout>
       <SEO
-        title={`Support | ${config.title}`}
+        title={`${title} | ${config.title}`}
         pathname={pathname}
         desc={subtitle || config.description}
       />

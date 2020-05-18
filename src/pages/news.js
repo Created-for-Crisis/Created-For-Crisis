@@ -44,7 +44,7 @@ const News = ({ location: { pathname } }) => {
   return (
     <Layout>
       <SEO
-        title={`Support | ${config.title}`}
+        title={`News | ${config.title}`}
         pathname={pathname}
         desc={config.description}
       />

@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import { OutboundLink } from "gatsby-plugin-google-analytics"
 import styled from "styled-components"
 import { up } from "styled-breakpoints"
+import Img from "gatsby-image"
 import Layout from "../components/Layout/Layout"
 import SEO from "../components/Layout/SEO"
 import { Splash } from "../components/Splash"
@@ -17,36 +18,34 @@ const Introduction = styled.div`
   align-items: flex-start;
   flex-direction: column;
 
-  img {
-    display: none;
-  }
-
   ${up("lg")} {
     flex-direction: row;
     .content {
       margin-right: 1rem;
     }
+  }
+`
 
-    img {
-      display: block;
-      margin: 0 0 0 1rem;
-      border-radius: 0.5rem;
-    }
+const IntroImg = styled(Img)`
+  display: none;
+  ${up("lg")} {
+    display: block;
+    margin: 0 0 0 1rem;
+    border-radius: 0.5rem;
+    flex: 1 0 490px;
   }
 `
 
 const Home = () => {
   const {
-    contentfulPage: { title, subtitle, splashActions, content },
+    contentfulPage: { title, headerTitle, subtitle, splashActions, content },
     allContentfulNews: { edges: news },
-    contentfulAsset: {
-      title: imageTitle,
-      fluid: { src },
-    },
+    contentfulAsset,
   } = useStaticQuery(graphql`
     query getHomePage {
       contentfulPage(slug: { eq: "home" }) {
         title
+        headerTitle
         subtitle
         splashActions {
           text
@@ -87,25 +86,31 @@ const Home = () => {
           }
         }
       }
-      contentfulAsset(id: { eq: "61e8eb76-9273-5776-9142-8847f7db0191" }) {
+      contentfulAsset(title: { eq: "Home Introduction Image" }) {
         id
         title
         fluid(maxWidth: 490, quality: 100, resizingBehavior: SCALE) {
-          src
+          ...GatsbyContentfulFluid_withWebp
         }
       }
     }
   `)
 
+  console.log({ contentfulAsset })
+
   return (
     <Layout>
       <SEO
-        title={`Home | ${config.title}`}
+        title={`${title} | ${config.title}`}
         pathname={"/"}
         desc={config.description}
       />
       {/* Page Components */}
-      <Splash title={title} subtitle={subtitle} actions={splashActions} />
+      <Splash
+        title={headerTitle || title}
+        subtitle={subtitle}
+        actions={splashActions}
+      />
       {/* News */}
       <Container.Page size="content" padded>
         <div>
@@ -139,7 +144,7 @@ const Home = () => {
             <div className="content">
               <ContentBuilder content={content} />
             </div>
-            <img src={src} alt={imageTitle} />
+            <IntroImg fluid={contentfulAsset.fluid} />
           </Introduction>
         </div>
       </Container.Page>
