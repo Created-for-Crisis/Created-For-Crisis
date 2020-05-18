@@ -1,0 +1,5 @@
+# Manual Redirects
+/patterns/  /projects/masks/patterns/
+/labelingandsafety/  /projects/masks/labeling-and-safety/
+/press/  /news/
+/faq/  /projects/masks/faq/
