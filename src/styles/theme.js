@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components"
 import { rgba } from "polished"
+import typography from "./typography"
 
 require("typeface-open-sans")
 require("typeface-crimson-text")
@@ -79,6 +80,7 @@ const theme = {
 
 const GlobalStyle = createGlobalStyle`
   body {
+    ${typography.toString()};
     margin: 0;
     position: relative;
     color: ${props => props.theme.colors.shades.textDark};

@@ -8,9 +8,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { ThemeProvider } from "styled-components"
-import { TypographyStyle } from "react-typography"
 import { theme, GlobalStyle } from "../../styles/theme"
-import typography from "../../styles/typography"
 
 import getFirebase, { FirebaseContext } from "../Firebase"
 import { AuthUserContext } from "../Session"
@@ -39,7 +37,6 @@ class Layout extends Component {
     return (
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <TypographyStyle typography={typography} />
         <FirebaseContext.Provider value={this.state.firebase}>
           <AppWithAuthentication {...this.props} />
         </FirebaseContext.Provider>

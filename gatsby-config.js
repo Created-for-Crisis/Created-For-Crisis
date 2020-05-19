@@ -60,7 +60,7 @@ module.exports = {
       resolve: `gatsby-plugin-typography`,
       options: {
         pathToConfigModule: `src/styles/typography`,
-        // omitGoogleFont: true,
+        omitGoogleFont: true,
       },
     },
     `gatsby-transformer-sharp`,
