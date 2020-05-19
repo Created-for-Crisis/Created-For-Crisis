@@ -21,34 +21,31 @@ const Page = ({
       relatedPagesMenu,
     },
   },
-}) => {
-  console.log({ pathname })
-  return (
-    <Layout>
-      <SEO
-        title={`${title} | ${config.title}`}
-        pathname={pathname}
-        desc={subtitle || config.description}
-      />
-      {/* Page Components */}
-      <Splash
-        title={headerTitle || title}
-        subtitle={subtitle}
-        actions={splashActions}
-      />
-      <Container.Page size="content" padded>
-        <aside>
-          <RelatedPages
-            routes={relatedPagesMenu ? relatedPagesMenu.routes : []}
-          />
-        </aside>
-        <article>
-          <ContentBuilder content={content} />
-        </article>
-      </Container.Page>
-    </Layout>
-  )
-}
+}) => (
+  <Layout>
+    <SEO
+      title={`${title} | ${config.title}`}
+      pathname={pathname}
+      desc={subtitle || config.description}
+    />
+    {/* Page Components */}
+    <Splash
+      title={headerTitle || title}
+      subtitle={subtitle}
+      actions={splashActions}
+    />
+    <Container.Page size="content" padded>
+      <aside>
+        <RelatedPages
+          routes={relatedPagesMenu ? relatedPagesMenu.routes : []}
+        />
+      </aside>
+      <article>
+        <ContentBuilder content={content} />
+      </article>
+    </Container.Page>
+  </Layout>
+)
 
 Page.propTypes = {
   data: PropTypes.object.isRequired,
