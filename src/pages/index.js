@@ -96,8 +96,6 @@ const Home = () => {
     }
   `)
 
-  console.log({ contentfulAsset })
-
   return (
     <Layout>
       <SEO
