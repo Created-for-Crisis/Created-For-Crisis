@@ -8,3 +8,7 @@
 # All branch deployments will use the DEV Environment variables
 [context.branch-deploy.environment]
   GATSBY_ACTIVE_ENV = "development"
+
+# Netlify Build Plugins
+[[plugins]]
+  package = "netlify-plugin-gatsby-cache"

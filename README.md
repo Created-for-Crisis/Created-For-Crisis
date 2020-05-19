@@ -18,6 +18,7 @@ The design is currently being managed in Figma and can be viewed [here](https://
 - `yarn start` to run the development site locally.
 - `yarn build` builds the compiled site.
 - `yarn serve` serve the compiled site locally.
+- `yarn clean` will clean the Gatsby cache.
 
 #### Firebase
 

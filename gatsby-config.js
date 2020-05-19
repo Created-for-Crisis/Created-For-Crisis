@@ -5,15 +5,26 @@ require("dotenv").config({
   path: `.env.${activeEnv}`,
 })
 
+const config = require("./config")
+
 module.exports = {
   siteMetadata: {
-    title: `Created for Crisis`,
-    description: `We're a nationwide group of individuals who have come together in a time
-    of crisis to solve important problems.`,
-    author: `@rekenna`,
+    title: config.title,
+    titleAlt: config.title,
+    titleTemplate: config.titleTemplate,
+    description: config.description,
+    headline: config.description,
+    author: config.author,
+    siteUrl: config.siteUrl,
+    banner: config.image,
+    twitter: config.twitter,
+    facebook: config.facebook,
+    siteLanguage: config.siteLanguage, // Language Tag on <html> element
+    ogLanguage: config.ogLanguage, // Facebook Language
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-netlify`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -29,17 +40,20 @@ module.exports = {
               spaceId: process.env.CONTENTFUL_SPACE_ID_DEV,
               accessToken: process.env.CONTENTFUL_ACCESS_TOKEN_DEV,
               environment: process.env.CONTENTFUL_ENVIRONMENT_DEV,
+              downloadLocal: true,
             }
           : {
               spaceId: process.env.CONTENTFUL_SPACE_ID_PROD,
               accessToken: process.env.CONTENTFUL_ACCESS_TOKEN_PROD,
               environment: process.env.CONTENTFUL_ENVIRONMENT_PROD,
+              downloadLocal: true,
             },
     },
     {
       resolve: `gatsby-plugin-styled-components`,
       options: {
         // Add any options here
+        ssr: true,
       },
     },
     {
@@ -61,11 +75,12 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `created-for-crisis`,
-        short_name: `cfc`,
+        name: config.title,
+        short_name: config.shortName,
+        description: config.description,
         start_url: `/`,
-        background_color: `#fff`,
-        theme_color: `#fff`,
+        background_color: config.backgroundColor,
+        theme_color: config.themeColor,
         display: `standalone`,
         icon: `src/assets/favicons/CfC-Favicon-64.png`, // This path is relative to the root of the site.
         icons: [
@@ -92,6 +107,7 @@ module.exports = {
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    `gatsby-plugin-offline`,
+    `gatsby-plugin-sitemap`,
   ],
 }

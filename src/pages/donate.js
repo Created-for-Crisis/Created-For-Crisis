@@ -2,68 +2,84 @@ import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Layout from "../components/Layout/Layout"
-import SEO from "../components/seo"
-import Banner from "../components/blocks/banner"
-import { ArticleContainer } from "../styles/components"
-import Donateform from "../components/Donation/DonateForm"
+import SEO from "../components/Layout/SEO"
+import { Splash } from "../components/Splash"
+import { Container } from "../components/Container"
+import { ContentBuilder } from "../components/ContentBuilder"
+import { RelatedPages } from "../components/Layout/RelatedPages"
+import { DonateForm } from "../components/Donation/DonateForm"
+import config from "../../config"
 
-import { AuthUserContext } from "../components/Session"
+/*
+ ** This page is also compiled manually
+ ** so we can add the Donation Form within the content.
+ */
 
-const Donate = () => {
-  const { contentfulBanner } = useStaticQuery(graphql`
-    query getDonatePage {
-      contentfulBanner(id: { eq: "144114a6-c600-58e1-b612-faa9e333d538" }) {
+const Support = ({ location: { pathname } }) => {
+  const {
+    contentfulPage: {
+      title,
+      headerTitle,
+      subtitle,
+      splashActions,
+      content,
+      relatedPagesMenu,
+    },
+  } = useStaticQuery(graphql`
+    query getSupportPage {
+      contentfulPage(slug: { eq: "donate" }) {
         title
-        illustration {
-          file {
-            url
-          }
-        }
-        actions {
+        headerTitle
+        subtitle
+        splashActions {
           text
-          variant
-          link
+          color
           icon
-          internal_link
+          iconPosition
+          id
+          url
+          external
         }
         content {
           json
         }
+        relatedPagesMenu {
+          routes {
+            id
+            title
+            slug
+            contentfulparent {
+              slug
+            }
+          }
+        }
       }
     }
   `)
-
   return (
     <Layout>
-      <SEO title="Donate" />
-      <Banner {...contentfulBanner} />
-      <ArticleContainer style={{ padding: 0 }}>
-        <AuthUserContext.Consumer>
-          {authUser => <Donateform authUser={authUser} />}
-        </AuthUserContext.Consumer>
-        <h3 style={{ marginTop: "0" }}>
-          Created For Crisis no longer needs to look for ways to help; they come
-          to us.
-        </h3>
-        <p>
-          We already received requests for more designs, ranging from surgical
-          caps to nasal swabs, and for assistance in other countries. But we
-          need help. We can find the people, but rapid research and working with
-          international health authorities require resources we currently lack.
-        </p>
-        <p>
-          COVID-19 is changing the landscape of healthcare, breaking down
-          barriers which kept innovators out. This is a new wave of crisis
-          response, one which empowers people to help through accessible designs
-          which can be rapidly deployed. Through funding and institutional
-          support you can help Created for Crisis grow as a grassroots aid
-          organization, a rapid response team with the diversity and reach of
-          the internet which provides solutions at a pace with which traditional
-          avenues cannot compete.
-        </p>
-      </ArticleContainer>
+      <SEO
+        title={`${title} | ${config.title}`}
+        pathname={pathname}
+        desc={subtitle || config.description}
+      />
+      {/* Page Components */}
+      <Splash
+        title={headerTitle || title}
+        subtitle={subtitle}
+        actions={splashActions}
+      />
+      <Container.Page size="content" padded>
+        <aside>
+          <RelatedPages routes={relatedPagesMenu && relatedPagesMenu.routes} />
+        </aside>
+        <article>
+          <DonateForm />
+          <ContentBuilder content={content} />
+        </article>
+      </Container.Page>
     </Layout>
   )
 }
 
-export default Donate
+export default Support

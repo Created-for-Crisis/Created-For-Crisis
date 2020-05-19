@@ -23,6 +23,7 @@ app.use(
         "https://localhost:8000",
         // Created for Crisis Domains
         "https://develop.createdforcrisis.org",
+        "https://develop--createdforcrisis.netlify.app",
         "https://www.createdforcrisis.org",
         // MasksNow Domains
         "https://staging--eloquent-montalcini-4aed93.netlify.app",
