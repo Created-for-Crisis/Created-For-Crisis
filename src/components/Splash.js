@@ -41,7 +41,7 @@ const SplashInner = styled.div`
   p {
     max-width: 731px;
     font-size: 1rem;
-    font-family: "Open Sans", "sans-serif";
+    font-family: ${props => props.theme.fonts.body};
     font-weight: normal;
     line-height: 2.25rem;
     ${up("lg")} {
@@ -72,11 +72,17 @@ const SplashInner = styled.div`
   }
 `
 
-export const Splash = ({ title, subtitle, backgroundPosition, actions }) => {
+export const Splash = ({
+  title,
+  subtitle,
+  backgroundPosition,
+  actions,
+  ...props
+}) => {
   return (
-    <SplashBackground>
+    <SplashBackground {...props}>
       <Container size="content">
-        <SplashInner backgroundPosition={backgroundPosition}>
+        <SplashInner backgroundPosition={backgroundPosition} {...props}>
           <h1>{title}</h1>
           {subtitle && <p>{subtitle}</p>}
           {actions && (
