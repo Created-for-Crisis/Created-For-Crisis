@@ -4,7 +4,7 @@ module.exports = {
   description: `Created For Crisis is an international design and research team with a focus on humanitarian and public health needs.`,
   author: `Created for Crisis`,
   siteUrl: "https://createdforcrisis.org",
-  image: "/images/SEOImage.png",
+  image: "/SEOImage.png",
   twitter: "@Created4Crisis",
   facebook: "createdforcrisis",
   siteLanguage: "en", // Language Tag on <html> element
